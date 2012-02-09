@@ -4,8 +4,40 @@ skgmh.selected_app = null;
 skgmh.selected_club = null;
 skgmh.anzahl_spieler = 6;
 skgmh.dritter_block = new Array();
-skgmh.inlineEdit = {};
 skgmh.data = {"HEIM" : new Array(6) , "GAST":new Array(6)};
+skgmh.inlineEdit = {};
+skgmh.types = {};
+skgmh.prototypes = {};
+
+skgmh.prototypes.datapointer = {
+    setValue : function (value) {
+        this.pointer[this.field_name] = value;
+    },
+    getValue : function () {
+        return this.pointer[this.field_name];
+    },
+};
+
+skgmh.types.datapointer = function (pointer,field_name) {
+    this.pointer = pointer;
+    this.field_name = field_name;
+};
+
+skgmh.types.datapointer.prototype = skgmh.prototypes.datapointer;
+
+/*
+  var object1 = { a : 1, b : 2 , test : function () {return this.c}};
+  function child() {
+    this.c = 3;
+    this.d = 4;
+  }
+  child.prototype = object1;
+  var object2 = new child();
+  alert(object2.test);
+  alert(object2.test());
+  alert( object2.a ); // zeigt den Wert 1 an
+  alert( object2.c ); // zeigt den Wert 3 an
+*/
 
 skgmh.init_app = function() {with(skgmh) {
     skgmh.load_storage();
@@ -28,7 +60,9 @@ skgmh.fillDataIntoForm = function () {with(skgmh) {
 }};
 
 skgmh.updateEditById = function(fieldid) {with(skgmh) {
-    updateEdit(document.getElementById(fieldid),getDataPointerById(fieldid).getValue());
+    var datapointer = getDataPointerById(fieldid);
+    
+    updateEdit(document.getElementById(fieldid),datapointer.getValue());
 }};
 
 skgmh.updateEdit = function(field,value) {
@@ -57,33 +91,19 @@ skgmh.bind = function() {with(skgmh){
     document.getElementById('remove_P5_P6_button').onclick = remove3Block;
 }};
 
+
 skgmh.getDataPointerById = function (elementid) {with(skgmh) {
-    var createSetFunc = function (dataPointer) {
-        return function(value) {
-            dataPointer.pointer[dataPointer.field_name] = value;
-        }
-    };
-    var createGetFunc = function (dataPointer) {
-        return function() {
-            return dataPointer.pointer[dataPointer.field_name];
-        }
-    }
     var pointer = null;
     for (var i=0; i < 6 && pointer == null; i++) {
-        if ('H'+(i+1)+'_NAME' === elementid) pointer = {'pointer':data.HEIM[i], field_name:'name'};
-        if ('H'+(i+1)+'_ZP' === elementid) pointer = {'pointer':data.HEIM[i], field_name:'zp'};
-        if ('H'+(i+1)+'_LP' === elementid) pointer = {'pointer':data.HEIM[i], field_name:'lp'};
-        if ('G'+(i+1)+'_NAME' === elementid) pointer = {'pointer':data.GAST[i], field_name:'name'};
-        if ('G'+(i+1)+'_ZP' === elementid) pointer = {'pointer':data.GAST[i], field_name:'zp'};
-        if ('G'+(i+1)+'_LP' === elementid) pointer = {'pointer':data.GAST[i], field_name:'lp'};
+        if ('H'+(i+1)+'_NAME' === elementid) return new types.datapointer(data.HEIM[i],'name');
+        if ('H'+(i+1)+'_ZP' === elementid) return new types.datapointer(data.HEIM[i],'zp');
+        if ('H'+(i+1)+'_LP' === elementid) return new types.datapointer(data.HEIM[i],'lp');
+        if ('G'+(i+1)+'_NAME' === elementid) return new types.datapointer(data.GAST[i],'name');
+        if ('G'+(i+1)+'_ZP' === elementid) return new types.datapointer(data.GAST[i],'zp');
+        if ('G'+(i+1)+'_LP' === elementid) return new types.datapointer(data.GAST[i],'lp');
     }
-    if ('HM_NAME' === elementid) pointer = {'pointer':data, field_name:'HEIMMANNSCHAFT'};
-    if ('GM_NAME' === elementid) pointer = {'pointer':data, field_name:'GASTMANNSCHAFT'};
-    if (pointer != null) {
-        pointer.setValue = createSetFunc(pointer);
-        pointer.getValue = createGetFunc(pointer);
-        return pointer;
-    }
+    if ('HM_NAME' === elementid) return new types.datapointer(data,'HEIMMANNSCHAFT');
+    if ('GM_NAME' === elementid) return new types.datapointer(data,'GASTMANNSCHAFT');
 }}
 
 skgmh.wrapValueTransfer = function(element,data_pointer) {
