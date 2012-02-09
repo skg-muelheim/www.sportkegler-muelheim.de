@@ -3,8 +3,10 @@ var skgmh = skgmh || {};
 skgmh.selected_app = null;
 skgmh.selected_club = null;
 skgmh.anzahl_spieler = 6;
+skgmh.gespielte_gassen = 6;
+skgmh.verlorene_wertungen = 7;
 skgmh.dritter_block = new Array();
-skgmh.data = {"HEIM" : new Array(6) , "GAST":new Array(6)};
+skgmh.data = {"HEIM" : new Array(6) , "GAST":new Array(6),};
 skgmh.datapointers = {};
 skgmh.inlineEdit = {};
 skgmh.types = {};
@@ -31,6 +33,7 @@ skgmh.init_app = function() {with(skgmh) {
     create_datapointers();
     bind();
     fillDataIntoForm();
+    recalculateValues();
 }};
 
 skgmh.create_datapointers = function () {with(skgmh) {
@@ -51,7 +54,9 @@ skgmh.fillDataIntoForm = function () {with(skgmh) {
     selectClub(selected_club);
     for (var i=0; i < 6; i++) {
         updateEditById('H'+(i+1)+'_NAME');
+        updateEditById('H'+(i+1)+'_LP');
         updateEditById('G'+(i+1)+'_NAME');
+        updateEditById('G'+(i+1)+'_LP');
     }
     updateEditById('HM_NAME');
     updateEditById('GM_NAME');
@@ -84,14 +89,18 @@ skgmh.bind = function() {with(skgmh){
     for (i = 0; i < n; i++) {
         var element = elements[i];
         element.innerHTML = '<span/>';
-        skgmh.inlineEdit.init(element,wrapValueTransfer(element,datapointers[element.id]));
+        var recalcNeeded = null;
+        if (element.getAttribute('recalcNeeded') === "true") {
+            recalcNeeded = skgmh.recalculateValues;
+        }
+        skgmh.inlineEdit.init(element,wrapValueTransfer(element,datapointers[element.id],recalcNeeded));
     }
     
     document.getElementById('remove_P5_P6_button').onclick = remove3Block;
 }};
 
 
-skgmh.wrapValueTransfer = function(element,data_pointer) {
+skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
     var wrapper = {};
     wrapper.toModel =function(newValue) {
         var elements = element.childNodes;
@@ -106,6 +115,9 @@ skgmh.wrapValueTransfer = function(element,data_pointer) {
             }
         }
         skgmh.store_all();
+        if (recalcMethod) {
+            recalcMethod();
+        }
     }
     wrapper.fromModel =function() {
         if (data_pointer) {
@@ -125,7 +137,9 @@ skgmh.remove3Block = function() {with(skgmh){
     icon.setAttribute('class','icon-plus');
     document.getElementById('insert_P5_P6_button').appendChild(icon);
     icon.onclick = insert3Block;
-    store_value('anzahl_spieler',4);
+    anzahl_spieler = 4;
+    store_value('anzahl_spieler',anzahl_spieler);
+    recalculateValues();
 }};
 
 skgmh.insert3Block = function() {with(skgmh){
@@ -135,7 +149,62 @@ skgmh.insert3Block = function() {with(skgmh){
         dom.appendChild(dritter_block.pop());
     }
     document.getElementById('insert_P5_P6_button').innerHTML = '';
-    store_value('anzahl_spieler',6);
+    anzahl_spieler = 6;
+    store_value('anzahl_spieler',anzahl_spieler);
+    recalculateValues();
+}};
+
+
+skgmh.recalculateValues = function () {with(skgmh){
+    sorter = function (a,b) {
+        if (a.lp === b.lp) {
+            return a.mannschaft =='G' ? +1 : -1;
+        }
+        return a.lp-b.lp;
+    }
+    punkteBerechunung = new Array(anzahl_spieler*2)
+    for(var i=0; i < anzahl_spieler; i++) {
+        var temp = {id: 'H'+(i+1), mannschaft:'H'}
+        temp.lp = +(datapointers[temp.id+'_LP'].getValue());
+        punkteBerechunung[(i*2)] = temp;
+        
+        temp = {id: 'G'+(i+1), mannschaft:'G'}
+        temp.lp = +(datapointers[temp.id+'_LP'].getValue());
+        punkteBerechunung[(i*2)+1] = temp;
+    }
+    punkteBerechunung.sort(sorter);
+
+    wertungen = 0;
+    gast_spieler = 0;
+    for(var i=punkteBerechunung.length-1; i >= 0; i--) {
+        datapointers[punkteBerechunung[i].id+'_ZP'].setValue(i+1);
+        document.getElementById(punkteBerechunung[i].id+'_ZP').innerHTML = i+1;
+        if (punkteBerechunung[i].mannschaft === 'H') {
+            wertungen += gast_spieler;
+        }else {
+            gast_spieler++;
+        }
+    }
+    verlorene_wertungen = wertungen;
+
+    var bloeckeGesammt = anzahl_spieler / 2;
+    var gassenGesammt = bloeckeGesammt * 4;
+    var progressGassen = gespielte_gassen / gassenGesammt * 100;
+    progressGassen = progressGassen < 100 ? progressGassen : 100;
+    var element = document.getElementById('progressGassen');
+    element.innerHTML = gespielte_gassen +'/' + gassenGesammt + ' Gassen';
+    element.setAttribute('style','width: '+ progressGassen +"%");
+
+    var wertungenZumPunkt = 10;
+    if (anzahl_spieler ==4) {
+        wertungenZumPunkt = 6;
+    }
+    var progressPunktverlusst = verlorene_wertungen / wertungenZumPunkt * 100;
+    progressPunktverlusst = progressPunktverlusst < 100 ? progressPunktverlusst : 100;
+    element = document.getElementById('progressPunktverlusst');
+    element.innerHTML = verlorene_wertungen +'/' + wertungenZumPunkt + ' Wertungen';
+    element.setAttribute('style','width: '+ progressPunktverlusst +"%");
+
 }};
 
 skgmh.load_storage = function() {with(skgmh) {
@@ -256,7 +325,11 @@ skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
             input.setAttribute('value',this.fromModelCallback());
         }
         this.appendChild(input);
-        input.onkeydown = keydown;        
+        input.onkeydown = keydown;
+        if (this.numEdit) {
+            // TODO.
+            input.size = this.numEdit;
+        }
         input.focus();
         input.select();
         input.onblur = removeInput;
