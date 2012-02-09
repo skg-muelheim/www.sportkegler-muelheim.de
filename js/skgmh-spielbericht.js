@@ -5,6 +5,7 @@ skgmh.selected_club = null;
 skgmh.anzahl_spieler = 6;
 skgmh.dritter_block = new Array();
 skgmh.data = {"HEIM" : new Array(6) , "GAST":new Array(6)};
+skgmh.datapointers = {};
 skgmh.inlineEdit = {};
 skgmh.types = {};
 skgmh.prototypes = {};
@@ -25,24 +26,24 @@ skgmh.types.datapointer = function (pointer,field_name) {
 
 skgmh.types.datapointer.prototype = skgmh.prototypes.datapointer;
 
-/*
-  var object1 = { a : 1, b : 2 , test : function () {return this.c}};
-  function child() {
-    this.c = 3;
-    this.d = 4;
-  }
-  child.prototype = object1;
-  var object2 = new child();
-  alert(object2.test);
-  alert(object2.test());
-  alert( object2.a ); // zeigt den Wert 1 an
-  alert( object2.c ); // zeigt den Wert 3 an
-*/
-
 skgmh.init_app = function() {with(skgmh) {
     skgmh.load_storage();
+    create_datapointers();
     bind();
     fillDataIntoForm();
+}};
+
+skgmh.create_datapointers = function () {with(skgmh) {
+    for (var i=0; i < 6 ; i++) {
+        datapointers['H'+(i+1)+'_NAME'] = new types.datapointer(data.HEIM[i],'name');
+        datapointers['H'+(i+1)+'_ZP'] = new types.datapointer(data.HEIM[i],'zp');
+        datapointers['H'+(i+1)+'_LP'] = new types.datapointer(data.HEIM[i],'lp');
+        datapointers['G'+(i+1)+'_NAME'] = new types.datapointer(data.GAST[i],'name');
+        datapointers['G'+(i+1)+'_ZP'] = new types.datapointer(data.GAST[i],'zp');
+        datapointers['G'+(i+1)+'_LP'] = new types.datapointer(data.GAST[i],'lp');
+    }
+    datapointers['HM_NAME'] = new types.datapointer(data,'HEIMMANNSCHAFT');
+    datapointers['GM_NAME'] = new types.datapointer(data,'GASTMANNSCHAFT');
 }};
 
 skgmh.fillDataIntoForm = function () {with(skgmh) {
@@ -60,9 +61,7 @@ skgmh.fillDataIntoForm = function () {with(skgmh) {
 }};
 
 skgmh.updateEditById = function(fieldid) {with(skgmh) {
-    var datapointer = getDataPointerById(fieldid);
-    
-    updateEdit(document.getElementById(fieldid),datapointer.getValue());
+    updateEdit(document.getElementById(fieldid),datapointers[fieldid].getValue());
 }};
 
 skgmh.updateEdit = function(field,value) {
@@ -85,26 +84,12 @@ skgmh.bind = function() {with(skgmh){
     for (i = 0; i < n; i++) {
         var element = elements[i];
         element.innerHTML = '<span/>';
-        skgmh.inlineEdit.init(element,wrapValueTransfer(element,getDataPointerById(element.id)));
+        skgmh.inlineEdit.init(element,wrapValueTransfer(element,datapointers[element.id]));
     }
     
     document.getElementById('remove_P5_P6_button').onclick = remove3Block;
 }};
 
-
-skgmh.getDataPointerById = function (elementid) {with(skgmh) {
-    var pointer = null;
-    for (var i=0; i < 6 && pointer == null; i++) {
-        if ('H'+(i+1)+'_NAME' === elementid) return new types.datapointer(data.HEIM[i],'name');
-        if ('H'+(i+1)+'_ZP' === elementid) return new types.datapointer(data.HEIM[i],'zp');
-        if ('H'+(i+1)+'_LP' === elementid) return new types.datapointer(data.HEIM[i],'lp');
-        if ('G'+(i+1)+'_NAME' === elementid) return new types.datapointer(data.GAST[i],'name');
-        if ('G'+(i+1)+'_ZP' === elementid) return new types.datapointer(data.GAST[i],'zp');
-        if ('G'+(i+1)+'_LP' === elementid) return new types.datapointer(data.GAST[i],'lp');
-    }
-    if ('HM_NAME' === elementid) return new types.datapointer(data,'HEIMMANNSCHAFT');
-    if ('GM_NAME' === elementid) return new types.datapointer(data,'GASTMANNSCHAFT');
-}}
 
 skgmh.wrapValueTransfer = function(element,data_pointer) {
     var wrapper = {};
@@ -152,8 +137,6 @@ skgmh.insert3Block = function() {with(skgmh){
     document.getElementById('insert_P5_P6_button').innerHTML = '';
     store_value('anzahl_spieler',6);
 }};
-
-
 
 skgmh.load_storage = function() {with(skgmh) {
     selected_app = loadOrInitStorage('last_selected_app','Spielbericht');
@@ -205,7 +188,7 @@ skgmh.selectApp = function(which) {with(skgmh) {
 
 skgmh.selectClub = function(which) {with(skgmh) {
     setInnerHtmlForId('SelectedClub',which);
-//    setInnerHtmlForId('HeimMannschaft_Name',which);
+//    updateEditById('HM_NAME',which);
 }};
 
 skgmh.setInnerHtmlForId = function(id,value) {
