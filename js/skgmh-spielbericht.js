@@ -143,10 +143,12 @@ skgmh.remove3Block = function() {with(skgmh){
 }};
 
 skgmh.insert3Block = function() {with(skgmh){
-    var dom = document.getElementById('tablebody');
+    var dom = document.getElementById('summenZeilen');
+    var p = dom.parentNode;
     var n = dritter_block.length;
     for (var i = n-1; i >= 0; i--) {
-        dom.appendChild(dritter_block.pop());
+        p.insertBefore(dritter_block.pop(),dom);
+//        dom.appendChild(dritter_block.pop());
     }
     document.getElementById('insert_P5_P6_button').innerHTML = '';
     anzahl_spieler = 6;
@@ -162,17 +164,30 @@ skgmh.recalculateValues = function () {with(skgmh){
         }
         return a.lp-b.lp;
     }
+
+    var h_lp = 0;
+    var g_lp = 0;
+    var g_punkte = 0;
     punkteBerechunung = new Array(anzahl_spieler*2)
     for(var i=0; i < anzahl_spieler; i++) {
         var temp = {id: 'H'+(i+1), mannschaft:'H'}
         temp.lp = +(datapointers[temp.id+'_LP'].getValue());
         punkteBerechunung[(i*2)] = temp;
+        h_lp += temp.lp;
         
         temp = {id: 'G'+(i+1), mannschaft:'G'}
         temp.lp = +(datapointers[temp.id+'_LP'].getValue());
         punkteBerechunung[(i*2)+1] = temp;
+        g_lp += temp.lp;
     }
     punkteBerechunung.sort(sorter);
+    document.getElementById('H_LP').innerHTML = h_lp;
+    document.getElementById('G_LP').innerHTML = g_lp;
+    if (g_lp > h_lp) {
+        g_punkte += 2;
+    }else if (g_lp === h_lp) {
+        g_punkte += 1;
+    }
 
     wertungen = 0;
     gast_spieler = 0;
@@ -186,6 +201,12 @@ skgmh.recalculateValues = function () {with(skgmh){
         }
     }
     verlorene_wertungen = wertungen;
+    var g_zp = verlorene_wertungen + (anzahl_spieler == 6 ? 3*7 : 2*5);
+    document.getElementById('G_ZP').innerHTML = g_zp;
+    var h_zp = -verlorene_wertungen + (anzahl_spieler == 6 ? 3*13 : 2*9);
+    document.getElementById('H_ZP').innerHTML = h_zp;
+    
+    
 
     var bloeckeGesammt = anzahl_spieler / 2;
     var gassenGesammt = bloeckeGesammt * 4;
@@ -204,6 +225,13 @@ skgmh.recalculateValues = function () {with(skgmh){
     element = document.getElementById('progressPunktverlusst');
     element.innerHTML = verlorene_wertungen +'/' + wertungenZumPunkt + ' Wertungen';
     element.setAttribute('style','width: '+ progressPunktverlusst +"%");
+
+    if (verlorene_wertungen >= wertungenZumPunkt) {
+        g_punkte++;
+    }
+    
+    document.getElementById('G_PUNKTE').innerHTML = g_punkte;
+    document.getElementById('H_PUNKTE').innerHTML = 3 - g_punkte;
 
 }};
 
