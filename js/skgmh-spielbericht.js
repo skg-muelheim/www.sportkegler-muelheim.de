@@ -378,9 +378,14 @@ skgmh.inlineEdit.mouseover = function (){ with(skgmh.inlineEdit){
     pencil.parentNode.onclick = edit;
 }};
 
+
 skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
     if (this.getAttribute('popUp')) {
-        $(this.getAttribute('popUp')).modal({
+        var popUpName = this.getAttribute('popUp');
+        var popUpParam = this.getAttribute('popUpParam');
+        document.getElementById(popUpName).setAttribute('popUpParam',popUpParam);
+        document.get
+        $('#'+popUpName).modal({
             keyboard: true
         });
     }else {
@@ -394,9 +399,9 @@ skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
             }
             this.appendChild(input);
             input.onkeydown = keydown;
-            if (this.numEdit) {
-                // TODO.
-                input.size = this.numEdit;
+            var numEdit = this.getAttribute('numEdit');
+            if (numEdit) {
+               input.setAttribute('style','width: '+(numEdit*8)+'px');
             }
             input.focus();
             input.select();
