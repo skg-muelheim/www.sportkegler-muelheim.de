@@ -3,8 +3,8 @@ var skgmh = skgmh || {};
 skgmh.selected_app = null;
 skgmh.selected_club = null;
 skgmh.anzahl_spieler = 6;
-skgmh.gespielte_gassen = 6;
-skgmh.verlorene_wertungen = 7;
+skgmh.gespielte_gassen = 48;
+skgmh.verlorene_wertungen = 78;
 skgmh.dritter_block = new Array();
 skgmh.data = {"HEIM" : new Array(6) , "GAST":new Array(6),};
 skgmh.datapointers = {};
@@ -21,11 +21,24 @@ skgmh.prototypes.datapointer = {
     },
 };
 
+skgmh.prototypes.datapointer_direct = {
+    setValue : function (value) {
+        this.pointer = value;
+    },
+    getValue : function () {
+        return this.pointer;
+    },
+};
+
 skgmh.types.datapointer = function (pointer,field_name) {
     this.pointer = pointer;
     this.field_name = field_name;
 };
+skgmh.types.datapointer_direct = function (pointer) {
+    this.pointer = pointer;
+};
 
+skgmh.types.datapointer_direct.prototype = skgmh.prototypes.datapointer_direct;
 skgmh.types.datapointer.prototype = skgmh.prototypes.datapointer;
 
 skgmh.init_app = function() {with(skgmh) {
@@ -41,9 +54,17 @@ skgmh.create_datapointers = function () {with(skgmh) {
         datapointers['H'+(i+1)+'_NAME'] = new types.datapointer(data.HEIM[i],'name');
         datapointers['H'+(i+1)+'_ZP'] = new types.datapointer(data.HEIM[i],'zp');
         datapointers['H'+(i+1)+'_LP'] = new types.datapointer(data.HEIM[i],'lp');
+        datapointers['H'+(i+1)+'_GassenLP'] = new types.datapointer_direct(data.HEIM[i].gassen);
+        
         datapointers['G'+(i+1)+'_NAME'] = new types.datapointer(data.GAST[i],'name');
         datapointers['G'+(i+1)+'_ZP'] = new types.datapointer(data.GAST[i],'zp');
         datapointers['G'+(i+1)+'_LP'] = new types.datapointer(data.GAST[i],'lp');
+        datapointers['G'+(i+1)+'_GassenLP'] = new types.datapointer_direct(data.GAST[i].gassen);
+        
+        for (var j=0; j < 8; j++) {
+            datapointers['H'+(i+1)+'_GassenLP_'+(j+1)] = new types.datapointer(data.HEIM[i].gassen,j);
+            datapointers['G'+(i+1)+'_GassenLP_'+(j+1)] = new types.datapointer(data.GAST[i].gassen,j);
+        }
     }
     datapointers['HM_NAME'] = new types.datapointer(data,'HEIMMANNSCHAFT');
     datapointers['GM_NAME'] = new types.datapointer(data,'GASTMANNSCHAFT');
@@ -168,12 +189,20 @@ skgmh.recalculateValues = function () {with(skgmh){
     var h_lp = 0;
     var g_lp = 0;
     var g_punkte = 0;
+    var gespielte_gassen = 0;
     punkteBerechunung = new Array(anzahl_spieler*2)
     for(var i=0; i < anzahl_spieler; i++) {
         var temp = {id: 'H'+(i+1), mannschaft:'H'}
         temp.lp = +(datapointers[temp.id+'_LP'].getValue());
         punkteBerechunung[(i*2)] = temp;
         h_lp += temp.lp;
+        for(var j=0; j < 8; j++) {
+            var gtemp = datapointers[temp.id+'_GassenLP'].getValue()[j];
+            if (gtemp && gtemp != '') {
+                gespielte_gassen++;
+            }
+        }
+        
         
         temp = {id: 'G'+(i+1), mannschaft:'G'}
         temp.lp = +(datapointers[temp.id+'_LP'].getValue());
@@ -207,9 +236,7 @@ skgmh.recalculateValues = function () {with(skgmh){
     document.getElementById('H_ZP').innerHTML = h_zp;
     
     
-
-    var bloeckeGesammt = anzahl_spieler / 2;
-    var gassenGesammt = bloeckeGesammt * 4;
+    var gassenGesammt = anzahl_spieler * 8;
     var progressGassen = gespielte_gassen / gassenGesammt * 100;
     progressGassen = progressGassen < 100 ? progressGassen : 100;
     var element = document.getElementById('progressGassen');
@@ -244,10 +271,18 @@ skgmh.load_storage = function() {with(skgmh) {
         data.HEIM[i].name = loadOrInitStorage('H'+(i+1)+'_NAME','');
         data.HEIM[i].zp = loadOrInitStorage('H'+(i+1)+'_ZP','');
         data.HEIM[i].lp = loadOrInitStorage('H'+(i+1)+'_LP','');
+        data.HEIM[i].gassen = new Array(8);
+
         data.GAST[i] = {};
         data.GAST[i].name = loadOrInitStorage('G'+(i+1)+'_NAME','');
         data.GAST[i].zp = loadOrInitStorage('G'+(i+1)+'_ZP','');
         data.GAST[i].lp = loadOrInitStorage('G'+(i+1)+'_LP','');
+        data.GAST[i].gassen = new Array(8);
+
+        for (var j=0; j < 8; j++) {
+            data.HEIM[i].gassen[j] = loadOrInitStorage('H'+(i+1)+'_GassenLP'+(j+1),'');
+            data.GAST[i].gassen[j] = loadOrInitStorage('G'+(i+1)+'_GassenLP'+(j+1),'');
+        }
     }
     data.HEIMMANNSCHAFT = loadOrInitStorage('HM_NAME','HEIM');
     data.GASTMANNSCHAFT = loadOrInitStorage('GM_NAME','GAST');
@@ -344,27 +379,33 @@ skgmh.inlineEdit.mouseover = function (){ with(skgmh.inlineEdit){
 }};
 
 skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
-    var input_id = this.id+"_edit";
-    var input = document.getElementById(input_id);
-    if (!input) {
-        var input = document.createElement('input');
-        input.setAttribute('id', input_id);
-        if (this.fromModelCallback) {
-            input.setAttribute('value',this.fromModelCallback());
+    if (this.getAttribute('popUp')) {
+        $(this.getAttribute('popUp')).modal({
+            keyboard: true
+        });
+    }else {
+        var input_id = this.id+"_edit";
+        var input = document.getElementById(input_id);
+        if (!input) {
+            var input = document.createElement('input');
+            input.setAttribute('id', input_id);
+            if (this.fromModelCallback) {
+                input.setAttribute('value',this.fromModelCallback());
+            }
+            this.appendChild(input);
+            input.onkeydown = keydown;
+            if (this.numEdit) {
+                // TODO.
+                input.size = this.numEdit;
+            }
+            input.focus();
+            input.select();
+            input.onblur = removeInput;
         }
-        this.appendChild(input);
-        input.onkeydown = keydown;
-        if (this.numEdit) {
-            // TODO.
-            input.size = this.numEdit;
-        }
-        input.focus();
-        input.select();
-        input.onblur = removeInput;
+    //    el = document.getElementById("overlay");
+    //    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";    
+    //    alert(this.id);
     }
-//    el = document.getElementById("overlay");
-//    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";    
-//    alert(this.id);
 }};
 
 skgmh.inlineEdit.keydown = function(event) {
