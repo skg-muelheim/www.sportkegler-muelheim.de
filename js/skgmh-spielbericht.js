@@ -223,9 +223,9 @@ skgmh.recalculateValues = function () {with(skgmh){
         }
     }
     verlorene_wertungen = wertungen;
-    var g_zp = verlorene_wertungen + (anzahl_spieler == 6 ? 3*7 : 2*5);
+    var g_zp = verlorene_wertungen + (anzahl_spieler == 6 ? 1+2+3+4+5+6 : 1+2+3+4);
     document.getElementById('G_ZP').innerHTML = g_zp;
-    var h_zp = -verlorene_wertungen + (anzahl_spieler == 6 ? 3*13 : 2*9);
+    var h_zp = -verlorene_wertungen + (anzahl_spieler == 6 ? 7+8+9+10+11+12 : 5+6+7+8);
     document.getElementById('H_ZP').innerHTML = h_zp;
     
     
