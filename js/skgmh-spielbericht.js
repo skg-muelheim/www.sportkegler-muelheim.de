@@ -114,7 +114,19 @@ skgmh.bind = function() {with(skgmh){
     }
     
     document.getElementById('remove_P5_P6_button').onclick = remove3Block;
+    document.getElementById('progressGassenP').onclick = gassenProgressP;
+    document.getElementById('progressGassen').onclick = gassenProgressM;
 }};
+
+skgmh.gassenProgressP = function(event) {
+    skgmh.gespielte_gassen++;
+    skgmh.recalculateValues();
+}
+
+skgmh.gassenProgressM = function(event) {
+    skgmh.gespielte_gassen-=2;
+    skgmh.recalculateValues();
+}
 
 
 skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
@@ -206,30 +218,40 @@ skgmh.recalculateValues = function () {with(skgmh){
         punkteBerechunung[(i*2)+1] = temp;
         g_lp += temp.lp;
     }
+    
+    
     punkteBerechunung.sort(sorter);
     document.getElementById('H_LP').innerHTML = h_lp;
     document.getElementById('G_LP').innerHTML = g_lp;
+    
     if (g_lp > h_lp) {
         g_punkte += 2;
-    }else if (g_lp === h_lp) {
+    } else if (g_lp === h_lp) {
         g_punkte += 1;
     }
+    
 
     wertungen = 0;
     gast_spieler = 0;
     for(var i=punkteBerechunung.length-1; i >= 0; i--) {
         datapointers[punkteBerechunung[i].id+'_ZP'].setValue(i+1);
-        document.getElementById(punkteBerechunung[i].id+'_ZP').innerHTML = i+1;
+        if (datapointers[punkteBerechunung[i].id+'_LP'].getValue() != '') {
+            document.getElementById(punkteBerechunung[i].id+'_ZP').innerHTML = i+1;
+        }
         if (punkteBerechunung[i].mannschaft === 'H') {
-            wertungen += gast_spieler;
+            if (datapointers[punkteBerechunung[i].id+'_LP'].getValue() != '') {
+                wertungen += gast_spieler;
+            }
         }else {
-            gast_spieler++;
+            if (datapointers[punkteBerechunung[i].id+'_LP'].getValue() != '') {
+                gast_spieler++;
+            }
         }
     }
     verlorene_wertungen = wertungen;
-    var g_zp = verlorene_wertungen + (anzahl_spieler == 6 ? 3*7 : 2*5);
+    var g_zp = verlorene_wertungen + (anzahl_spieler == 6 ? 1+2+3+4+5+6 : 1+2+3+4);
     document.getElementById('G_ZP').innerHTML = g_zp;
-    var h_zp = -verlorene_wertungen + (anzahl_spieler == 6 ? 3*13 : 2*9);
+    var h_zp = -verlorene_wertungen + (anzahl_spieler == 6 ? 7+8+9+10+11+12 : 5+6+7+8);
     document.getElementById('H_ZP').innerHTML = h_zp;
     
     
@@ -237,7 +259,7 @@ skgmh.recalculateValues = function () {with(skgmh){
     var progressGassen = gespielte_gassen / gassenGesammt * 100;
     progressGassen = progressGassen < 100 ? progressGassen : 100;
     var element = document.getElementById('progressGassen');
-    element.innerHTML = gespielte_gassen +'/' + gassenGesammt + ' Gassen';
+    element.innerHTML = gespielte_gassen +'/' + gassenGesammt + ' Bahnen';
     element.setAttribute('style','width: '+ progressGassen +"%");
 
     var wertungenZumPunkt = 10;
@@ -523,5 +545,3 @@ skgmh.inlineEdit.mouseout = function (){
     var pencil = document.getElementById(pid);
     pencil.setAttribute('style','visibility: hidden');
 };
-
-
