@@ -3,7 +3,7 @@ var skgmh = skgmh || {};
 skgmh.selected_app = null;
 skgmh.selected_club = null;
 skgmh.anzahl_spieler = 6;
-skgmh.gespielte_gassen = 6;
+skgmh.gespielte_gassen = 0;
 skgmh.verlorene_wertungen = 7;
 skgmh.dritter_block = new Array();
 skgmh.data = {"HEIM" : new Array(6) , "GAST":new Array(6),};
@@ -97,7 +97,19 @@ skgmh.bind = function() {with(skgmh){
     }
     
     document.getElementById('remove_P5_P6_button').onclick = remove3Block;
+    document.getElementById('progressGassenP').onclick = gassenProgressP;
+    document.getElementById('progressGassen').onclick = gassenProgressM;
 }};
+
+skgmh.gassenProgressP = function(event) {
+    skgmh.gespielte_gassen++;
+    skgmh.recalculateValues();
+}
+
+skgmh.gassenProgressM = function(event) {
+    skgmh.gespielte_gassen-=2;
+    skgmh.recalculateValues();
+}
 
 
 skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
@@ -180,6 +192,8 @@ skgmh.recalculateValues = function () {with(skgmh){
         punkteBerechunung[(i*2)+1] = temp;
         g_lp += temp.lp;
     }
+    
+    
     punkteBerechunung.sort(sorter);
     document.getElementById('H_LP').innerHTML = h_lp;
     document.getElementById('G_LP').innerHTML = g_lp;
@@ -213,7 +227,7 @@ skgmh.recalculateValues = function () {with(skgmh){
     var progressGassen = gespielte_gassen / gassenGesammt * 100;
     progressGassen = progressGassen < 100 ? progressGassen : 100;
     var element = document.getElementById('progressGassen');
-    element.innerHTML = gespielte_gassen +'/' + gassenGesammt + ' Gassen';
+    element.innerHTML = gespielte_gassen +'/' + gassenGesammt + ' Bahnen';
     element.setAttribute('style','width: '+ progressGassen +"%");
 
     var wertungenZumPunkt = 10;
@@ -354,9 +368,9 @@ skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
         }
         this.appendChild(input);
         input.onkeydown = keydown;
-        if (this.numEdit) {
-            // TODO.
-            input.size = this.numEdit;
+        var numEdit = this.getAttribute('numEdit');
+        if (numEdit) {
+            input.setAttribute('style','width: '+(numEdit*8)+'px');
         }
         input.focus();
         input.select();
