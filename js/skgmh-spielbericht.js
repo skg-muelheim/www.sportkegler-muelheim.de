@@ -197,21 +197,29 @@ skgmh.recalculateValues = function () {with(skgmh){
     punkteBerechunung.sort(sorter);
     document.getElementById('H_LP').innerHTML = h_lp;
     document.getElementById('G_LP').innerHTML = g_lp;
+    
     if (g_lp > h_lp) {
         g_punkte += 2;
-    }else if (g_lp === h_lp) {
+    } else if (g_lp === h_lp) {
         g_punkte += 1;
     }
+    
 
     wertungen = 0;
     gast_spieler = 0;
     for(var i=punkteBerechunung.length-1; i >= 0; i--) {
         datapointers[punkteBerechunung[i].id+'_ZP'].setValue(i+1);
-        document.getElementById(punkteBerechunung[i].id+'_ZP').innerHTML = i+1;
+        if (datapointers[punkteBerechunung[i].id+'_LP'].getValue() != '') {
+            document.getElementById(punkteBerechunung[i].id+'_ZP').innerHTML = i+1;
+        }
         if (punkteBerechunung[i].mannschaft === 'H') {
-            wertungen += gast_spieler;
+            if (datapointers[punkteBerechunung[i].id+'_LP'].getValue() != '') {
+                wertungen += gast_spieler;
+            }
         }else {
-            gast_spieler++;
+            if (datapointers[punkteBerechunung[i].id+'_LP'].getValue() != '') {
+                gast_spieler++;
+            }
         }
     }
     verlorene_wertungen = wertungen;
