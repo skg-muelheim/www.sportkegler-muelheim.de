@@ -110,11 +110,7 @@ skgmh.bind = function() {with(skgmh){
     for (i = 0; i < n; i++) {
         var element = elements[i];
         element.innerHTML = '<span/>';
-        var recalcNeeded = null;
-        if (element.getAttribute('recalcNeeded') === "true") {
-            recalcNeeded = skgmh.recalculateValues;
-        }
-        skgmh.inlineEdit.init(element,wrapValueTransfer(element,datapointers[element.id],recalcNeeded));
+        skgmh.inlineEdit.init(element,wrapValueTransfer(element,datapointers[element.id],recalculateValues));
     }
     
     document.getElementById('remove_P5_P6_button').onclick = remove3Block;
@@ -136,9 +132,10 @@ skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
             }
         }
         skgmh.store_all();
-        if (recalcMethod) {
+        if (element.getAttribute('recalcNeeded') === "true" && recalcMethod) {
             recalcMethod();
         }
+
     }
     wrapper.fromModel =function() {
         if (data_pointer) {
@@ -384,7 +381,7 @@ skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
         var popUpName = this.getAttribute('popUp');
         var popUpParam = this.getAttribute('popUpParam');
         document.getElementById(popUpName).setAttribute('popUpParam',popUpParam);
-        document.get
+        skgmh.updatePopup(popUpName);
         $('#'+popUpName).modal({
             keyboard: true
         });
@@ -407,11 +404,101 @@ skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
             input.select();
             input.onblur = removeInput;
         }
-    //    el = document.getElementById("overlay");
+    //    el = document.getElementById("overilay");
     //    el.style.visibility = (el.style.visibility == "visible") ? "hidden" : "visible";    
     //    alert(this.id);
     }
 }};
+
+skgmh.updatePopup = function(popUpName) {with(skgmh) {
+    var blockIndex = document.getElementById(popUpName).getAttribute('popUpParam') -1;
+
+    var maxBahnInBlock = 3 + (blockIndex) * 4;
+    var maxGasseInBlock = 1 + maxBahnInBlock * 2;
+    
+    var minBahnInBlock = maxBahnInBlock -3;
+    var minGasseInBlock = (minBahnInBlock * 2);
+    
+    var dGassenWechselInBlock = skgmh.gespielte_gassen/4;
+    var gassenWechselInBlock = parseInt(dGassenWechselInBlock) - minGasseInBlock;
+
+    gassenWechselInBlock = gassenWechselInBlock < 7 ? gassenWechselInBlock : 7;
+    gassenWechselInBlock = gassenWechselInBlock > 0 ? gassenWechselInBlock : 0;
+    var dBahnWechselInBlock = gassenWechselInBlock / 2;
+
+    var bahnWechselInBlock = parseInt(dBahnWechselInBlock);
+    
+    var ersterSpieler = blockIndex * 2;
+    var letzterSpieler = ersterSpieler +1;
+
+    var spielerH1 = skgmh.data.HEIM[ersterSpieler];
+    var spielerH2 = skgmh.data.HEIM[letzterSpieler];
+    var spielerG1 = skgmh.data.GAST[ersterSpieler];
+    var spielerG2 = skgmh.data.GAST[letzterSpieler];
+    
+    var nameH1 = spielerH1.name;
+    var nameH2 = spielerH2.name;
+    var nameG1 = spielerG1.name;
+    var nameG2 = spielerG2.name;
+    
+    var posG1 = ((0+bahnWechselInBlock) % 4) +1;
+    var posH1 = ((1+bahnWechselInBlock) % 4) +1;
+    var posG2 = ((2+bahnWechselInBlock) % 4) +1;
+    var posH2 = ((3+bahnWechselInBlock) % 4) +1;
+  
+    var eleG1 = document.getElementById('NameSpielerBahn'+posG1);
+    var eleH1 = document.getElementById('NameSpielerBahn'+posH1);
+    var eleG2 = document.getElementById('NameSpielerBahn'+posG2);
+    var eleH2 = document.getElementById('NameSpielerBahn'+posH2);
+    eleG1.innerHTML = nameG1;
+    eleH1.innerHTML = nameH1;
+    eleG2.innerHTML = nameG2;
+    eleH2.innerHTML = nameH2;
+
+    var temp = null;
+    for(var i = 0; i < 4; i++) {
+        temp = document.getElementById('SpielerBahn'+posG1+'V'+(i+1));
+        temp.innerHTML = spielerG1.gassen[i*2+0];
+        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['G'+(ersterSpieler+1)+'_GassenLP_'+i*2+0],null));
+        
+        temp = document.getElementById('SpielerBahn'+posG1+'R'+(i+1));
+        temp.innerHTML = spielerG1.gassen[i*2+1];
+        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['G'+(ersterSpieler+1)+'_GassenLP_'+i*2+1],null));        
+        
+        document.getElementById('SpielerBahn'+posG1+'S'+(i+1)).innerHTML = spielerG1.gassen[i*2+0] + spielerG1.gassen[i*2+1];
+        
+        temp = document.getElementById('SpielerBahn'+posH1+'V'+(i+1));
+        temp.innerHTML = spielerH1.gassen[i*2+0];
+        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['H'+(ersterSpieler+1)+'_GassenLP_'+i*2+0],null));
+        
+        temp = document.getElementById('SpielerBahn'+posH1+'R'+(i+1));
+        temp.innerHTML = spielerH1.gassen[i*2+1];
+        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['H'+(ersterSpieler+1)+'_GassenLP_'+i*2+1],null));        
+        
+        document.getElementById('SpielerBahn'+posH1+'S'+(i+1)).innerHTML = spielerG1.gassen[i*2+0] + spielerG1.gassen[i*2+1];
+
+        temp = document.getElementById('SpielerBahn'+posG2+'V'+(i+1));
+        temp.innerHTML = spielerG2.gassen[i*2+0];
+        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['G'+(letzterSpieler+1)+'_GassenLP_'+i*2+0],null));
+        
+        temp = document.getElementById('SpielerBahn'+posG2+'R'+(i+1));
+        temp.innerHTML = spielerG2.gassen[i*2+1];
+        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['G'+(letzterSpieler+1)+'_GassenLP_'+i*2+1],null));        
+        
+        document.getElementById('SpielerBahn'+posG2+'S'+(i+1)).innerHTML = spielerG2.gassen[i*2+0] + spielerG2.gassen[i*2+1]; 
+
+        temp = document.getElementById('SpielerBahn'+posH2+'V'+(i+1));
+        temp.innerHTML = spielerH2.gassen[i*2+0];
+        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['H'+(letzterSpieler+1)+'_GassenLP_'+i*2+0],null));
+        
+        temp = document.getElementById('SpielerBahn'+posH2+'R'+(i+1));
+        temp.innerHTML = spielerH2.gassen[i*2+1];
+        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['H'+(letzterSpieler+1)+'_GassenLP_'+i*2+1],null));        
+        
+        document.getElementById('SpielerBahn'+posH2+'S'+(i+1)).innerHTML = spielerH2.gassen[i*2+0] + spielerH2.gassen[i*2+1]; 
+    }
+    
+}}
 
 skgmh.inlineEdit.keydown = function(event) {
     switch (event.keyCode) {
