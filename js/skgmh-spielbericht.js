@@ -30,11 +30,11 @@ skgmh.prototypes.datapointer_direct = {
     },
 };
 
-skgmh.types.datapointer = function (pointer,field_name) {
+skgmh.types.datapointer = function (pointer,field_name,pointer_name) {
     this.pointer = pointer;
     this.field_name = field_name;
 };
-skgmh.types.datapointer_direct = function (pointer) {
+skgmh.types.datapointer_direct = function (pointer,pointer_name) {
     this.pointer = pointer;
 };
 
@@ -48,17 +48,26 @@ skgmh.init_app = function() {with(skgmh) {
     fillDataIntoForm();
     recalculateValues();
 }};
+skgmh.registerDataPointer = function (isHeim,spielerindex,feldname) {with(skgmh){
+    datapointers[(isHeim?'H':'G')+(spielerindex+1)+'_' +feldname.toUpperCase()] = new types.datapointer((isHeim?data.HEIM:data.GAST)[spielerindex],feldname.toLowerCase());
+}}
 
 skgmh.create_datapointers = function () {with(skgmh) {
     for (var i=0; i < 6 ; i++) {
-        datapointers['H'+(i+1)+'_NAME'] = new types.datapointer(data.HEIM[i],'name');
-        datapointers['H'+(i+1)+'_ZP'] = new types.datapointer(data.HEIM[i],'zp');
-        datapointers['H'+(i+1)+'_LP'] = new types.datapointer(data.HEIM[i],'lp');
+        registerDataPointer(true,i,'name');
+        registerDataPointer(true,i,'zp');
+        registerDataPointer(true,i,'lp');
+//        datapointers['H'+(i+1)+'_NAME'] = new types.datapointer(data.HEIM[i],'name');
+//        datapointers['H'+(i+1)+'_ZP'] = new types.datapointer(data.HEIM[i],'zp');
+//        datapointers['H'+(i+1)+'_LP'] = new types.datapointer(data.HEIM[i],'lp');
         datapointers['H'+(i+1)+'_GassenLP'] = new types.datapointer_direct(data.HEIM[i].gassen);
         
-        datapointers['G'+(i+1)+'_NAME'] = new types.datapointer(data.GAST[i],'name');
-        datapointers['G'+(i+1)+'_ZP'] = new types.datapointer(data.GAST[i],'zp');
-        datapointers['G'+(i+1)+'_LP'] = new types.datapointer(data.GAST[i],'lp');
+        registerDataPointer(false,i,'name');
+        registerDataPointer(false,i,'zp');
+        registerDataPointer(false,i,'lp');
+//        datapointers['G'+(i+1)+'_NAME'] = new types.datapointer(data.GAST[i],'name');
+//        datapointers['G'+(i+1)+'_ZP'] = new types.datapointer(data.GAST[i],'zp');
+//        datapointers['G'+(i+1)+'_LP'] = new types.datapointer(data.GAST[i],'lp');
         datapointers['G'+(i+1)+'_GassenLP'] = new types.datapointer_direct(data.GAST[i].gassen);
         
         for (var j=0; j < 8; j++) {
@@ -89,6 +98,9 @@ skgmh.fillDataIntoForm = function () {with(skgmh) {
 skgmh.updateEditById = function(fieldid) {with(skgmh) {
     updateEdit(document.getElementById(fieldid),datapointers[fieldid].getValue());
 }};
+skgmh.updateEditByIdPopup = function(fieldid,dataid) {with(skgmh) {
+    updateEdit(document.getElementById(fieldid),datapointers[dataid].getValue());
+}};
 
 skgmh.updateEdit = function(field,value) {
     if (field != null) {
@@ -116,6 +128,7 @@ skgmh.bind = function() {with(skgmh){
     document.getElementById('remove_P5_P6_button').onclick = remove3Block;
     document.getElementById('progressGassenP').onclick = gassenProgressP;
     document.getElementById('progressGassen').onclick = gassenProgressM;
+    document.getElementById('zumSpielbericht').onclick = function(){$('#LP_Eingabe').modal('hide')};
 }};
 
 skgmh.gassenProgressP = function(event) {
@@ -315,12 +328,25 @@ skgmh.store_all = function() {with(skgmh) {
         store_value('G'+(i+1)+'_NAME',data.GAST[i].name);
         store_value('G'+(i+1)+'_ZP',data.GAST[i].zp);
         store_value('G'+(i+1)+'_LP',data.GAST[i].lp);
+        for (var j=0; j < 8; j++) {
+            if (data.HEIM[i].gassen[j] == -99) {
+                alert('H'+i +" " + j);
+            }
+            if (data.GAST[i].gassen[j] == -99) {
+                alert('G'+i +" " + j);
+            }
+            store_value('H'+(i+1)+'_GassenLP'+(j+1),data.HEIM[i].gassen[j]);
+            store_value('G'+(i+1)+'_GassenLP'+(j+1),data.GAST[i].gassen[j]);
+        }
     }
     store_value('HM_NAME',data.HEIMMANNSCHAFT);
     store_value('GM_NAME',data.GASTMANNSCHAFT);
 }};
 
 skgmh.store_value = function (which,value) {
+    if (value == -99) {
+        alert('store-99:'+which);
+    }
   localStorage.setItem(which,value);
 };
 
@@ -330,6 +356,10 @@ skgmh.loadOrInitStorage = function (which,defaultValue) {
         temp = defaultValue;
         localStorage.setItem(which,temp);
     }
+    if (temp== -99) {
+        alert('load-99:'+which);
+    }
+
     return temp;
 };
 
@@ -478,48 +508,24 @@ skgmh.updatePopup = function(popUpName) {with(skgmh) {
     eleH2.innerHTML = nameH2;
 
     var temp = null;
-    for(var i = 0; i < 4; i++) {
-        temp = document.getElementById('SpielerBahn'+posG1+'V'+(i+1));
-        temp.innerHTML = spielerG1.gassen[i*2+0];
-        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['G'+(ersterSpieler+1)+'_GassenLP_'+i*2+0],null));
-        
-        temp = document.getElementById('SpielerBahn'+posG1+'R'+(i+1));
-        temp.innerHTML = spielerG1.gassen[i*2+1];
-        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['G'+(ersterSpieler+1)+'_GassenLP_'+i*2+1],null));        
-        
-        document.getElementById('SpielerBahn'+posG1+'S'+(i+1)).innerHTML = spielerG1.gassen[i*2+0] + spielerG1.gassen[i*2+1];
-        
-        temp = document.getElementById('SpielerBahn'+posH1+'V'+(i+1));
-        temp.innerHTML = spielerH1.gassen[i*2+0];
-        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['H'+(ersterSpieler+1)+'_GassenLP_'+i*2+0],null));
-        
-        temp = document.getElementById('SpielerBahn'+posH1+'R'+(i+1));
-        temp.innerHTML = spielerH1.gassen[i*2+1];
-        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['H'+(ersterSpieler+1)+'_GassenLP_'+i*2+1],null));        
-        
-        document.getElementById('SpielerBahn'+posH1+'S'+(i+1)).innerHTML = spielerG1.gassen[i*2+0] + spielerG1.gassen[i*2+1];
-
-        temp = document.getElementById('SpielerBahn'+posG2+'V'+(i+1));
-        temp.innerHTML = spielerG2.gassen[i*2+0];
-        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['G'+(letzterSpieler+1)+'_GassenLP_'+i*2+0],null));
-        
-        temp = document.getElementById('SpielerBahn'+posG2+'R'+(i+1));
-        temp.innerHTML = spielerG2.gassen[i*2+1];
-        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['G'+(letzterSpieler+1)+'_GassenLP_'+i*2+1],null));        
-        
-        document.getElementById('SpielerBahn'+posG2+'S'+(i+1)).innerHTML = spielerG2.gassen[i*2+0] + spielerG2.gassen[i*2+1]; 
-
-        temp = document.getElementById('SpielerBahn'+posH2+'V'+(i+1));
-        temp.innerHTML = spielerH2.gassen[i*2+0];
-        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['H'+(letzterSpieler+1)+'_GassenLP_'+i*2+0],null));
-        
-        temp = document.getElementById('SpielerBahn'+posH2+'R'+(i+1));
-        temp.innerHTML = spielerH2.gassen[i*2+1];
-        skgmh.inlineEdit.init(temp,skgmh.wrapValueTransfer(temp,datapointers['H'+(letzterSpieler+1)+'_GassenLP_'+i*2+1],null));        
-        
-        document.getElementById('SpielerBahn'+posH2+'S'+(i+1)).innerHTML = spielerH2.gassen[i*2+0] + spielerH2.gassen[i*2+1]; 
+    for(var i = 0; i < 8; i++) {
+        initPopUpEdit(ersterSpieler,posH1,i,skgmh.data.HEIM[ersterSpieler],'H');
+        initPopUpEdit(ersterSpieler,posH2,i,skgmh.data.HEIM[letzterSpieler],'H');
+        initPopUpEdit(ersterSpieler,posG1,i,skgmh.data.GAST[ersterSpieler],'G');
+        initPopUpEdit(ersterSpieler,posG2,i,skgmh.data.GAST[letzterSpieler],'G');
     }
     
+}}
+
+skgmh.initPopUpEdit = function(spielerIndex,bahn,gassenIndex,dataReference,heimgast) {with(skgmh){
+    var isRaeumen = (gassenIndex % 2) == 1;
+    var feldid = 'SpielerBahn'+bahn+(isRaeumen?'R':'V')+((parseInt(gassenIndex/2))+1);
+    var temp = document.getElementById(feldid);
+    temp.innerHTML = '<span/>';
+//    temp.innerHTML = dataReference.gassen[gassenIndex];
+    var dataid = heimgast+(spielerIndex+1)+'_GassenLP_'+(gassenIndex+1);
+    inlineEdit.init(temp,wrapValueTransfer(temp,datapointers[dataid],null));
+    updateEditByIdPopup(feldid,dataid);
 }}
 
 skgmh.inlineEdit.keydown = function(event) {
