@@ -170,7 +170,7 @@ skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
     return wrapper;
 }
 
-skgmh.remove3Block = function() {with(skgmh){
+skgmh.remove3Block = function() {with(skgmh){v
     var elements = getElementsByClassName(document,'dritterBlock');
     var n = elements.length;
     for (var i = n-1; i >= 0; i--) {
@@ -199,6 +199,40 @@ skgmh.insert3Block = function() {with(skgmh){
     recalculateValues();
 }};
 
+skgmh.getValueByIdInSpan = function(id) {
+    var ve = document.getElementById(id);
+    var elements = ve.childNodes;
+    var n = elements.length;
+    for (k = 0; k < n; k++) {
+        var inner = elements[k];
+        if (inner.tagName.toUpperCase() === 'SPAN') {
+            return inner.innerHTML;
+        }
+    }
+    return '';
+}
+
+skgmh.updatePopupSum = function() {
+    for(var i=0; i < 4; i++) {
+        for(var j=0; j < 4; j++) {
+            var sum = ''
+            var v = skgmh.getValueByIdInSpan('SpielerBahn'+(i+1)+'V'+(j+1));
+            var r = skgmh.getValueByIdInSpan('SpielerBahn'+(i+1)+'R'+(j+1));
+
+            if (v != '' || r != '') {
+                sum = parseInt(0);
+                if (v != '') {
+                    sum += parseInt(v);
+                }
+                if (r != '') {
+                    sum += parseInt(r);
+                }
+            }
+            document.getElementById('SpielerBahn'+(i+1)+'S'+(j+1)).innerHTML=sum;    
+        }
+    }
+}
+
 
 skgmh.recalculateValues = function () {with(skgmh){
     sorter = function (a,b) {
@@ -208,6 +242,21 @@ skgmh.recalculateValues = function () {with(skgmh){
         return a.lp-b.lp;
     }
 
+    for(var i=0; i < anzahl_spieler; i++) {
+        var heim = 0;
+        var gast = 0;
+        for(var j=0; j < 8; j++) {
+           heim += +(datapointers['H'+(i+1)+'_GassenLP_'+(j+1)].getValue());
+           gast += +(datapointers['G'+(i+1)+'_GassenLP_'+(j+1)].getValue());
+        }
+        datapointers['H'+(i+1)+'_LP'].setValue(heim);
+        datapointers['G'+(i+1)+'_LP'].setValue(gast);
+        updateEditById('H'+(i+1)+'_LP');
+        updateEditById('G'+(i+1)+'_LP');
+    }
+    
+    updatePopupSum();
+   
     var h_lp = 0;
     var g_lp = 0;
     var g_punkte = 0;
@@ -510,11 +559,12 @@ skgmh.updatePopup = function(popUpName) {with(skgmh) {
     var temp = null;
     for(var i = 0; i < 8; i++) {
         initPopUpEdit(ersterSpieler,posH1,i,skgmh.data.HEIM[ersterSpieler],'H');
-        initPopUpEdit(ersterSpieler,posH2,i,skgmh.data.HEIM[letzterSpieler],'H');
+        initPopUpEdit(letzterSpieler,posH2,i,skgmh.data.HEIM[letzterSpieler],'H');
         initPopUpEdit(ersterSpieler,posG1,i,skgmh.data.GAST[ersterSpieler],'G');
-        initPopUpEdit(ersterSpieler,posG2,i,skgmh.data.GAST[letzterSpieler],'G');
+        initPopUpEdit(letzterSpieler,posG2,i,skgmh.data.GAST[letzterSpieler],'G');
     }
     
+    updatePopupSum();
 }}
 
 skgmh.initPopUpEdit = function(spielerIndex,bahn,gassenIndex,dataReference,heimgast) {with(skgmh){
@@ -524,7 +574,7 @@ skgmh.initPopUpEdit = function(spielerIndex,bahn,gassenIndex,dataReference,heimg
     temp.innerHTML = '<span/>';
 //    temp.innerHTML = dataReference.gassen[gassenIndex];
     var dataid = heimgast+(spielerIndex+1)+'_GassenLP_'+(gassenIndex+1);
-    inlineEdit.init(temp,wrapValueTransfer(temp,datapointers[dataid],null));
+    inlineEdit.init(temp,wrapValueTransfer(temp,datapointers[dataid],recalculateValues));
     updateEditByIdPopup(feldid,dataid);
 }}
 
