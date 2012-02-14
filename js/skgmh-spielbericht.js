@@ -299,6 +299,8 @@ skgmh.recalculateValues = function () {with(skgmh){
         datapointers[punkteBerechunung[i].id+'_ZP'].setValue(i+1);
         if (datapointers[punkteBerechunung[i].id+'_LP'].getValue() != '') {
             document.getElementById(punkteBerechunung[i].id+'_ZP').innerHTML = i+1;
+        }else {
+            document.getElementById(punkteBerechunung[i].id+'_ZP').innerHTML = "";
         }
         if (punkteBerechunung[i].mannschaft === 'H') {
             if (datapointers[punkteBerechunung[i].id+'_LP'].getValue() != '') {
