@@ -1,0 +1,192 @@
+<?php /* Smarty version 2.6.26, created on 2011-11-20 15:15:21
+         compiled from navigator-neu.tpl */ ?>
+<style type="text/css">
+<?php echo '
+.ulmenue {
+  list-style-type: none;
+  margin-top: 3px;
+  margin-left: 0px;
+  margin-bottom: 3px;
+  padding-left: 0px;  
+}
+.ulmenue li a {
+  color: black;
+  width: 13em;
+  padding: 1px;
+  padding-left: 10px;
+  background-color: #CCFFCC;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8pt;  
+  display: block;  
+}
+.ulmenue li a:hover {
+  color: white;
+  background-color: #99CC66;
+}
+.ulmenue2 {
+  list-style-type: none;
+  margin-top: 2px;
+  margin-left: 0px;
+  margin-bottom: 3px;
+  padding-left: 0px;  
+}
+.ulmenue2 li a {
+  color: black;
+  width: 13em;
+  padding: 1px;
+  padding-left: 10px;
+  background-color: #D54C4C;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8pt; 
+  display: block;  
+}
+.ulmenue2 li a:hover {
+   color: white;
+  background-color: #7E1717;
+}
+.ulmenue3 {
+  list-style-type: none;
+   margin-top: 2px;
+  margin-left: 0px;
+  margin-bottom: 3px;
+  padding-left: 0px;  
+}
+.ulmenue3 li a {
+  color: black;
+  width: 13em;
+  padding: 1px;
+  padding-left: 10px;
+  background-color: 9FB2CA;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8pt; 
+  display: block;  
+}
+.ulmenue3 li a:hover {
+  color: white;
+  background-color: #292C9A;
+}
+.ulmenue4 {
+  list-style-type: none;
+   margin-top: 2px;
+  margin-left: 0px;
+  margin-bottom: 3px;
+  padding-left: 0px;  
+}
+.ulmenue4 li a {
+  color: black;
+  width: 13em;
+  padding: 1px;
+  padding-left: 10px;
+  background-color: CED592;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8pt; 
+  display: block;  
+}
+.ulmenue4 li a:hover {
+  color: white;
+  background-color: #A8B921;
+}
+.ulmenue5 {
+  list-style-type: none;
+   margin-top: 2px;
+  margin-left: 0px;
+  margin-bottom: 3px;
+  padding-left: 0px;  
+}
+.ulmenue5 li a {
+  color: black;
+  width: 13em;
+  padding: 1px;
+  padding-left: 10px;
+  background-color: 33FF66;
+  text-decoration: none;
+  border-bottom: 1px solid white;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 8pt; 
+  display: block;  
+}
+.ulmenue5 li a:hover {
+  color: white;
+  background-color: 00CC00;
+}
+'; ?>
+
+</style>
+    <div bgcolor="#7892B5" topmargin="0" marginheight="0">
+        <p style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                       <span style="font-size:12pt;">&nbsp;</span><p style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;"><font face="Arial" color="#CCCCCC"><span style="font-size:12pt;"><b><i><u>SKG Mülheim</u></i></b></span></font></p>
+<ul class="ulmenue">
+        <li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">			<a href="skg_news_mit_tabellen.htm" target="detail"><span style="font-size:10pt;">Home (SKG News)</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+		<a href="../meisterschaften/frame-meisterschaften.htm" target="detail">Meisterschaften</a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+<a href="../info/kegelzentrum.htm" target="detail">Unser Kegelzentrum</a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+<a href="../chronik/chronik-frame.htm" target="detail">Chronik</a>
+        <li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+     
+</ul>
+        <p style="line-height:100%; text-decoration:none; margin-top:0; margin-bottom:0; margin-left:5;">
+            
+<span style="font-size:11pt;">&nbsp;</span>
+<p style="line-height:100%; text-decoration:none; margin-top:0; margin-bottom:0; margin-left:5;">            <font face="Arial" color="#33FF66"><span style="font-size:11pt;"><i><b>SKG 
+Jugend</b></i></span></font><span style="font-size:11pt;"><font face="Arial" color="#33FF66">
+</font></span></p>
+<ul class="ulmenue5">
+            <li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="jugend/ranglistenturnier-mjugend.htm" target="detail"><span style="font-size:10pt;">Ranglistenturniere
+            </span></a></ul>
+        <p style="line-height:100%; text-decoration:none; margin-top:0; margin-bottom:0; margin-left:5;">
+            
+            <span style="font-size:11pt;">&nbsp;</span>
+<p style="line-height:100%; text-decoration:none; margin-top:0; margin-bottom:0; margin-left:5;"><font face="Arial" color="#7E1717"><span style="font-size:11pt;"><i><b>Rot-Weiß 59 Mülheim</b></i></span></font><span style="font-size:11pt;"><font face="Arial">
+        </font></span></p>
+<ul class="ulmenue2">
+            <li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="../rw-ligenspiele/rw-erste-mannschaft/rw-erste-mannschaft.htm" target="detail"><span style="font-size:10pt;">1. Mannschaft</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="../rw-ligenspiele/rw-zweite-mannschaft/rw-zweite-mannschaft.htm" target="detail"><span style="font-size:10pt;">2. Mannschaft</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="../rw-pokale/rw-pokale.htm" target="detail"><span style="font-size:10pt;">Pokale</span></a></ul>
+        <p style="line-height:100%; text-decoration:none; margin-top:0; margin-bottom:0; margin-left:5;">
+            
+            <span style="font-size:11pt;">&nbsp;</span>
+<p style="line-height:100%; text-decoration:none; margin-top:0; margin-bottom:0; margin-left:5;"><font face="Arial" color="#292C9A"><span style="font-size:11pt;"><i><b>Blau-Weiß
+            61 Mülheim</b></i></span></font><span style="font-size:11pt;"><font face="Arial">
+        </font></span></p>
+<ul class="ulmenue3">
+            <li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="bw-ligenspiele/bw-erste-mannschaft/bw-erste-mannschaft.htm" target="detail"><span style="font-size:10pt;">1. Mannschaft
+		</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="bw-ligenspiele/bw-zweite-mannschaft/bw-zweite-mannschaft.htm" target="detail"><span style="font-size:10pt;">2. Mannschaft
+          
+	    </span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="bw-ligenspiele/bw-dritte-mannschaft/bw-dritte-mannschaft.htm" target="detail"><span style="font-size:10pt;">3. Mannschaft
+		                </span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="bw-ligenspiele/bw-vierte-mannschaft/bw-vierte-mannschaft.htm" target="detail"><span style="font-size:10pt;">4. Mannschaft</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+				<a href="bw-pokale/frame-bw-pokale.htm" target="detail"><span style="font-size:10pt;">Pokale
+        </span></a></ul>
+        <p style="line-height:100%; text-decoration:none; margin-top:0; margin-bottom:0; margin-left:5;">
+            
+            <span style="font-size:11pt;">&nbsp;</span>
+<p style="line-height:100%; text-decoration:none; margin-top:0; margin-bottom:0; margin-left:5;"><font face="Arial" color="#996600"><span style="font-size:11pt;"><i><b>KSC 71 Saarn</b></i></span></font><span style="font-size:11pt;"><font face="Arial">
+        </font></span></p>
+<ul class="ulmenue4">
+            <li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="../saarn-ligenspiele/saarn-erste-mannschaft/saarn-erste-mannschaft.htm" target="detail"><span style="font-size:10pt;">1. Mannschaft</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+                <a href="../saarn-pokale/saarn-pokale-frame.htm" target="detail"><span style="font-size:10pt;">Pokale</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+				<a href="saarn-chronik.htm" target="detail"><span style="font-size:10pt;">Chronik</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+</ul>
+	
+<ul class="ulmenue">
+            <li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+			<a href="info/kontakte.htm" target="detail"><span style="font-size:10pt;">kontakte</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+				<a href="info/routenplaner.htm" target="detail"><span style="font-size:10pt;">Routenplaner</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+				<a href="info/impressum.htm" target="detail"><span style="font-size:10pt;">Impressum</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+				<a href="http://www.guestbook-free.com/books2/sodorb/" target="detail"><span style="font-size:10pt;">Gästebuch</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
+<br>
+</ul>
+</div>
