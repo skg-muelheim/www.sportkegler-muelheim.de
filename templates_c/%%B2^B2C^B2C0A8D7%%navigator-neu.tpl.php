@@ -1,9 +1,7 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-    <head>
-        <title>Navigation</title>
+<?php /* Smarty version 2.6.26, created on 2011-11-20 15:15:21
+         compiled from navigator-neu.tpl */ ?>
 <style type="text/css">
-
+<?php echo '
 .ulmenue {
   list-style-type: none;
   margin-top: 3px;
@@ -119,11 +117,10 @@
   color: white;
   background-color: 00CC00;
 }
-</style>
-<base target="detail">    
+'; ?>
 
-</head>
-    <body bgcolor="#7892B5" topmargin="0" marginheight="0">
+</style>
+    <div bgcolor="#7892B5" topmargin="0" marginheight="0">
         <p style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
                        <span style="font-size:12pt;">&nbsp;</span><p style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;"><font face="Arial" color="#CCCCCC"><span style="font-size:12pt;"><b><i><u>SKG Mülheim</u></i></b></span></font></p>
 <ul class="ulmenue">
@@ -192,6 +189,4 @@ Jugend</b></i></span></font><span style="font-size:11pt;"><font face="Arial" col
 				<a href="http://www.guestbook-free.com/books2/sodorb/" target="detail"><span style="font-size:10pt;">Gästebuch</span></a><li style="line-height:100%; margin-top:0; margin-bottom:0; margin-left:5;">
 <br>
 </ul>
-</body>
-</html>
-
+</div>

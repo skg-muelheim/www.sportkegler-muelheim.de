@@ -65,15 +65,15 @@ gibt es Neues? &nbsp;&nbsp;&nbsp;&nbsp;</font></i></b></span><span style="font-s
 <ul>
     <div align="left">
         <li style="text-align:left; line-height:11pt; margin-bottom:2; margin-left:0; border-left-style:none;">&nbsp;<font face="Arial"><span style="font-size:11pt;">&nbsp;&nbsp;</span></font><span style="font-size:11pt;"><font face="Arial"><i><a href="../bw-ligenspiele/bw-erste-mannschaft/bw-erste-mannschaft.htm" target="detail">Blau-Weiß 
-        61 Mülheim 1:  1. Bundesliga - 3.+4. Spieltag&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../bw-ligenspiele/bw-vierte-mannschaft/bw-vierte-mannschaft.htm" target="detail">Blau-Weiß 
+        61 Mülheim 1:  1. Bundesliga - 6. Spieltag&nbsp;&nbsp;</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../bw-ligenspiele/bw-vierte-mannschaft/bw-vierte-mannschaft.htm" target="detail">Blau-Weiß 
         61 Mülheim 4:  Kreisliga 2 - 1. Spieltag</a></i></font></span></li>
         <li style="text-align:left; line-height:11pt; margin-bottom:2; margin-left:0; border-left-style:none;"><span style="font-size:11pt;"><font face="Arial"><i>&nbsp;&nbsp;&nbsp;<a href="../bw-ligenspiele/bw-zweite-mannschaft/bw-zweite-mannschaft.htm" target="detail">Blau-Weiß 
-        61 Mülheim 2:  Bezirksliga 1 - 2. Spieltag</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../rw-ligenspiele/rw-erste-mannschaft/rw-erste-mannschaft.htm" target="detail">Rot-Weiß 
-        59 Mülheim 1:  Niederrheinliga -&nbsp;1. Spieltag</a></i></font></span></li>
+        61 Mülheim 2:  Bezirksliga 1 - 3. Spieltag</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../rw-ligenspiele/rw-erste-mannschaft/rw-erste-mannschaft.htm" target="detail">Rot-Weiß 
+        59 Mülheim 1:  Niederrheinliga -&nbsp;3. Spieltag</a></i></font></span></li>
         <li style="text-align:left; line-height:11pt; margin-bottom:2; margin-left:0; border-left-style:none;"><span style="font-size:11pt;"><font face="Arial"><i>&nbsp;&nbsp;&nbsp;<a href="../bw-ligenspiele/bw-dritte-mannschaft/bw-dritte-mannschaft.htm" target="detail">Blau-Weiß 
-        61 Mülheim 3:  Bezirksklasse 2 - 2. Spieltag</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../rw-ligenspiele/rw-zweite-mannschaft/rw-zweite-mannschaft.htm" target="detail">Rot-Weiß 
-        59 Mülheim 2:   Bezirksliga - 1. Spieltag</a></i></font></span></li>
-        <li style="text-align:left; line-height:11pt; margin-bottom:2; margin-left:0; border-left-style:none;"><span style="font-size:11pt;"><font face="Arial"><i><a href="../bw-ligenspiele/bw-dritte-mannschaft/bw-dritte-mannschaft.htm" target="detail">&nbsp;&nbsp;&nbsp;</a><a href="../saarn-ligenspiele/saarn-erste-mannschaft/saarn-erste-mannschaft.htm" target="detail">KSC 
+        61 Mülheim 3:  Bezirksklasse 2 - 3. Spieltag</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="../rw-ligenspiele/rw-zweite-mannschaft/rw-zweite-mannschaft.htm" target="detail">Rot-Weiß 
+        59 Mülheim 2:   Bezirksliga - 3. Spieltag</a></i></font></span></li>
+        <li style="text-align:left; line-height:11pt; margin-bottom:2; margin-left:0; border-left-style:none;"><span style="font-size:11pt;"><font face="Arial"><i>&nbsp;&nbsp;<a href="../bw-ligenspiele/bw-dritte-mannschaft/bw-dritte-mannschaft.htm" target="detail">&nbsp;</a><a href="../saarn-ligenspiele/saarn-erste-mannschaft/saarn-erste-mannschaft.htm" target="detail">KSC 
         71 Saarn:  Spielplan Bezirksklasse 1 - 1. Spieltag</a>&nbsp;</i></font></span></li>
     </div>
 </ul>
