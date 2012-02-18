@@ -21,7 +21,8 @@
                 }
             {/literal}
         </style>
-        <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/bootstrap-responsive.css" rel="stylesheet">
+        <link href="css/docs.css" rel="stylesheet">
 
         <!-- Le fav and touch icons -->
         <link rel="shortcut icon" href="images/favicon.ico">
@@ -31,7 +32,7 @@
 
         <link rel="SHORTCUT ICON" href="../../skgicon.ico">
     </head>
-    <body bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+    <body data-spy="scroll" data-target=".subnav" data-offset="50">
         <!-- 
                 <div id="header">{*include file='banner.tpl'*}</div>
                 <div id="nav">TOP Navigation</div>
