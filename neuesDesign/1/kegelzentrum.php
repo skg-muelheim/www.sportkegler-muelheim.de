@@ -14,5 +14,5 @@ $smarty->compile_check = true;
 $smarty->template_dir = 'templates';
 $smarty->compile_dir = 'templates_c';
 
-$smarty->display('index.tpl');
+$smarty->display('kegelzentrum.tpl');
 ?>

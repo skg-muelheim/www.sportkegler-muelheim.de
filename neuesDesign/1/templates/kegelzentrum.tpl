@@ -51,8 +51,8 @@
                     <a class="brand" href="index.php">SKG M&uuml;lheim</a>
                     <div class="nav-collapse">
                         <ul class="nav">
-                            <li class="active"><a href="index.php">Aktuelles</a></li>
-                            <li class="dropdown">
+                            <li ><a href="index.php">Aktuelles</a></li>
+                            <li class="dropdown active">
                                 <a class="dropdown-toggle"
                                    data-toggle="dropdown"
                                    href="#">
@@ -61,7 +61,7 @@
                                 </a>
                                 <ul class="dropdown-menu">
                                     <li><a href="#Meisterschaften">Meisterschaften</a></li>
-                                    <li><a href="kegelzentrum.php">Unser Kegelzentrum</a></li>
+                                    <li><a href="#Kegelzentrum">Unser Kegelzentrum</a></li>
                                     <li><a href="#Chronik">Chronik</a></li>
                                 </ul>
                             </li>
@@ -130,7 +130,7 @@
             </ul>
         </div>
         <div class="container" id="main">
-            {include file='skg_news_mit_tabellen.tpl'}
+            {include file='kegelzentrum_inner.tpl'}
         </div>
 
         <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
