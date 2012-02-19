@@ -159,7 +159,7 @@ hr.soften {
 @media (min-width: 980px) {
   .subnav-fixed {
     position: fixed;
-    top: 40px;
+    top: 39px;
     left: 0;
     right: 0;
     z-index: 1030;
