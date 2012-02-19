@@ -40,7 +40,9 @@
                 <div id="sidebar">{*include file='navigator-neu.tpl'*}</div>
                 <div id="footer">Footer</div>
         -->
-        <div class="navbar navbar-fixed-top">
+       {include file='main_navbar.tpl'}
+<!--         
+       <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class="container-fluid">
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -123,12 +125,13 @@
                                 </ul>
                             </li>
                         </ul>
-                    </div><!--/.nav-collapse -->
+                    </div>
                 </div>
             </div>
             <ul class="nav nav-pills">
             </ul>
         </div>
+-->        
         <div class="container" id="main">
             {include file='skg_news_mit_tabellen.tpl'}
         </div>
