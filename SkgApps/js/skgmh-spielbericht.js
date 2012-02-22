@@ -3,7 +3,7 @@ var skgmh = skgmh || {};
 skgmh.selected_app = null;
 skgmh.selected_club = null;
 skgmh.anzahl_spieler = 6;
-skgmh.gespielte_gassen = 48;
+skgmh.gespielte_gassen = 2*4*4*2; // 2 Mannschaften 4 Spieler * 4 Bahnen * 2 Gassen
 skgmh.verlorene_wertungen = 78;
 skgmh.dritter_block = new Array();
 skgmh.data = {"HEIM" : new Array(6) , "GAST":new Array(6),};
@@ -279,6 +279,12 @@ skgmh.recalculateValues = function () {with(skgmh){
         temp.lp = +(datapointers[temp.id+'_LP'].getValue());
         punkteBerechunung[(i*2)+1] = temp;
         g_lp += temp.lp;
+        for(var j=0; j < 8; j++) {
+            var gtemp = datapointers[temp.id+'_GassenLP'].getValue()[j];
+            if (gtemp && gtemp != '') {
+                gespielte_gassen++;
+            }
+        }
     }
     
     
@@ -319,11 +325,11 @@ skgmh.recalculateValues = function () {with(skgmh){
     document.getElementById('H_ZP').innerHTML = h_zp;
     
     
-    var gassenGesammt = anzahl_spieler * 8;
+    var gassenGesammt = anzahl_spieler * 8 * 2;
     var progressGassen = gespielte_gassen / gassenGesammt * 100;
     progressGassen = progressGassen < 100 ? progressGassen : 100;
     var element = document.getElementById('progressGassen');
-    element.innerHTML = gespielte_gassen +'/' + gassenGesammt + ' Bahnen';
+    element.innerHTML = gespielte_gassen +'/' + gassenGesammt + ' Gassen';
     element.setAttribute('style','width: '+ progressGassen +"%");
 
     var wertungenZumPunkt = 10;
@@ -522,7 +528,7 @@ skgmh.updatePopup = function(popUpName) {with(skgmh) {
     var minBahnInBlock = maxBahnInBlock -3;
     var minGasseInBlock = (minBahnInBlock * 2);
     
-    var dGassenWechselInBlock = skgmh.gespielte_gassen/2;
+    var dGassenWechselInBlock = skgmh.gespielte_gassen/4;
     var gassenWechselInBlock = parseInt(dGassenWechselInBlock) - minGasseInBlock;
 
     gassenWechselInBlock = gassenWechselInBlock < 7 ? gassenWechselInBlock : 7;
