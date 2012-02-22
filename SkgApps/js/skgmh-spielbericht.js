@@ -205,7 +205,7 @@ skgmh.getValueByIdInSpan = function(id) {
     var n = elements.length;
     for (k = 0; k < n; k++) {
         var inner = elements[k];
-        if (inner.tagName.toUpperCase() === 'SPAN') {
+        if (inner.tagName && inner.tagName.toUpperCase() === 'SPAN') {
             return inner.innerHTML;
         }
     }
@@ -260,7 +260,7 @@ skgmh.recalculateValues = function () {with(skgmh){
     var h_lp = 0;
     var g_lp = 0;
     var g_punkte = 0;
-    var gespielte_gassen = 0;
+    gespielte_gassen = 0;
     punkteBerechunung = new Array(anzahl_spieler*2)
     for(var i=0; i < anzahl_spieler; i++) {
         var temp = {id: 'H'+(i+1), mannschaft:'H'}
@@ -522,7 +522,7 @@ skgmh.updatePopup = function(popUpName) {with(skgmh) {
     var minBahnInBlock = maxBahnInBlock -3;
     var minGasseInBlock = (minBahnInBlock * 2);
     
-    var dGassenWechselInBlock = skgmh.gespielte_gassen/4;
+    var dGassenWechselInBlock = skgmh.gespielte_gassen/2;
     var gassenWechselInBlock = parseInt(dGassenWechselInBlock) - minGasseInBlock;
 
     gassenWechselInBlock = gassenWechselInBlock < 7 ? gassenWechselInBlock : 7;
