@@ -9,8 +9,8 @@
             <a class="brand" href="index.php">SKG M&uuml;lheim</a>
             <div class="nav-collapse">
                 <ul class="nav">
-                    <li class="active"><a href="index.php">Aktuelles</a></li>
-                    <li class="dropdown">
+                    <li id="main-nav.aktuelles"><a href="index.php">Aktuelles</a></li>
+                    <li class="dropdown" id="main-nav.verein">
                         <a class="dropdown-toggle"
                            data-toggle="dropdown"
                            href="#">
