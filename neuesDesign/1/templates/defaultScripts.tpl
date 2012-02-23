@@ -1,4 +1,6 @@
+<!--
 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+-->
 <script src="js/jquery.js"></script>
 <script src="js/google-code-prettify/prettify.js"></script>
 <script src="js/bootstrap-transition.js"></script>
