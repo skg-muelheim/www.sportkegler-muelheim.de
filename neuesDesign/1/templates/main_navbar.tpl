@@ -18,9 +18,9 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#Meisterschaften">Meisterschaften</a></li>
+                            <li><a href="meisterschaften.php">Meisterschaften</a></li>
                             <li><a href="kegelzentrum.php">Unser Kegelzentrum</a></li>
-                            <li><a href="#Chronik">Chronik</a></li>
+                            <li><a href="chronik.php">Chronik</a></li>
                         </ul>
                     </li>
 
@@ -53,7 +53,7 @@
                             <li><a href="#BWPokale">Pokalespiele</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" id="main-nav.ksc71saarn">
                         <a class="dropdown-toggle"
                            data-toggle="dropdown"
                            href="#">
@@ -61,12 +61,12 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#KSCM1">1. Mannschaft</a></li>
-                            <li><a href="#KSCPokale">Pokalespiele</a></li>
-                            <li><a href="#KSCChronik">Chronik</a></li>
+                            <li><a href="ksc71saarn.php?was=main&wann=aktuell">1. Mannschaft</a></li>
+                            <li><a href="ksc71saarn.php?was=pokale&wann=aktuell">Pokalespiele</a></li>
+                            <li><a href="ksc71saarn.php?was=chronik">Chronik</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" id="main-nav.kontakt">
                         <a class="dropdown-toggle"
                            data-toggle="dropdown"
                            href="#">
@@ -74,10 +74,10 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#Kontakte">Ansprechpartner</a></li>
-                            <li><a href="#Routenplaner">Routenplaner</a></li>
-                            <li><a href="#Impressum">Impressum</a></li>
-                            <li><a href="#Gaestebuch">G&auml;stebuch</a></li>
+                            <li><a href="route.php">Routenplaner</a></li>
+                            <li><a href="kontakte.php">Ansprechpartner</a></li>
+                            <li><a href="gaesteBuch.php">G&auml;stebuch</a></li>
+                            <li><a href="impressum.php">Impressum</a></li>
                         </ul>
                     </li>
                 </ul>

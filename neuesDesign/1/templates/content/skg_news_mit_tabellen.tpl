@@ -3,7 +3,7 @@
     <p class="lead">Momentan sind wir in der Ligenspielphase, daher aus aktuellen Anlass unsere Tabellen nach Ligen sortiert</p>
     <div class="subnav">
         <ul class="nav nav-pills">
-            <li class="active"><a href="#Buli1">1. Bundesliga</a><li>
+            <li><a href="#Buli1">1. Bundesliga</a><li>
             <li><a href="#NR">Niederrheinliga</a><li>
             <li><a href="#BL">Bezirksliga</a><li>
             <li><a href="#BK">Bezirksklasse</a><li>
