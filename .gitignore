@@ -1,7 +1,7 @@
 /lib/smarty/demo/
 /nbproject/private/
-/templates_c/
-/neuesDesign/1/templates_c/
+/templates_c/*
+/neuesDesign/1/templates_c/*
 /nbproject/
 /Bilder/Thumbs.db
 /Thumbs.db
