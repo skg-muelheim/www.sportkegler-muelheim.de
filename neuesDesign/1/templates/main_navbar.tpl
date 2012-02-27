@@ -74,10 +74,10 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="route.php">Routenplaner</a></li>
-                            <li><a href="kontakte.php">Ansprechpartner</a></li>
-                            <li><a href="gaesteBuch.php">G&auml;stebuch</a></li>
-                            <li><a href="impressum.php">Impressum</a></li>
+                            <li><a href="kontakt.php?was=route">Routenplaner</a></li>
+                            <li><a href="kontakt.php?was=ansprechpartner">Ansprechpartner</a></li>
+                            <li><a href="kontakt.php?was=gaestebuch">G&auml;stebuch</a></li>
+                            <li><a href="kontakt.php">Impressum</a></li>
                         </ul>
                     </li>
                 </ul>
