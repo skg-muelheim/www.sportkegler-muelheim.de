@@ -76,7 +76,7 @@
                         <ul class="dropdown-menu">
                             <li><a href="kontakt.php?was=route">Routenplaner</a></li>
                             <li><a href="kontakt.php?was=ansprechpartner">Ansprechpartner</a></li>
-                            <li><a href="kontakt.php?was=gaestebuch">G&auml;stebuch</a></li>
+                            <li><a href="kontakt.php?was=gaestebuch&prefix=test_">G&auml;stebuch</a></li>
                             <li><a href="kontakt.php">Impressum</a></li>
                         </ul>
                     </li>
