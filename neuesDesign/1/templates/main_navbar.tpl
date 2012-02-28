@@ -25,7 +25,7 @@
                     </li>
 
                     <li><a href="#Jugend">Jugend</a></li>
-                    <li class="dropdown">
+                    <li class="dropdown" id="main-nav.rw59muelheim">
                         <a class="dropdown-toggle"
                            data-toggle="dropdown"
                            href="#">
@@ -38,7 +38,7 @@
                             <li><a href="#RWPokale">Pokalespiele</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown">
+                    <li class="dropdown" id="main-nav.bw61muelheim">
                         <a class="dropdown-toggle"
                            data-toggle="dropdown"
                            href="#">
@@ -46,11 +46,11 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#BWM1">1. Mannschaft</a></li>
-                            <li><a href="#BWM2">2. Mannschaft</a></li>
-                            <li><a href="#BWM3">3. Mannschaft</a></li>
-                            <li><a href="#BWM4">4. Mannschaft</a></li>
-                            <li><a href="#BWPokale">Pokalespiele</a></li>
+                            <li><a href="bw61muelheim.php?was=main&wann=aktuell#BWM1">1. Mannschaft</a></li>
+                            <li><a href="bw61muelheim.php?was=main&wann=aktuell#BWM2">2. Mannschaft</a></li>
+                            <li><a href="bw61muelheim.php?was=main&wann=aktuell#BWM3">3. Mannschaft</a></li>
+                            <li><a href="bw61muelheim.php?was=main&wann=aktuell#BWM4">4. Mannschaft</a></li>
+                            <li><a href="bw61muelheim.php?was=pokale&wann=aktuell">Pokalespiele</a></li>
                         </ul>
                     </li>
                     <li class="dropdown" id="main-nav.ksc71saarn">

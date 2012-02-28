@@ -19,6 +19,17 @@
         a.twtr-reply {
             text-replace: "reply" "Antworten";
         }
+        .subnav {
+            z-index: 99;
+        }
+        
+        .navbar {
+            z-index: 0;
+        }
+        .dropdown-menu{
+            z-index: 99;
+        }
+            
     {/literal}
 </style>
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
