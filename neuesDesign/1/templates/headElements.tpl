@@ -19,15 +19,8 @@
         a.twtr-reply {
             text-replace: "reply" "Antworten";
         }
-        .subnav {
-            z-index: 99;
-        }
-        
         .navbar {
-            z-index: 0;
-        }
-        .dropdown-menu{
-            z-index: 99;
+            z-index: 9999;
         }
             
     {/literal}

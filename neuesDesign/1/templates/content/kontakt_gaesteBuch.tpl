@@ -17,7 +17,7 @@
 new TWTR.Widget({
   version: 2,
   type: 'search',
-  search: '#test_gb_skgmh',
+  search: '#{/literal}{$test_prefix}{literal}gb_skgmh',
   interval: 30000,
   title: 'G&auml;stebuch',
   subject: 'Sportkegler Gemeinschaft M&uuml;lheim an der Ruhr',
@@ -50,7 +50,7 @@ new TWTR.Widget({
 new TWTR.Widget({
   version: 2,
   type: 'search',
-  search: '#test_gb_bw61',
+  search: '#{/literal}{$test_prefix}{literal}gb_bw61',
   interval: 30000,
   title: 'G&auml;stebuch',
   subject: 'BW 61 M&uuml;lheim',
@@ -83,7 +83,7 @@ new TWTR.Widget({
 new TWTR.Widget({
   version: 2,
   type: 'search',
-  search: '#test_gb_rw59',
+  search: '#{/literal}{$test_prefix}{literal}gb_rw59',
   interval: 30000,
   title: 'G&auml;stebuch',
   subject: 'RW 59 M&uuml;lheim',
@@ -116,7 +116,7 @@ new TWTR.Widget({
 new TWTR.Widget({
   version: 2,
   type: 'search',
-  search: '#test_gb_ksc71',
+  search: '#{/literal}{$test_prefix}{literal}gb_ksc71',
   interval: 30000,
   title: 'G&auml;stebuch',
   subject: 'KSC 71 Saarn',
@@ -189,7 +189,7 @@ var initTweetBox = function(id) {
         label: "Neues f&uuml;rs G&auml;stebuch hier twittern.",
         height: 100,
         width: 400,
-        defaultContent: "#test_"+id,
+        defaultContent: "#{/literal}{$test_prefix}{literal}"+id,
         onTweet: onTweet
         });
     });
