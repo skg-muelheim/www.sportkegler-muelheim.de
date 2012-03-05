@@ -255,7 +255,7 @@ skgmh.updatePopupSum = function() {
 
 
 skgmh.recalculateValues = function () {with(skgmh){
-    sorter = function (a,b) {
+        sorter = function (a,b) {
         if (a.lp === b.lp) {
             return a.mannschaft =='G' ? +1 : -1;
         }
@@ -293,15 +293,32 @@ skgmh.recalculateValues = function () {with(skgmh){
                 gast += +(gtemp);
             }
             if (selected_app == 'Hochrechnung') {
-                heim = hgassen[2] / hgassen[0] * 4;
-                heim += hgassen[3] / hgassen[1] * 4;
-                gast = ggassen[2] / ggassen[0] * 4;
-                gast += ggassen[3] / ggassen[1] * 4;
+                heim = hgassen[2];
+                heim += hgassen[3];
+                var vFaktor = hgassen[2] / (hgassen[2] + hgassen[3]); 
+                var rFaktor = hgassen[3] / (hgassen[2] + hgassen[3]);
+                var hTippV = (skgmh.data['HEIM'][i].tipp / 4) * vFaktor; 
+                var hTippR = (skgmh.data['HEIM'][i].tipp / 4) * rFaktor;
+                heim += hTippV * (4 - hgassen[0]);
+                heim += hTippR * (4 - hgassen[1]);
                 if (hgassen[0] == 0) {
-                    heim = 0;
+                    heim = skgmh.data['HEIM'][i].tipp;
+                }else {
+                    heim = parseInt(heim);
                 }
+                
+                gast = ggassen[2];
+                gast += ggassen[3];
+                vFaktor = ggassen[2] / (ggassen[2] + ggassen[3]); 
+                rFaktor = ggassen[3] / (ggassen[2] + ggassen[3]);
+                var gTippV = (skgmh.data['GAST'][i].tipp / 4) * vFaktor; 
+                var gTippR = (skgmh.data['GAST'][i].tipp / 4) * rFaktor;
+                gast += gTippV * (4 - ggassen[0]);
+                gast += gTippR * (4 - ggassen[1]);
                 if (ggassen[0] == 0) {
-                    gast = 0;
+                    gast = skgmh.data['GAST'][i].tipp;
+                }else {
+                    gast = parseInt(gast);
                 }
             }
             datapointers['H'+(i+1)+'_LP'].setValue(heim);
