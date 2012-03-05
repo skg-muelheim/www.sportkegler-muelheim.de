@@ -60,6 +60,7 @@
   </head>
 
   <body nix="skgmh.init_app()">
+    <a id="download">download</a><br/>
     <a href="#" id="show">show</a><br/>
     <a href="#" id="delete_all">delete all</a><br/>
     <div id="content"></div>
@@ -80,6 +81,7 @@
     <script src="js/bootstrap-collapse.js"></script>
     <script src="js/bootstrap-carousel.js"></script>
     <script src="js/bootstrap-typeahead.js"></script>
+    <script src="js/webtoolkit.base64.js"></script>
 <!--
 <script src="js/skgmh-spielbericht.js"></script>
 -->
@@ -107,7 +109,7 @@
       var show = function() {
         var allKeys = new Array(localStorage.length);
         for(var i=0; i < localStorage.length; i++) {  
-          allKeys[i] = localStorage[i];
+          allKeys[i] = localStorage.key(i);
         }
         allKeys.sort();
   
@@ -125,7 +127,9 @@
       }
       
       document.getElementById('show').onclick = show;
-      document.getElementById('delete_all').onclick = delete_all();
+      document.getElementById('delete_all').onclick = delete_all;
+      
+      document.getElementById('download')['href'] = 'data:application/octet-stream;base64,'+Base64.encode(JSON.stringify(localStorage));
     </script>
   
 
