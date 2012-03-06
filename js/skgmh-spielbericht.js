@@ -48,7 +48,7 @@ skgmh.init_app = function() {with(skgmh) {
 
 skgmh.updateDataLink = function() {
     document.getElementById('downloadDataLink')['href'] = 'data:application/octet-stream;base64,'+Base64.encode(JSON.stringify(localStorage));
-}
+};
 
 /**
  * Legt einen DataPointer an.
@@ -62,7 +62,7 @@ skgmh.registerDataPointer = function (isHeim,spielerindex,feldname) {with(skgmh)
     var datenBereich = isHeim?data.HEIM:data.GAST;
     // Der Datenbereich ist jeweils mit Kleinbuchstaben
     datapointers[nameDP] = new types.datapointer(datenBereich[spielerindex],feldname.toLowerCase());
-}}
+}};
 
 skgmh.create_datapointers = function () {with(skgmh) {
     // lokale Konstanten
@@ -168,17 +168,17 @@ skgmh.switchToProgrammModus = function(mode) {
         store_all();
     }};
     return func;
-}
+};
 
 skgmh.gassenProgressP = function(event) {
     skgmh.gespielte_gassen++;
     skgmh.recalculateValues();
-}
+};
 
 skgmh.gassenProgressM = function(event) {
     skgmh.gespielte_gassen-=2;
     skgmh.recalculateValues();
-}
+};
 
 
 skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
@@ -207,7 +207,7 @@ skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
         }
     }
     return wrapper;
-}
+};
 
 skgmh.remove3Block = function() {with(skgmh){
     var elements = getElementsByClassName(document,'dritterBlock');
@@ -253,10 +253,11 @@ skgmh.getValueByIdInSpan = function(id) {
         }
     }
     return '';
-}
+};
 
 skgmh.updatePopupSum = function() {
     for(var i=0; i < 4; i++) {
+        var spielerSum = 0;
         for(var j=0; j < 4; j++) {
             var sum = ''
             var v = skgmh.getValueByIdInSpan('SpielerBahn'+(i+1)+'V'+(j+1));
@@ -271,10 +272,12 @@ skgmh.updatePopupSum = function() {
                     sum += parseInt(r);
                 }
             }
+            spielerSum += sum;
             document.getElementById('SpielerBahn'+(i+1)+'S'+(j+1)).innerHTML=sum;    
         }
+        document.getElementById('SpielerBahn'+(i+1)+'Erg').innerHTML = "<center>"+spielerSum+"</center>";
     }
-}
+};
 
 
 skgmh.recalculateValues = function () {with(skgmh){
@@ -580,7 +583,7 @@ skgmh.selectClub = function(which) {with(skgmh) {
 
 skgmh.setInnerHtmlForId = function(id,value) {
     document.getElementById(id).innerHTML = value;
-}
+};
 
 skgmh.test_storage = function() {with(skgmh) {
     return "test";
@@ -607,7 +610,7 @@ skgmh.getElementsByClassName = function (node,classname) {
         return classElements;
     })(classname, node);
   }
-}
+};
 
 skgmh.getElementsByAttribute = function (node,attribute,value) {
     return (function getElementsByClass(searchAttribute,value,node) {
@@ -641,10 +644,6 @@ skgmh.inlineEdit.init = function(element,onchange) {with(skgmh.inlineEdit){
     element.fromModelCallback = onchange.fromModel;
 }};
 
-skgmh.inlineEdit.test = function(newValue) {
-    alert(newValue);
-}
-
 skgmh.inlineEdit.mouseover = function (){ with(skgmh.inlineEdit){
     var pid = this.id+'_pencil';
     var pencil = document.getElementById(pid);
@@ -656,8 +655,13 @@ skgmh.inlineEdit.mouseover = function (){ with(skgmh.inlineEdit){
 skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
     if (this.getAttribute('popUp') && skgmh.selected_app != 'Tippabgabe') {
         var popUpName = this.getAttribute('popUp');
-        var popUpParam = this.getAttribute('popUpParam');
-        document.getElementById(popUpName).setAttribute('popUpParam',popUpParam);
+        
+        var blockIndex = this.getAttribute('popUpParam') -1;
+        var bahnWechselInBlock = skgmh.berechneBahnWechselImBlock(blockIndex);
+        
+        var welcheBahnAnzeigen = blockIndex * 4 + bahnWechselInBlock;
+        
+        document.getElementById(popUpName).setAttribute('popUpParam',welcheBahnAnzeigen);
         skgmh.updatePopup(popUpName);
         $('#'+popUpName).modal({
             keyboard: true
@@ -687,11 +691,8 @@ skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
     }
 }};
 
-skgmh.updatePopup = function(popUpName) {with(skgmh) {
-    var blockIndex = document.getElementById(popUpName).getAttribute('popUpParam') -1;
-
+skgmh.berechneBahnWechselImBlock = function(blockIndex) {
     var maxBahnInBlock = 3 + (blockIndex) * 4;
-    var maxGasseInBlock = 1 + maxBahnInBlock * 2;
     
     var minBahnInBlock = maxBahnInBlock -3;
     var minGasseInBlock = (minBahnInBlock * 2);
@@ -703,8 +704,14 @@ skgmh.updatePopup = function(popUpName) {with(skgmh) {
     gassenWechselInBlock = gassenWechselInBlock > 0 ? gassenWechselInBlock : 0;
     var dBahnWechselInBlock = gassenWechselInBlock / 2;
 
-    var bahnWechselInBlock = parseInt(dBahnWechselInBlock);
-    
+    return parseInt(dBahnWechselInBlock);
+};
+
+skgmh.updatePopup = function(popUpName) {with(skgmh) {
+    var welcheBahnAnzeigen = document.getElementById(popUpName).getAttribute('popUpParam');
+    var bahnWechselInBlock = welcheBahnAnzeigen % 4;
+    var blockIndex = parseInt((welcheBahnAnzeigen - bahnWechselInBlock) / 4);
+   
     var ersterSpieler = blockIndex * 2;
     var letzterSpieler = ersterSpieler +1;
 
