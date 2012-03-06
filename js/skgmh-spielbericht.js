@@ -324,6 +324,20 @@ skgmh.recalculateValues = function () {with(skgmh){
                 heim += hgassen[3];
                 var vFaktor = hgassen[2] / (hgassen[2] + hgassen[3]); 
                 var rFaktor = hgassen[3] / (hgassen[2] + hgassen[3]);
+                if (vFaktor == 1 || rFaktor == 1) {
+                    var tipp = skgmh.data['HEIM'][i].tipp;
+                    vFaktor = 105 / 175;
+                   if (tipp < 700) {
+                        var vFaktorMax = 0.8;
+                        var posInSkala = tipp / 700;
+                        vFaktor = (vFaktorMax * (1-posInSkala)) + (vFaktor * posInSkala);
+                    }else {
+                        var vFaktorMin = 0.5;
+                        var posInSkala = (tipp - 700)  / 380;
+                        vFaktor = (vFaktorMin * (posInSkala)) + (vFaktor * (1-posInSkala));
+                    }
+                    rFaktor = 1 - vFaktor;
+                }
                 var hTippV = (skgmh.data['HEIM'][i].tipp / 4) * vFaktor; 
                 var hTippR = (skgmh.data['HEIM'][i].tipp / 4) * rFaktor;
                 heim += hTippV * (4 - hgassen[0]);
