@@ -102,13 +102,30 @@ skgmh.fillDataIntoForm = function () {with(skgmh) {
     }
 }};
 
+/**
+ * Aktualisiert ein Element im DOM
+ * fieldid: welches Feld wird aktualisiert
+ * postfix: optionaler Parameter. hängt den Text an das Element an
+ */
 skgmh.updateEditById = function(fieldid,postfix) {with(skgmh) {
     updateEdit(document.getElementById(fieldid),datapointers[fieldid].getValue(),postfix);
 }};
+
+/**
+ * Aktualisiert ein Element im DOM. Diese Funktion ist für das Popup gedacht.
+ * fieldid: welches Feld wird aktualisiert
+ * dataid: id des datapointer aus der der Wert gelesen wird.
+ */
 skgmh.updateEditByIdPopup = function(fieldid,dataid) {with(skgmh) {
     updateEdit(document.getElementById(fieldid),datapointers[dataid].getValue());
 }};
 
+/**
+ * Aktualisiert ein Element im DOM
+ * field: welches Feld wird aktualisiert
+ * value: neuer Wert des Felder
+ * postfix: optionaler Parameter. hängt den Text an das Element an
+ */
 skgmh.updateEdit = function(field,value,postfix) {
     if (field != null) {
         var elements = field.childNodes;
@@ -336,14 +353,14 @@ skgmh.recalculateValues = function () {with(skgmh){
             datapointers['H'+(i+1)+'_LP'].setValue(heim);
             datapointers['G'+(i+1)+'_LP'].setValue(gast);
             if (hdiff != 0 && selected_app == 'Hochrechnung' ) {
-                var vorzeichen = hdiff > 0?" (+":" (";
-                updateEditById('H'+(i+1)+'_LP',vorzeichen+hdiff+")");
+                var vorzeichen = hdiff > 0?"+":"";
+                updateEditById('H'+(i+1)+'_LP',' <span class="plusMinusAnzeige">('+vorzeichen+hdiff+')</span>');
             }else {
                 updateEditById('H'+(i+1)+'_LP');
             }
             if (gdiff != 0 && selected_app == 'Hochrechnung') {
-                var vorzeichen = gdiff > 0?" (+":" (";
-                updateEditById('G'+(i+1)+'_LP',vorzeichen+gdiff+")");
+                var vorzeichen = gdiff > 0?"+":"";
+                updateEditById('G'+(i+1)+'_LP',' <span class="plusMinusAnzeige">('+vorzeichen+gdiff+')</span>');
             }else {
                 updateEditById('G'+(i+1)+'_LP');
             }
