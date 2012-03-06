@@ -3,10 +3,10 @@ var skgmh = skgmh || {};
 skgmh.selected_app = null;
 skgmh.selected_club = null;
 skgmh.anzahl_spieler = 6;
-skgmh.gespielte_gassen = 2*4*4*2; // 2 Mannschaften 4 Spieler * 4 Bahnen * 2 Gassen
+skgmh.gespielte_gassen = 2*4*4*2; // 2 Mannschaften * 4 Spieler * 4 Bahnen * 2 Gassen
 skgmh.verlorene_wertungen = 78;
 skgmh.dritter_block = new Array();
-skgmh.data = {"HEIM" : new Array(6) , "GAST":new Array(6),};
+skgmh.data = {"HEIM" : new Array(6) , "GAST" : new Array(6),};
 skgmh.datapointers = {};
 skgmh.inlineEdit = {};
 skgmh.types = {};
@@ -29,24 +29,11 @@ skgmh.prototypes.datapointer = {
     },
 };
 
-skgmh.prototypes.datapointer_direct = {
-    setValue : function (value) {
-        this.pointer = value;
-    },
-    getValue : function () {
-        return this.pointer;
-    },
-};
-
 skgmh.types.datapointer = function (pointer,field_name,pointer_name) {
     this.pointer = pointer;
     this.field_name = field_name;
 };
-skgmh.types.datapointer_direct = function (pointer,pointer_name) {
-    this.pointer = pointer;
-};
 
-skgmh.types.datapointer_direct.prototype = skgmh.prototypes.datapointer_direct;
 skgmh.types.datapointer.prototype = skgmh.prototypes.datapointer;
 
 skgmh.init_app = function() {with(skgmh) {
@@ -56,29 +43,41 @@ skgmh.init_app = function() {with(skgmh) {
     selectClub(selected_club);
     selectApp(selected_app);
     recalculateValues();
-    document.getElementById('downloadDataLink')['href'] = 'data:application/octet-stream;base64,'+Base64.encode(JSON.stringify(localStorage));
+    updateDataLink();
 }};
+
+skgmh.updateDataLink = function() {
+    document.getElementById('downloadDataLink')['href'] = 'data:application/octet-stream;base64,'+Base64.encode(JSON.stringify(localStorage));
+}
+
+/**
+ * Legt einen DataPointer an.
+ * isHeim: true/false
+ * spielerindex: welcher Spieler (Basis 0)
+ * feldname: Name des Felder für das ein Datenpointer angelegt werden soll.
+ */
 skgmh.registerDataPointer = function (isHeim,spielerindex,feldname) {with(skgmh){
-    datapointers[(isHeim?'H':'G')+(spielerindex+1)+'_' +feldname.toUpperCase()] = new types.datapointer((isHeim?data.HEIM:data.GAST)[spielerindex],feldname.toLowerCase());
+    // Die Pointer haben Grossbuchstaben als Felddbezeichner.
+    var nameDP = (isHeim?'H':'G')+(spielerindex+1)+'_' +feldname.toUpperCase();
+    var datenBereich = isHeim?data.HEIM:data.GAST;
+    // Der Datenbereich ist jeweils mit Kleinbuchstaben
+    datapointers[nameDP] = new types.datapointer(datenBereich[spielerindex],feldname.toLowerCase());
 }}
 
 skgmh.create_datapointers = function () {with(skgmh) {
+    // lokale Konstanten
+    var heimspieler = true;
+    var gastspieler = false;
     for (var i=0; i < 6 ; i++) {
-        registerDataPointer(true,i,'name');
-        registerDataPointer(true,i,'zp');
-        registerDataPointer(true,i,'lp');
-//        datapointers['H'+(i+1)+'_NAME'] = new types.datapointer(data.HEIM[i],'name');
-//        datapointers['H'+(i+1)+'_ZP'] = new types.datapointer(data.HEIM[i],'zp');
-//        datapointers['H'+(i+1)+'_LP'] = new types.datapointer(data.HEIM[i],'lp');
-        datapointers['H'+(i+1)+'_GassenLP'] = new types.datapointer_direct(data.HEIM[i].gassen);
+        registerDataPointer(heimspieler,i,'name');
+        registerDataPointer(heimspieler,i,'zp');
+        registerDataPointer(heimspieler,i,'lp');
+        datapointers['H'+(i+1)+'_GassenLP'] = new types.datapointer(data.HEIM[i],'gassen');
         
-        registerDataPointer(false,i,'name');
-        registerDataPointer(false,i,'zp');
-        registerDataPointer(false,i,'lp');
-//        datapointers['G'+(i+1)+'_NAME'] = new types.datapointer(data.GAST[i],'name');
-//        datapointers['G'+(i+1)+'_ZP'] = new types.datapointer(data.GAST[i],'zp');
-//        datapointers['G'+(i+1)+'_LP'] = new types.datapointer(data.GAST[i],'lp');
-        datapointers['G'+(i+1)+'_GassenLP'] = new types.datapointer_direct(data.GAST[i].gassen);
+        registerDataPointer(gastspieler,i,'name');
+        registerDataPointer(gastspieler,i,'zp');
+        registerDataPointer(gastspieler,i,'lp');
+        datapointers['G'+(i+1)+'_GassenLP'] = new types.datapointer(data.GAST[i],'gassen');
         
         for (var j=0; j < 8; j++) {
             datapointers['H'+(i+1)+'_GassenLP_'+(j+1)] = new types.datapointer(data.HEIM[i].gassen,j);
@@ -103,25 +102,45 @@ skgmh.fillDataIntoForm = function () {with(skgmh) {
     }
 }};
 
-skgmh.updateEditById = function(fieldid) {with(skgmh) {
-    updateEdit(document.getElementById(fieldid),datapointers[fieldid].getValue());
+/**
+ * Aktualisiert ein Element im DOM
+ * fieldid: welches Feld wird aktualisiert
+ * postfix: optionaler Parameter. hängt den Text an das Element an
+ */
+skgmh.updateEditById = function(fieldid,postfix) {with(skgmh) {
+    updateEdit(document.getElementById(fieldid),datapointers[fieldid].getValue(),postfix);
 }};
+
+/**
+ * Aktualisiert ein Element im DOM. Diese Funktion ist für das Popup gedacht.
+ * fieldid: welches Feld wird aktualisiert
+ * dataid: id des datapointer aus der der Wert gelesen wird.
+ */
 skgmh.updateEditByIdPopup = function(fieldid,dataid) {with(skgmh) {
     updateEdit(document.getElementById(fieldid),datapointers[dataid].getValue());
 }};
 
-skgmh.updateEdit = function(field,value) {
+/**
+ * Aktualisiert ein Element im DOM
+ * field: welches Feld wird aktualisiert
+ * value: neuer Wert des Felder
+ * postfix: optionaler Parameter. hängt den Text an das Element an
+ */
+skgmh.updateEdit = function(field,value,postfix) {
     if (field != null) {
         var elements = field.childNodes;
         var n = elements.length;
         for (i = 0; i < n; i++) {
             var inner = elements[i];
             if (inner.tagName.toUpperCase() === 'SPAN') {
-                inner.innerHTML = value;
+                if (postfix) {
+                    inner.innerHTML = value + postfix;
+                }else {
+                    inner.innerHTML = value;
+                }
             }
         }
     }
-  
 };
 
 skgmh.bind = function() {with(skgmh){
@@ -190,18 +209,22 @@ skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
     return wrapper;
 }
 
-skgmh.remove3Block = function() {with(skgmh){v
+skgmh.remove3Block = function() {with(skgmh){
     var elements = getElementsByClassName(document,'dritterBlock');
     var n = elements.length;
     for (var i = n-1; i >= 0; i--) {
         dritter_block.push(elements[i].parentNode.removeChild(elements[i]));
     }
-    var icon = document.createElement('i');
-    icon.setAttribute('class','icon-plus');
-    document.getElementById('insert_P5_P6_button').appendChild(icon);
-    icon.onclick = insert3Block;
-    anzahl_spieler = 4;
-    store_value('anzahl_spieler',anzahl_spieler);
+    var buttonPosition = document.getElementById('insert_P5_P6_button');
+    if (getElementsByClassName(buttonPosition,'icon-plus').length == 0) {
+        var icon = document.createElement('i');
+        icon.setAttribute('class','icon-plus');
+        
+        buttonPosition.appendChild(icon);
+        icon.onclick = insert3Block;
+        anzahl_spieler = 4;
+        store_value('anzahl_spieler',anzahl_spieler);
+    }
     recalculateValues();
 }};
 
@@ -257,7 +280,11 @@ skgmh.updatePopupSum = function() {
 skgmh.recalculateValues = function () {with(skgmh){
     sorter = function (a,b) {
         if (a.lp === b.lp) {
-            return a.mannschaft =='G' ? +1 : -1;
+            if (a.mannschaft != b.mannschaft) {
+                return a.mannschaft =='G' ? +1 : -1;
+            }else {
+               return a.raeumen-b.raeumen;
+            }
         }
         return a.lp-b.lp;
     }
@@ -293,21 +320,50 @@ skgmh.recalculateValues = function () {with(skgmh){
                 gast += +(gtemp);
             }
             if (selected_app == 'Hochrechnung') {
-                heim = hgassen[2] / hgassen[0] * 4;
-                heim += hgassen[3] / hgassen[1] * 4;
-                gast = ggassen[2] / ggassen[0] * 4;
-                gast += ggassen[3] / ggassen[1] * 4;
+                heim = hgassen[2];
+                heim += hgassen[3];
+                var vFaktor = hgassen[2] / (hgassen[2] + hgassen[3]); 
+                var rFaktor = hgassen[3] / (hgassen[2] + hgassen[3]);
+                var hTippV = (skgmh.data['HEIM'][i].tipp / 4) * vFaktor; 
+                var hTippR = (skgmh.data['HEIM'][i].tipp / 4) * rFaktor;
+                heim += hTippV * (4 - hgassen[0]);
+                heim += hTippR * (4 - hgassen[1]);
                 if (hgassen[0] == 0) {
-                    heim = 0;
+                    heim = skgmh.data['HEIM'][i].tipp;
+                }else {
+                    heim = parseInt(heim);
                 }
+                
+                gast = ggassen[2];
+                gast += ggassen[3];
+                vFaktor = ggassen[2] / (ggassen[2] + ggassen[3]); 
+                rFaktor = ggassen[3] / (ggassen[2] + ggassen[3]);
+                var gTippV = (skgmh.data['GAST'][i].tipp / 4) * vFaktor; 
+                var gTippR = (skgmh.data['GAST'][i].tipp / 4) * rFaktor;
+                gast += gTippV * (4 - ggassen[0]);
+                gast += gTippR * (4 - ggassen[1]);
                 if (ggassen[0] == 0) {
-                    gast = 0;
+                    gast = skgmh.data['GAST'][i].tipp;
+                }else {
+                    gast = parseInt(gast);
                 }
             }
+            var hdiff = heim - skgmh.data['HEIM'][i].tipp;
+            var gdiff = gast - skgmh.data['GAST'][i].tipp;
             datapointers['H'+(i+1)+'_LP'].setValue(heim);
             datapointers['G'+(i+1)+'_LP'].setValue(gast);
-            updateEditById('H'+(i+1)+'_LP');
-            updateEditById('G'+(i+1)+'_LP');
+            if (hdiff != 0 && selected_app == 'Hochrechnung' ) {
+                var vorzeichen = hdiff > 0?"+":"";
+                updateEditById('H'+(i+1)+'_LP',' <span class="plusMinusAnzeige">('+vorzeichen+hdiff+')</span>');
+            }else {
+                updateEditById('H'+(i+1)+'_LP');
+            }
+            if (gdiff != 0 && selected_app == 'Hochrechnung') {
+                var vorzeichen = gdiff > 0?"+":"";
+                updateEditById('G'+(i+1)+'_LP',' <span class="plusMinusAnzeige">('+vorzeichen+gdiff+')</span>');
+            }else {
+                updateEditById('G'+(i+1)+'_LP');
+            }
         }
         
         updatePopupSum();
@@ -323,8 +379,15 @@ skgmh.recalculateValues = function () {with(skgmh){
         temp.lp = +(datapointers[temp.id+'_LP'].getValue());
         punkteBerechunung[(i*2)] = temp;
         h_lp += temp.lp;
+        temp.volle = 0;
+        temp.raeumen = 0;
         for(var j=0; j < 8; j++) {
             var gtemp = datapointers[temp.id+'_GassenLP'].getValue()[j];
+            if (j % 2 == 0) {
+                temp.volle += gtemp; 
+            }else {
+                temp.raeumen += gtemp;
+            }
             if (gtemp && gtemp != '') {
                 gespielte_gassen++;
             }
@@ -407,6 +470,9 @@ skgmh.recalculateValues = function () {with(skgmh){
 
 }};
 
+/**
+ * Lädt die Daten aus localStorage und packt sie in die Datenstrukturen
+ */
 skgmh.load_storage = function() {with(skgmh) {
     selected_app = loadOrInitStorage('last_selected_app','Spielbericht');
     selected_club = loadOrInitStorage('last_selected_club','KSC 71 Saarn');
@@ -446,12 +512,6 @@ skgmh.store_all = function() {with(skgmh) {
         store_value('G'+(i+1)+'_LP',data.GAST[i].lp);
         store_value('G'+(i+1)+'_TIPP',data.GAST[i].tipp);
         for (var j=0; j < 8; j++) {
-            if (data.HEIM[i].gassen[j] == -99) {
-                alert('H'+i +" " + j);
-            }
-            if (data.GAST[i].gassen[j] == -99) {
-                alert('G'+i +" " + j);
-            }
             store_value('H'+(i+1)+'_GassenLP'+(j+1),data.HEIM[i].gassen[j]);
             store_value('G'+(i+1)+'_GassenLP'+(j+1),data.GAST[i].gassen[j]);
         }
@@ -459,7 +519,7 @@ skgmh.store_all = function() {with(skgmh) {
     store_value('HM_NAME',data.HEIMMANNSCHAFT);
     store_value('GM_NAME',data.GASTMANNSCHAFT);
     store_value('last_selected_app',selected_app);
-    document.getElementById('downloadDataLink')['href'] = 'data:application/octet-stream;base64,'+Base64.encode(JSON.stringify(localStorage));
+    updateDataLink();
 }};
 
 skgmh.store_value = function (which,value) {
