@@ -48,7 +48,7 @@ skgmh.init_app = function() {with(skgmh) {
 
 skgmh.updateDataLink = function() {
     document.getElementById('downloadDataLink')['href'] = 'data:application/octet-stream;base64,'+Base64.encode(JSON.stringify(localStorage));
-}
+};
 
 /**
  * Legt einen DataPointer an.
@@ -62,7 +62,7 @@ skgmh.registerDataPointer = function (isHeim,spielerindex,feldname) {with(skgmh)
     var datenBereich = isHeim?data.HEIM:data.GAST;
     // Der Datenbereich ist jeweils mit Kleinbuchstaben
     datapointers[nameDP] = new types.datapointer(datenBereich[spielerindex],feldname.toLowerCase());
-}}
+}};
 
 skgmh.create_datapointers = function () {with(skgmh) {
     // lokale Konstanten
@@ -168,17 +168,17 @@ skgmh.switchToProgrammModus = function(mode) {
         store_all();
     }};
     return func;
-}
+};
 
 skgmh.gassenProgressP = function(event) {
     skgmh.gespielte_gassen++;
     skgmh.recalculateValues();
-}
+};
 
 skgmh.gassenProgressM = function(event) {
     skgmh.gespielte_gassen-=2;
     skgmh.recalculateValues();
-}
+};
 
 
 skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
@@ -207,7 +207,7 @@ skgmh.wrapValueTransfer = function(element,data_pointer,recalcMethod) {
         }
     }
     return wrapper;
-}
+};
 
 skgmh.remove3Block = function() {with(skgmh){
     var elements = getElementsByClassName(document,'dritterBlock');
@@ -253,10 +253,11 @@ skgmh.getValueByIdInSpan = function(id) {
         }
     }
     return '';
-}
+};
 
-skgmh.updatePopupSum = function() {
+skgmh.updatePopupSum = function(popUpName) {
     for(var i=0; i < 4; i++) {
+        var spielerSum = 0;
         for(var j=0; j < 4; j++) {
             var sum = ''
             var v = skgmh.getValueByIdInSpan('SpielerBahn'+(i+1)+'V'+(j+1));
@@ -271,11 +272,69 @@ skgmh.updatePopupSum = function() {
                     sum += parseInt(r);
                 }
             }
+            spielerSum += sum;
             document.getElementById('SpielerBahn'+(i+1)+'S'+(j+1)).innerHTML=sum;    
         }
+        document.getElementById('SpielerBahn'+(i+1)+'Erg').innerHTML = spielerSum;
+    }
+    
+    popup = document.getElementById(popUpName);
+    dataps = new Array(4);
+    for (var i = 0; i < 4; i++) {
+        var m = popup.getAttribute('M'+(i+1));
+        var s = popup.getAttribute('S'+(i+1));
+        if (m == null || s == null) return;
+        dataps[i] = skgmh.data[m][s];
+        var spielerSum = parseInt(document.getElementById('SpielerBahn'+(i+1)+'Erg').innerHTML);
+        var hochrechnung = skgmh.berechneHochrechnung(skgmh.data[m][s]);
+        var diff = hochrechnung - skgmh.data[m][s].tipp;
+        var hString = hochrechnung + "&nbsp;(" +(diff == 0 ? "+/-0" : (diff > 0 ? "+" : "") + diff)+")";
+        document.getElementById('SpielerBahn'+(i+1)+'Erg').innerHTML = '<center>'+spielerSum
+            +'<span class="plusMinusAnzeige">&nbsp;:'+hString+'</span></center>';
+    }
+    
+        
+};
+
+skgmh.berechneHochrechnung = function(spieler) {
+    var gassen = new Array(4);
+    gassen[0] = 0;
+    gassen[1] = 0;
+    gassen[2] = 0;
+    gassen[3] = 0;
+    for(var j=0; j < 8; j++) {
+        var temp = spieler.gassen[j];
+        if (temp != "") {
+            gassen[j%2] += 1;
+            gassen[2+(j%2)] += +(temp)
+        }
+    }
+    if (gassen[0] == 0) {
+        return spieler.tipp;
+    }else {
+        var hoch = gassen[2] + gassen[3];
+        var vFaktor = gassen[2] / (gassen[2] + gassen[3]); 
+        var rFaktor = gassen[3] / (gassen[2] + gassen[3]);
+        if (vFaktor == 1 || rFaktor == 1) {
+           vFaktor = 105 / 175;
+           if (tipp < 700) {
+                var vFaktorMax = 0.8;
+                var posInSkala = spieler.tipp / 700;
+                vFaktor = (vFaktorMax * (1-posInSkala)) + (vFaktor * posInSkala);
+            }else {
+                var vFaktorMin = 0.5;
+                var posInSkala = (spieler.tipp - 700)  / 380;
+                vFaktor = (vFaktorMin * (posInSkala)) + (vFaktor * (1-posInSkala));
+            }
+            rFaktor = 1 - vFaktor;
+        }
+        var tippV = (spieler.tipp / 4) * vFaktor; 
+        var tippR = (spieler.tipp / 4) * rFaktor;
+        hoch += tippV * (4 - gassen[0]);
+        hoch += tippR * (4 - gassen[1]);
+        return parseInt(hoch);
     }
 }
-
 
 skgmh.recalculateValues = function () {with(skgmh){
     sorter = function (a,b) {
@@ -290,62 +349,18 @@ skgmh.recalculateValues = function () {with(skgmh){
     }
 
     if (selected_app != 'Tippabgabe') {
-        
-    
         for(var i=0; i < anzahl_spieler; i++) {
             var heim = 0;
             var gast = 0;
-            var hgassen = new Array(4);
-            hgassen[0] = 0;
-            hgassen[1] = 0;
-            hgassen[2] = 0;
-            hgassen[3] = 0;
-            var ggassen = new Array(4);
-            ggassen[0] = 0;
-            ggassen[1] = 0;
-            ggassen[2] = 0;
-            ggassen[3] = 0;
-            for(var j=0; j < 8; j++) {
-                var htemp = datapointers['H'+(i+1)+'_GassenLP_'+(j+1)].getValue();
-                var gtemp = datapointers['G'+(i+1)+'_GassenLP_'+(j+1)].getValue();
-                if (htemp != "") {
-                    hgassen[j%2] += 1;
-                    hgassen[2+(j%2)] += +(htemp)
-                }
-                if (gtemp != "") {
-                    ggassen[j%2] += 1;
-                    ggassen[2+(j%2)] += +(gtemp)
-                }
-                heim += +(htemp);
-                gast += +(gtemp);
-            }
             if (selected_app == 'Hochrechnung') {
-                heim = hgassen[2];
-                heim += hgassen[3];
-                var vFaktor = hgassen[2] / (hgassen[2] + hgassen[3]); 
-                var rFaktor = hgassen[3] / (hgassen[2] + hgassen[3]);
-                var hTippV = (skgmh.data['HEIM'][i].tipp / 4) * vFaktor; 
-                var hTippR = (skgmh.data['HEIM'][i].tipp / 4) * rFaktor;
-                heim += hTippV * (4 - hgassen[0]);
-                heim += hTippR * (4 - hgassen[1]);
-                if (hgassen[0] == 0) {
-                    heim = skgmh.data['HEIM'][i].tipp;
-                }else {
-                    heim = parseInt(heim);
-                }
-                
-                gast = ggassen[2];
-                gast += ggassen[3];
-                vFaktor = ggassen[2] / (ggassen[2] + ggassen[3]); 
-                rFaktor = ggassen[3] / (ggassen[2] + ggassen[3]);
-                var gTippV = (skgmh.data['GAST'][i].tipp / 4) * vFaktor; 
-                var gTippR = (skgmh.data['GAST'][i].tipp / 4) * rFaktor;
-                gast += gTippV * (4 - ggassen[0]);
-                gast += gTippR * (4 - ggassen[1]);
-                if (ggassen[0] == 0) {
-                    gast = skgmh.data['GAST'][i].tipp;
-                }else {
-                    gast = parseInt(gast);
+                heim = berechneHochrechnung(data['HEIM'][i]);
+                gast = berechneHochrechnung(data['GAST'][i]);
+            }else {
+                for(var j=0; j < 8; j++) {
+                    var htemp = datapointers['H'+(i+1)+'_GassenLP_'+(j+1)].getValue();
+                    var gtemp = datapointers['G'+(i+1)+'_GassenLP_'+(j+1)].getValue();
+                    heim += +(htemp);
+                    gast += +(gtemp);
                 }
             }
             var hdiff = heim - skgmh.data['HEIM'][i].tipp;
@@ -365,8 +380,7 @@ skgmh.recalculateValues = function () {with(skgmh){
                 updateEditById('G'+(i+1)+'_LP');
             }
         }
-        
-        updatePopupSum();
+        updatePopupSum('LP_Eingabe');
     }
        
     var h_lp = 0;
@@ -566,7 +580,7 @@ skgmh.selectClub = function(which) {with(skgmh) {
 
 skgmh.setInnerHtmlForId = function(id,value) {
     document.getElementById(id).innerHTML = value;
-}
+};
 
 skgmh.test_storage = function() {with(skgmh) {
     return "test";
@@ -593,7 +607,7 @@ skgmh.getElementsByClassName = function (node,classname) {
         return classElements;
     })(classname, node);
   }
-}
+};
 
 skgmh.getElementsByAttribute = function (node,attribute,value) {
     return (function getElementsByClass(searchAttribute,value,node) {
@@ -627,10 +641,6 @@ skgmh.inlineEdit.init = function(element,onchange) {with(skgmh.inlineEdit){
     element.fromModelCallback = onchange.fromModel;
 }};
 
-skgmh.inlineEdit.test = function(newValue) {
-    alert(newValue);
-}
-
 skgmh.inlineEdit.mouseover = function (){ with(skgmh.inlineEdit){
     var pid = this.id+'_pencil';
     var pencil = document.getElementById(pid);
@@ -642,8 +652,13 @@ skgmh.inlineEdit.mouseover = function (){ with(skgmh.inlineEdit){
 skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
     if (this.getAttribute('popUp') && skgmh.selected_app != 'Tippabgabe') {
         var popUpName = this.getAttribute('popUp');
-        var popUpParam = this.getAttribute('popUpParam');
-        document.getElementById(popUpName).setAttribute('popUpParam',popUpParam);
+        
+        var blockIndex = this.getAttribute('popUpParam') -1;
+        var bahnWechselInBlock = skgmh.berechneBahnWechselImBlock(blockIndex);
+        
+        var welcheBahnAnzeigen = blockIndex * 4 + bahnWechselInBlock;
+        
+        document.getElementById(popUpName).setAttribute('popUpParam',welcheBahnAnzeigen);
         skgmh.updatePopup(popUpName);
         $('#'+popUpName).modal({
             keyboard: true
@@ -673,11 +688,8 @@ skgmh.inlineEdit.edit = function() { with(skgmh.inlineEdit) {
     }
 }};
 
-skgmh.updatePopup = function(popUpName) {with(skgmh) {
-    var blockIndex = document.getElementById(popUpName).getAttribute('popUpParam') -1;
-
+skgmh.berechneBahnWechselImBlock = function(blockIndex) {
     var maxBahnInBlock = 3 + (blockIndex) * 4;
-    var maxGasseInBlock = 1 + maxBahnInBlock * 2;
     
     var minBahnInBlock = maxBahnInBlock -3;
     var minGasseInBlock = (minBahnInBlock * 2);
@@ -689,8 +701,14 @@ skgmh.updatePopup = function(popUpName) {with(skgmh) {
     gassenWechselInBlock = gassenWechselInBlock > 0 ? gassenWechselInBlock : 0;
     var dBahnWechselInBlock = gassenWechselInBlock / 2;
 
-    var bahnWechselInBlock = parseInt(dBahnWechselInBlock);
-    
+    return parseInt(dBahnWechselInBlock);
+};
+
+skgmh.updatePopup = function(popUpName) {with(skgmh) {
+    var welcheBahnAnzeigen = document.getElementById(popUpName).getAttribute('popUpParam');
+    var bahnWechselInBlock = welcheBahnAnzeigen % 4;
+    var blockIndex = parseInt((welcheBahnAnzeigen - bahnWechselInBlock) / 4);
+   
     var ersterSpieler = blockIndex * 2;
     var letzterSpieler = ersterSpieler +1;
 
@@ -708,6 +726,18 @@ skgmh.updatePopup = function(popUpName) {with(skgmh) {
     var posH1 = ((1+bahnWechselInBlock) % 4) +1;
     var posG2 = ((2+bahnWechselInBlock) % 4) +1;
     var posH2 = ((3+bahnWechselInBlock) % 4) +1;
+    
+    var popup = document.getElementById(popUpName);
+    popup.setAttribute('M'+posH1,'HEIM');
+    popup.setAttribute('M'+posH2,'HEIM');
+    popup.setAttribute('M'+posG1,'GAST');
+    popup.setAttribute('M'+posG2,'GAST');
+    popup.setAttribute('S'+posH1,ersterSpieler);
+    popup.setAttribute('S'+posH2,letzterSpieler);
+    popup.setAttribute('S'+posG1,ersterSpieler);
+    popup.setAttribute('S'+posG2,letzterSpieler);
+    
+
   
     var eleG1 = document.getElementById('NameSpielerBahn'+posG1);
     var eleH1 = document.getElementById('NameSpielerBahn'+posH1);
@@ -726,7 +756,7 @@ skgmh.updatePopup = function(popUpName) {with(skgmh) {
         initPopUpEdit(letzterSpieler,posG2,i,skgmh.data.GAST[letzterSpieler],'G');
     }
     
-    updatePopupSum();
+    updatePopupSum(popUpName);
 }}
 
 skgmh.initPopUpEdit = function(spielerIndex,bahn,gassenIndex,dataReference,heimgast) {with(skgmh){
