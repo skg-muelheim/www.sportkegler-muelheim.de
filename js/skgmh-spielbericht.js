@@ -288,7 +288,8 @@ skgmh.updatePopupSum = function(popUpName) {
         var spielerSum = parseInt(document.getElementById('SpielerBahn'+(i+1)+'Erg').innerHTML);
         var hochrechnung = skgmh.berechneHochrechnung(skgmh.data[m][s]);
         var diff = hochrechnung - skgmh.data[m][s].tipp;
-        var hString = hochrechnung + "&nbsp;(" +(diff == 0 ? "+/-0" : (diff > 0 ? "+" : "") + diff)+")";
+        var hString = hochrechnung;
+        if (diff != hochrechnung) hString += "&nbsp;(" +(diff == 0 ? "+/-0" : (diff > 0 ? "+" : "") + diff)+")";
         document.getElementById('SpielerBahn'+(i+1)+'Erg').innerHTML = '<center>'+spielerSum
             +'<span class="plusMinusAnzeige">&nbsp;:'+hString+'</span></center>';
     }
@@ -312,26 +313,34 @@ skgmh.berechneHochrechnung = function(spieler) {
     if (gassen[0] == 0) {
         return spieler.tipp;
     }else {
-        var hoch = gassen[2] + gassen[3];
+        var hoch = 0
         var vFaktor = gassen[2] / (gassen[2] + gassen[3]); 
         var rFaktor = gassen[3] / (gassen[2] + gassen[3]);
         if (vFaktor == 1 || rFaktor == 1) {
-           vFaktor = 105 / 175;
-           if (tipp < 700) {
-                var vFaktorMax = 0.8;
-                var posInSkala = spieler.tipp / 700;
-                vFaktor = (vFaktorMax * (1-posInSkala)) + (vFaktor * posInSkala);
-            }else {
-                var vFaktorMin = 0.5;
-                var posInSkala = (spieler.tipp - 700)  / 380;
-                vFaktor = (vFaktorMin * (posInSkala)) + (vFaktor * (1-posInSkala));
+            vFaktor = 105 / 175;
+            if (tipp > 0) {
+                if (tipp < 700) {
+                    var vFaktorMax = 0.8;
+                    var posInSkala = spieler.tipp / 700;
+                    vFaktor = (vFaktorMax * (1-posInSkala)) + (vFaktor * posInSkala);
+                }else {
+                    var vFaktorMin = 0.5;
+                    var posInSkala = (spieler.tipp - 700)  / 380;
+                    vFaktor = (vFaktorMin * (posInSkala)) + (vFaktor * (1-posInSkala));
+                }
             }
             rFaktor = 1 - vFaktor;
         }
-        var tippV = (spieler.tipp / 4) * vFaktor; 
-        var tippR = (spieler.tipp / 4) * rFaktor;
-        hoch += tippV * (4 - gassen[0]);
-        hoch += tippR * (4 - gassen[1]);
+        if (spieler.tipp == 0) {
+            hoch = gassen[2] / gassen[0] * 4;
+            hoch += gassen[3] / gassen[1] * 4;
+        }else {
+            hoch = gassen[2] + gassen[3];
+            var tippV = (spieler.tipp / 4) * vFaktor; 
+            var tippR = (spieler.tipp / 4) * rFaktor;
+            hoch += tippV * (4 - gassen[0]);
+            hoch += tippR * (4 - gassen[1]);
+        }
         return parseInt(hoch);
     }
 }
@@ -367,13 +376,13 @@ skgmh.recalculateValues = function () {with(skgmh){
             var gdiff = gast - skgmh.data['GAST'][i].tipp;
             datapointers['H'+(i+1)+'_LP'].setValue(heim);
             datapointers['G'+(i+1)+'_LP'].setValue(gast);
-            if (hdiff != 0 && selected_app == 'Hochrechnung' ) {
+            if (hdiff != 0 && hdiff != heim) {
                 var vorzeichen = hdiff > 0?"+":"";
                 updateEditById('H'+(i+1)+'_LP',' <span class="plusMinusAnzeige">('+vorzeichen+hdiff+')</span>');
             }else {
                 updateEditById('H'+(i+1)+'_LP');
             }
-            if (gdiff != 0 && selected_app == 'Hochrechnung') {
+            if (gdiff != 0 && gdiff != gast) {
                 var vorzeichen = gdiff > 0?"+":"";
                 updateEditById('G'+(i+1)+'_LP',' <span class="plusMinusAnzeige">('+vorzeichen+gdiff+')</span>');
             }else {
@@ -552,10 +561,26 @@ skgmh.loadOrInitStorage = function (which,defaultValue) {
     return temp;
 };
 
+skgmh.showHochrechnung = function (show) {
+    var n = document.styleSheets.length;
+    for (var i = 0; i < n ; i++) {
+        var ss = document.styleSheets[i];
+        if (ss.cssRules && ss.cssRules.length > 0) {
+            var m = ss.cssRules.length;
+            for (var j = 0; j < m; j++) {
+                if (ss.cssRules[j].selectorText == '.plusMinusAnzeige') {
+                    ss.deleteRule(j);
+                    ss.addRule(".plusMinusAnzeige" ,( show ? 'color: #888;' : 'visibility: hidden;') );
+                }
+            }
+        }
+    }
+}
+
 skgmh.selectApp = function(which) {with(skgmh) {
     setInnerHtmlForId('SelectedApp',which);
+    showHochrechnung(which == 'Hochrechnung');
     if (which == 'Spielbericht') {
-        
     }else if (which == 'Hochrechnung') {
     }else if (which == 'Tippabgabe') {
         var elements = getElementsByAttribute(document,'popup','LP_Eingabe');
@@ -564,8 +589,6 @@ skgmh.selectApp = function(which) {with(skgmh) {
             var element = elements[i];
 //            skgmh.inlineEdit.init(element,wrapValueTransfer(element,datapointers[element.id],recalculateValues));
         }
-
-
     }else {
         alert(which + " nicht bekannt");
     }
