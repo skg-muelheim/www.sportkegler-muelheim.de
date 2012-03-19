@@ -9,4 +9,3 @@
     {include file="content/kontakt-subnav.tpl" gbuch_aktiv="active" }
 </header>
 
-{/literal}
