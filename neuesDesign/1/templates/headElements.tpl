@@ -27,6 +27,7 @@
 </style>
 <link href="css/bootstrap-responsive.css" rel="stylesheet">
 <link href="css/docs.css" rel="stylesheet">
+<link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
 
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="images/favicon.ico">

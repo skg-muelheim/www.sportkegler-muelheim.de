@@ -2,6 +2,7 @@
 <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
 -->
 <script src="js/jquery.js"></script>
+<script src="js/jquery.lightbox-0.5.min.js"></script>
 <script src="js/google-code-prettify/prettify.js"></script>
 <script src="js/bootstrap-transition.js"></script>
 <script src="js/bootstrap-alert.js"></script>
@@ -31,5 +32,8 @@ var ele = document.getElementById("main")
             }
         }
     }
+$(function() {
+	$('a.lightbox').lightBox(/*{fixedNavigation:true}*/);
+});        
 </script>
 {/literal}
