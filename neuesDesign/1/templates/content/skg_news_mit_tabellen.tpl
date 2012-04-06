@@ -42,6 +42,8 @@
 
 <section id="Buli1">
 <div class="row">&nbsp;</div>
+<div class="load-async" template="tabelle" data="BW1.tabelle"/>
+<!--
 <div class="row">
     <div class="span2"><strong>1.&nbsp;Bundesliga&nbsp;&nbsp;Herren</strong></div>
     <div class="span2"><strong>Sonnstag 23.10.11</strong></div>
@@ -220,6 +222,7 @@
         </tr>
     </tbody>
 </table>
+-->
 </section>
 
 <section id="NR">

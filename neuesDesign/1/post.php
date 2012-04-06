@@ -1,13 +1,15 @@
 <?php
-if ($_POST) {
+$VAR_SOURCE = $_POST;
+if ($VAR_SOURCE) {
 
-    $user = $_POST['u'];
-    $passwd = $_POST['p'];
+    $user = $VAR_SOURCE['u'];
+    $passwd = $VAR_SOURCE['p'];
     
     $connection = @mysql_connect("127.0.0.1","skgapps","skgapps");
     if (!$connection) {
         $result['error'] = true;
         $result['message'] = "Auf Grund von technischen Problemen können derzeit keine neuen Benutzer registriert werden. Wir bitten um Verstädnnis.";
+        header("Error-Message: ".$result['message'],false,503);
         die(json_encode($result));
     }
 
@@ -15,39 +17,31 @@ if ($_POST) {
         $result['error'] = true;
         $result['message'] = "Auf Grund von technischen Problemen können derzeit keine neuen Benutzer registriert werden. Wir bitten um Verstädnnis.";
         echo $result['message'];
-        header("Error-Message: ".$result['message'],false,501);
+        header("Error-Message: ".$result['message'],false,503);
         die(json_encode($result));
     }
     
-    $stmt = "SELECT TOP 1 name FROM registrierte_benutzer where 'name'='".$user."')";
+    $stmt = "SELECT name FROM `registrierte_benutzer` where `name`='".$user."'";
     $resultset = mysql_query($stmt,$connection);
-    if (!$resultset) {
-        $result['error'] = true;
-        $result['message'] = "Auf Grund von technischen Problemen können derzeit keine neuen Benutzer registriert werden. Wir bitten um Verstädnnis.";
-        
-        header("Error-Message: ".$result['message'],false,502);
-        header("Status: 503 ",false,502);
-        echo $result['message'];
-        die(json_encode($result));
+    if ($resultset) {
+        if ($erg = mysql_fetch_array($resultset,MYSQL_NUM)) {
+            if ($erg[0] == $user) {
+                $result['error'] = true;
+                $result['message'] = "Dieser Benutzername ist schon vergeben. Eventuell haben Sie sich schon registriert.";
+                header("Error-Message: ".$result['message'],false,403);
+                die(json_encode($result));
+            }
+        }
+        mysql_free_result($resultset);
     }
     
-    $row = mysql_fetch_row($resultset);
-    
-    if ($row) {
-        $stmt = "INSERT INTO `registrierte_benutzer`(`name`, `passwort`) VALUES ('".$user."','".md5($passwd)."')";
-        $newEntries = mysql_query($stmt,$connection);
-        $result['inserted'] = $newEntries;
-    }else {
-        $result['error'] = true;
-        $result['message'] = "Dieser Benutzername ist schon vergeben. Eventuell haben Sie sich schon registriert.";
-        header("Error-Message: ".$result['message'],false,504);
-        echo $result['message'];
-        die(json_encode($result));
-    }
+    $stmt = "INSERT INTO `registrierte_benutzer`(`name`, `passwort`) VALUES ('".$user."','".md5($passwd)."')";
+    $newEntries = mysql_query($stmt,$connection);
+    $result['inserted'] = $newEntries;
 
     mysql_close($connection);
     echo json_encode($result);
 }else {
-    header("HTTP/1.0 404 Not Found");
+    header("HTTP/1.0 403 Not Found");
 }
 ?>

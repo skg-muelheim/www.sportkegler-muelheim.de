@@ -17,8 +17,19 @@
 <script src="js/bootstrap-carousel.js"></script>
 <script src="js/bootstrap-typeahead.js"></script>
 <script src="js/skg-mainapp.js"></script>
+<script src="js/skg-asyncTemplates.js"></script>
+<script src="js/encoder.js"></script>
+<!--
+-->
 {literal}
 <script type="text/javascript">
+
+Encoder.EncodeType = "entity";
+
+function str_replace(search, replace, subject) {
+    return subject.split(search).join(replace);
+}
+    
 var ele = document.getElementById("main")
     if (ele) {
         var attr = ele.getAttribute("mainnav-id");

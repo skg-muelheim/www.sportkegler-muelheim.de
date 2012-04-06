@@ -45,13 +45,15 @@ echo $_COOKIE;
             ,cache: false  
             ,url: "post.php"
             ,data: "u="+username+"&p="+password
-            ,success: function(msg){ 
-                alert( "Data Saved: " + msg);
+            ,success: function(msg){
+                var msgObj = JSON.parse(msg);
+                if (msgObj['inserted'] > 0) {
+                    alert( "Registrierung erfolgreich. Sie erhalten eine Email mit weiteren Informationen.");
+                }
             }
             ,error: function(request,errortype,ex) {
-//                alert(request);
-//                alert(errortype);
-//                alert(ex);
+                var errObj = JSON.parse(request.responseText);
+                alert(errObj['message']);
             }
         });
     };
