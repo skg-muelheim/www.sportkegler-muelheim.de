@@ -1,9 +1,10 @@
 {literal}<script type="text/javascript">
-  var isLocal = document.location.toString().indexOf('sportkegeln.loc') >= 0;
+  var isLocal = document.location.toString().indexOf('sportkegler-muelheim.loc') >= 0;
   if (!isLocal) {
     var _gaq = _gaq || [];
     _gaq.push(['_setAccount', 'UA-25963542-1']);
     _gaq.push(['_trackPageview']);
+    _gaq.push(['_setDomainName', 'www.sportkegler-muelheim.de']);
 
     (function() {
         var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;

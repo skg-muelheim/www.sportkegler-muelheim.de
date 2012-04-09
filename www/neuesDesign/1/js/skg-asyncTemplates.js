@@ -15,13 +15,19 @@
                     var eintrag = loaded_data['tabelle'][key];
                     if ("platzierung" in eintrag) {
                         platz = eintrag['platzierung'];
+                    }else {
+                        platz++;
                     }
                     var node = repeat[0].cloneNode(true);
                     parent.appendChild(node);
+                    var tempList = $(".platzierung",node);
+                    for (var key3 = tempList.length-1; key3 >= 0; key3--) {
+                        tempList[key3].innerText = platz;
+                    }
                     for (var key2 in eintrag) {
                         var tempList = $("."+key2,node);
-                        for (var key3 in tempList) {
-                            tempList[key3].innerHTML = eintrag[key2];
+                        for (var key3 = tempList.length-1; key3 >= 0; key3--) {
+                            tempList[key3].innerText = eintrag[key2];
                         }
                     }
                     
