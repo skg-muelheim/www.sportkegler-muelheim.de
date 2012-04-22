@@ -3,25 +3,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
-<!-- Le styles -->
-<link href="css/bootstrap.css" rel="stylesheet">
-<style>
-    {literal}
-        body {
-            padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
-        }
-        a.twtr-reply {
-            text-replace: "reply" "Antworten";
-        }
-        .navbar {
-            z-index: 9999;
-        }
-            
-    {/literal}
-</style>
-<link href="css/bootstrap-responsive.css" rel="stylesheet">
-<link href="css/docs.css" rel="stylesheet">
-<link href="css/jquery.lightbox-0.5.css" rel="stylesheet" type="text/css" media="screen"/>
+
+<link href="css.php" rel="stylesheet">
 
 <!-- Le fav and touch icons -->
 <link rel="shortcut icon" href="images/favicon.ico">

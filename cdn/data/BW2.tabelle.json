@@ -1,0 +1,12 @@
+{"liga":"1. Bundesliga  Herren",
+ "termin":"Sonnstag 23.10.11",
+ "mannschaften":"BW2",
+ "ergebnis":"3 : 0 ( 51 : 27 ) 5151 : 5059",
+ "tabelle": [
+    {"mannschaft":"M1","platzierung": 1}
+,   {"mannschaft":"M2","spiele": 1, "punkte":0, "heim":1, "ausw":2,"pm":3,"ewp":4,"holz":5}
+,   {"mannschaft":"M3"}
+,   {"mannschaft":"M4"}
+,   {"mannschaft":"M5"}
+]
+}
