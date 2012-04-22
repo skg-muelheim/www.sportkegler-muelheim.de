@@ -1,8 +1,10 @@
 (function(){
     var loadData = function(dest,loaded_template,data) {
+        var domain = document.domain.split(".");
+        var tld = domain[domain.length-1];
         $.ajax({
             type: "GET",
-            url: "data.php?content="+data,
+            url: "data.php/p/"+data,
             success: function(msg) {
                 var loaded_data = msg;
                 dest.innerHTML = loaded_template;
@@ -43,7 +45,7 @@
         });        
     }
     var loadAsync = function(dest,template,data) {
-            $.ajax(
+        $.ajax(
             { 
                 type: "GET"
                 ,url: "templates/"+template+".client.html"
