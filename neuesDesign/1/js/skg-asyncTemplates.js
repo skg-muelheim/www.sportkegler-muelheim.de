@@ -1,14 +1,18 @@
+var skgmh = skgmh || {};
+skgmh.async = {};
+skgmh.async.templates = {};
+
 (function(){
-    var loadData = function(dest,loaded_template,data) {
+    var loadData = function(dest,loaded_template) {
         var domain = document.domain.split(".");
         var tld = domain[domain.length-1];
         $.ajax({
             type: "GET",
-            url: "data.php/p/"+data,
+            url: "data.php/p/"+dest.data,
             success: function(msg) {
                 var loaded_data = msg;
-                dest.innerHTML = loaded_template;
-                var repeat = $(".repeat",dest);
+                dest.dest.innerHTML = loaded_template;
+                var repeat = $(".repeat",dest.dest);
                 var nodesToRepeat = repeat[0].childNodes;
                 var parent = repeat[0].parentNode;
                 parent.removeChild(repeat[0]);
@@ -44,25 +48,67 @@
             }
         });        
     }
-    var loadAsync = function(dest,template,data) {
-        $.ajax(
-            { 
+    
+    var loadAsyncOld = function(dest,template,data) {
+        if (template in skgmh.async.templates) {
+            
+        }else {
+            $.ajax({ 
+                    type: "GET"
+                    ,url: "templates/"+template+".client.html"
+                    ,success: function(msg){
+                        skgmh.async.templates[template] = msg;
+                        loadData(dest,msg,data);
+                    }
+                    ,error: function(request,errortype,ex) {
+                        dest.innerHTML = 'Konnte Vorlage nicht laden';
+                    }
+            });    
+        }
+    }
+
+    var loadAsync = function(templatename,destinations) {
+        $.ajax({ 
                 type: "GET"
-                ,url: "templates/"+template+".client.html"
+                ,url: "templates/"+templatename+".client.html"
                 ,success: function(msg){
-                    loadData(dest,msg,data);
+                    for (var i= destinations.length-1; i >= 0; i--) {
+                        var dest = destinations[i];
+                        loadData(dest,msg);
+                    }
                 }
                 ,error: function(request,errortype,ex) {
-                    dest.innerHTML = 'Konnte Vorlage nicht laden';
+                    for (var i= destinations.length-1; i >= 0; i--) {
+                        var dest = destinations[i];
+                        dest.dest.innerHTML = 'Konnte Vorlage nicht laden';
+                    }
                 }
-            });    
+        });    
     }
+
 
     var toLoad = $('.load-async');
     for (var i = toLoad.length-1 ; i >= 0; i--) {
-        var template = toLoad[i].getAttribute('template');
-        var data = toLoad[i].getAttribute('data');
-        loadAsync(toLoad[i],template,data);
+        var templatename = toLoad[i].getAttribute('template');
+        if (templatename in skgmh.async.templates) {
+            var template = skgmh.async.templates[templatename];
+        }else {
+            var template = Array();
+            skgmh.async.templates[templatename] = template;
+        }
+        var dataname = toLoad[i].getAttribute('data');
+        var destSpec = {};
+        destSpec.data = dataname;
+        destSpec.dest = toLoad[i];
+        template.push(destSpec);
+    }
+    
+    for (var key in skgmh.async.templates) {
+        var destinations = skgmh.async.templates[key];
+        loadAsync(key,destinations);
+    }
+    
+    //    loadAsync(toLoad[i],template,data);
 /*
        $.ajax(
         { 
@@ -83,6 +129,6 @@
         });
 */
 
-    }
+//    }
     
 }());

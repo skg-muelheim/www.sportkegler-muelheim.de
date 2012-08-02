@@ -1,14 +1,17 @@
 <?php
 $pinfo = $_SERVER['PATH_INFO'];
+
 if (strpos($pinfo,'/p/') == 0) {
     $perm = true;
     $pinfo = substr($pinfo,3);
 }else {
     $perm = false;
 }
+
 if (strpos($pinfo,"..") === true) {
     exit;
 }
+
 $filename = "../../../cdn/data/".$pinfo.".json";
 
 $change = filemtime($filename);
