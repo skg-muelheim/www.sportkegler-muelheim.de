@@ -16,5 +16,12 @@ $smarty->compile_check = true;
 $smarty->template_dir = 'templates';
 $smarty->compile_dir = 'templates_c';
 $smarty->debugging_ctrl = $smarty_debugger_ctrl;
+$host = $_SERVER['HTTP_HOST'];
+if (preg_match('/loc$/', $host)) {
+    $smarty->assign('cdnHost','cdn.skg.loc');
+} else {
+    $smarty->assign('cdnHost','cdn.sportkegler-muelheim.loc');
+}
+
 
 ?>

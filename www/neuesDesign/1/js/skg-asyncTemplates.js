@@ -28,20 +28,31 @@ skgmh.async.templates = {};
                     parent.appendChild(node);
                     var tempList = $(".platzierung",node);
                     for (var key3 = tempList.length-1; key3 >= 0; key3--) {
-                        tempList[key3].innerText = platz;
+                        tempList[key3].innerHTML = platz;
                     }
                     for (var key2 in eintrag) {
                         var tempList = $("."+key2,node);
                         for (var key3 = tempList.length-1; key3 >= 0; key3--) {
-                            tempList[key3].innerText = eintrag[key2];
+                            tempList[key3].innerHTML = eintrag[key2];
                         }
                     }
                     
                 }
-                var liga = $(".mannschaften",dest);
+                
+                var domPointer = $(".mannschaften",dest.dest);
                 var mannschaft =  Encoder.htmlEncode(loaded_data['mannschaften'],true);
                 mannschaft = str_replace(" ","&nbsp",mannschaft);
-                liga[0].innerHTML = mannschaft;
+                domPointer[0].innerHTML = mannschaft;
+
+                domPointer = $(".termin",dest.dest);
+                var termin =  Encoder.htmlEncode(loaded_data['termin'],true);
+                termin = str_replace(" ","&nbsp",mannschaft);
+                domPointer[0].innerHTML = termin;
+
+                domPointer = $(".liga",dest.dest);
+                var liga =  Encoder.htmlEncode(loaded_data['liga'],true);
+                liga = str_replace(" ","&nbsp",liga);
+                domPointer[0].innerHTML = liga;
             }
             ,error: function(request,errortype,ex) {
                 dest.innerHTML = 'Konnte Daten nicht laden';
