@@ -3,5 +3,5 @@ include 'default.php';
 
 $smarty->assign('mainnav','verein');
 $smarty->assign('content','kegelzentrum.tpl');
-$smarty->display('index.tpl');
+$smarty->display('index.tpl','kegelzentrum.tpl');
 ?>
