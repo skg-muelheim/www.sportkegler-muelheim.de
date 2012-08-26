@@ -9,13 +9,13 @@
     <div id="gallery">
         <p>Die Seiten sollten in etwa so aussehen</p>
         <p>Bei einer gro&szlig;en Monitoraufl&ouml;sung</p>
-        <p><a class="lightbox" href="http://cdn.sportkegler-muelheim.loc/images/Preview_gA.jpg" title="Bei einer gro&szlig;en Monitoraufl&ouml;sung">
-        <img src="http://cdn.sportkegler-muelheim.loc/images/Preview_gA_vorschau.jpg" width="276" height="122"></img>
+        <p><a class="lightbox" href="http://{$cdnHost}/images/Preview_gA.jpg" title="Bei einer gro&szlig;en Monitoraufl&ouml;sung">
+        <img src="http://{$cdnHost}/images/Preview_gA_vorschau.jpg" width="276" height="122"></img>
         </a>
         </p>
         <p>Bei einer niedrigen Monitoraufl&ouml;sung erreicht man das Hauptnavigation &uuml;ber das Icon oben rechts.</p>
-        <a class="lightbox" href="http://cdn.sportkegler-muelheim.loc/images/Preview_kA.jpg" title="Bei einer niedrigen Monitoraufl&ouml;sung erreicht man das Hauptnavigation &uuml;ber das Icon oben rechts.">
-        <img src="http://cdn.sportkegler-muelheim.loc/images/Preview_kA_vorschau.jpg" width="200" height="122"></img>
+        <a class="lightbox" href="http://{$cdnHost}/images/Preview_kA.jpg" title="Bei einer niedrigen Monitoraufl&ouml;sung erreicht man das Hauptnavigation &uuml;ber das Icon oben rechts.">
+        <img src="http://{$cdnHost}/images/Preview_kA_vorschau.jpg" width="200" height="122"></img>
         </a>
         
     </div>
