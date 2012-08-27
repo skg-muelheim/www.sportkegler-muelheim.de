@@ -2,7 +2,7 @@
 /nbproject/private/
 /templates_c/*.php
 /neuesDesign/1/templates_c/*.php
-/neuesDesign/1/cache/
+/neuesDesign/1/cache/*.tpl
 /nbproject/
 /Bilder/Thumbs.db
 /Thumbs.db
