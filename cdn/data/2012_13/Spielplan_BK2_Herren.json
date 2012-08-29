@@ -1,251 +1,524 @@
-{"liga":"Bezirksklasse 2",
-"Staffelleiter":"Stefan Schröter",
-"spiele": [
+{
+    "liga":"Bezirksklasse 2",
+    "Staffelleiter":"Stefan Schröter",
+    "spiele": [
 
-{ "spielnr":"1","spieltag":"1","bahn":"2-5",
-"datum":"09.09.12","uhrzeit":"13:00",
-"heim":"KSG 31 Essen 2",
-"gast":"SK Kleve 1 "}
-,{ "spielnr":"2","spieltag":"1","bahn":"1-4",
-"datum":"09.09.12","uhrzeit":"10:00",
-"heim":"SK 66/99 Solingen 1",
-"gast":"KSF 32 Duisburg 1"}
-,{ "spielnr":"3","spieltag":"1","bahn":"5-8",
-"datum":"09.09.12","uhrzeit":"13:00",
-"heim":"BW 61 Mülheim 3",
-"gast":"SKV Rees 3 "}
-,{ "spielnr":"4","spieltag":"1","bahn":"1-4",
-"datum":"09.09.12","uhrzeit":"10:00",
-"heim":"SKC Kapellen 1 ",
-"gast":"SK Dinslaken 3 "}
+    {
+        "spielnr":"1",
+        "spieltag":"1",
+        "bahn":"2-5",
+        "datum":"09.09.12",
+        "uhrzeit":"13:00",
+        "heim":"KSG 31 Essen 2",
+        "gast":"SK Kleve 1 "
+    }
+    ,{
+        "spielnr":"2",
+        "spieltag":"1",
+        "bahn":"1-4",
+        "datum":"09.09.12",
+        "uhrzeit":"10:00",
+        "heim":"SK 66/99 Solingen 1",
+        "gast":"KSF 32 Duisburg 1"
+    }
+    ,{
+        "spielnr":"3",
+        "spieltag":"1",
+        "bahn":"5-8",
+        "datum":"09.09.12",
+        "uhrzeit":"13:00",
+        "heim":"BW 61 Mülheim 3",
+        "gast":"SKV Rees 3 "
+    }
+    ,{
+        "spielnr":"4",
+        "spieltag":"1",
+        "bahn":"1-4",
+        "datum":"09.09.12",
+        "uhrzeit":"10:00",
+        "heim":"SKC Kapellen 1 ",
+        "gast":"SK Dinslaken 3 "
+    }
  
-,{ "spielnr":"5","spieltag":"2","bahn":"5-8",
-"datum":"23.09.12","uhrzeit":"16:00",
-"heim":"BW 61 Mülheim 3",
-"gast":"SK Dinslaken 3 "}
-,{ "spielnr":"6","spieltag":"2","bahn":"5-8",
-"datum":"23.09.12","uhrzeit":"10:00",
-"heim":"SK Kleve 1 ",
-"gast":"SKC Kapellen 1 "}
-,{ "spielnr":"7","spieltag":"2","bahn":"2-5",
-"datum":"23.09.12","uhrzeit":"13:00",
-"heim":"KSF 32 Duisburg 1",
-"gast":"KSG 31 Essen 2"}
-,{ "spielnr":"8","spieltag":"2","bahn":"1-4",
-"datum":"23.09.12","uhrzeit":"10:00",
-"heim":"SKV Rees 3 ",
-"gast":"SK 66/99 Solingen 1"}
+    ,{
+        "spielnr":"5",
+        "spieltag":"2",
+        "bahn":"5-8",
+        "datum":"23.09.12",
+        "uhrzeit":"16:00",
+        "heim":"BW 61 Mülheim 3",
+        "gast":"SK Dinslaken 3 "
+    }
+    ,{
+        "spielnr":"6",
+        "spieltag":"2",
+        "bahn":"5-8",
+        "datum":"23.09.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Kleve 1 ",
+        "gast":"SKC Kapellen 1 "
+    }
+    ,{
+        "spielnr":"7",
+        "spieltag":"2",
+        "bahn":"2-5",
+        "datum":"23.09.12",
+        "uhrzeit":"13:00",
+        "heim":"KSF 32 Duisburg 1",
+        "gast":"KSG 31 Essen 2"
+    }
+    ,{
+        "spielnr":"8",
+        "spieltag":"2",
+        "bahn":"1-4",
+        "datum":"23.09.12",
+        "uhrzeit":"10:00",
+        "heim":"SKV Rees 3 ",
+        "gast":"SK 66/99 Solingen 1"
+    }
  
-,{ "spielnr":"9","spieltag":"3","bahn":"5-8",
-"datum":"07.10.12","uhrzeit":"13:00",
-"heim":"BW 61 Mülheim 3",
-"gast":"SKC Kapellen 1 "}
-,{ "spielnr":"10","spieltag":"3","bahn":"2-5",
-"datum":"07.10.12","uhrzeit":"12:00",
-"heim":"KSG 31 Essen 2",
-"gast":"SKV Rees 3 "}
-,{ "spielnr":"11","spieltag":"3","bahn":"1-4",
-"datum":"07.10.12","uhrzeit":"10:00",
-"heim":"SK 66/99 Solingen 1",
-"gast":"SK Dinslaken 3 "}
-,{ "spielnr":"12","spieltag":"3","bahn":"5-8",
-"datum":"07.10.12","uhrzeit":"10:00",
-"heim":"SK Kleve 1 ",
-"gast":"KSF 32 Duisburg 1"}
+    ,{
+        "spielnr":"9",
+        "spieltag":"3",
+        "bahn":"5-8",
+        "datum":"07.10.12",
+        "uhrzeit":"13:00",
+        "heim":"BW 61 Mülheim 3",
+        "gast":"SKC Kapellen 1 "
+    }
+    ,{
+        "spielnr":"10",
+        "spieltag":"3",
+        "bahn":"2-5",
+        "datum":"07.10.12",
+        "uhrzeit":"12:00",
+        "heim":"KSG 31 Essen 2",
+        "gast":"SKV Rees 3 "
+    }
+    ,{
+        "spielnr":"11",
+        "spieltag":"3",
+        "bahn":"1-4",
+        "datum":"07.10.12",
+        "uhrzeit":"10:00",
+        "heim":"SK 66/99 Solingen 1",
+        "gast":"SK Dinslaken 3 "
+    }
+    ,{
+        "spielnr":"12",
+        "spieltag":"3",
+        "bahn":"5-8",
+        "datum":"07.10.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Kleve 1 ",
+        "gast":"KSF 32 Duisburg 1"
+    }
  
-,{ "spielnr":"13","spieltag":"4","bahn":"1-4",
-"datum":"21.10.12","uhrzeit":"10:00",
-"heim":"SKV Rees 3 ",
-"gast":"SK Kleve 1 "}
-,{ "spielnr":"14","spieltag":"4","bahn":"1-4",
-"datum":"21.10.12","uhrzeit":"10:00",
-"heim":"SKC Kapellen 1 ",
-"gast":"KSF 32 Duisburg 1"}
-,{ "spielnr":"15","spieltag":"4","bahn":"5-8",
-"datum":"21.10.12","uhrzeit":"13:00",
-"heim":"BW 61 Mülheim 3",
-"gast":"SK 66/99 Solingen 1"}
-,{ "spielnr":"16","spieltag":"4","bahn":"1-4",
-"datum":"21.10.12","uhrzeit":"10:00",
-"heim":"SK Dinslaken 3 ",
-"gast":"KSG 31 Essen 2"}
+    ,{
+        "spielnr":"13",
+        "spieltag":"4",
+        "bahn":"1-4",
+        "datum":"21.10.12",
+        "uhrzeit":"10:00",
+        "heim":"SKV Rees 3 ",
+        "gast":"SK Kleve 1 "
+    }
+    ,{
+        "spielnr":"14",
+        "spieltag":"4",
+        "bahn":"1-4",
+        "datum":"21.10.12",
+        "uhrzeit":"10:00",
+        "heim":"SKC Kapellen 1 ",
+        "gast":"KSF 32 Duisburg 1"
+    }
+    ,{
+        "spielnr":"15",
+        "spieltag":"4",
+        "bahn":"5-8",
+        "datum":"21.10.12",
+        "uhrzeit":"13:00",
+        "heim":"BW 61 Mülheim 3",
+        "gast":"SK 66/99 Solingen 1"
+    }
+    ,{
+        "spielnr":"16",
+        "spieltag":"4",
+        "bahn":"1-4",
+        "datum":"21.10.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Dinslaken 3 ",
+        "gast":"KSG 31 Essen 2"
+    }
  
-,{ "spielnr":"17","spieltag":"5","bahn":"1-4",
-"datum":"04.11.12","uhrzeit":"13:00",
-"heim":"SK 66/99 Solingen 1",
-"gast":"SKC Kapellen 1 "}
-,{ "spielnr":"18","spieltag":"5","bahn":"5-8",
-"datum":"04.11.12","uhrzeit":"10:00",
-"heim":"SK Kleve 1 ",
-"gast":"SK Dinslaken 3 "}
-,{ "spielnr":"19","spieltag":"5","bahn":"2-5",
-"datum":"04.11.12","uhrzeit":"10:00",
-"heim":"KSF 32 Duisburg 1",
-"gast":"SKV Rees 3 "}
-,{ "spielnr":"20","spieltag":"5","bahn":"2-5",
-"datum":"04.11.12","uhrzeit":"13:00",
-"heim":"KSG 31 Essen 2",
-"gast":"BW 61 Mülheim 3"}
+    ,{
+        "spielnr":"17",
+        "spieltag":"5",
+        "bahn":"1-4",
+        "datum":"04.11.12",
+        "uhrzeit":"13:00",
+        "heim":"SK 66/99 Solingen 1",
+        "gast":"SKC Kapellen 1 "
+    }
+    ,{
+        "spielnr":"18",
+        "spieltag":"5",
+        "bahn":"5-8",
+        "datum":"04.11.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Kleve 1 ",
+        "gast":"SK Dinslaken 3 "
+    }
+    ,{
+        "spielnr":"19",
+        "spieltag":"5",
+        "bahn":"2-5",
+        "datum":"04.11.12",
+        "uhrzeit":"10:00",
+        "heim":"KSF 32 Duisburg 1",
+        "gast":"SKV Rees 3 "
+    }
+    ,{
+        "spielnr":"20",
+        "spieltag":"5",
+        "bahn":"2-5",
+        "datum":"04.11.12",
+        "uhrzeit":"13:00",
+        "heim":"KSG 31 Essen 2",
+        "gast":"BW 61 Mülheim 3"
+    }
  
-,{ "spielnr":"21","spieltag":"6","bahn":"1-4",
-"datum":"11.11.12","uhrzeit":"10:00",
-"heim":"SK Dinslaken 3 ",
-"gast":"KSF 32 Duisburg 1"}
-,{ "spielnr":"22","spieltag":"6","bahn":"1-4",
-"datum":"11.11.12","uhrzeit":"10:00",
-"heim":"SK 66/99 Solingen 1",
-"gast":"KSG 31 Essen 2"}
-,{ "spielnr":"23","spieltag":"6","bahn":"5-8",
-"datum":"11.11.12","uhrzeit":"13:00",
-"heim":"BW 61 Mülheim 3",
-"gast":"SK Kleve 1 "}
-,{ "spielnr":"24","spieltag":"6","bahn":"1-4",
-"datum":"11.11.12","uhrzeit":"10:00",
-"heim":"SKC Kapellen 1 ",
-"gast":"SKV Rees 3 "}
+    ,{
+        "spielnr":"21",
+        "spieltag":"6",
+        "bahn":"1-4",
+        "datum":"11.11.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Dinslaken 3 ",
+        "gast":"KSF 32 Duisburg 1"
+    }
+    ,{
+        "spielnr":"22",
+        "spieltag":"6",
+        "bahn":"1-4",
+        "datum":"11.11.12",
+        "uhrzeit":"10:00",
+        "heim":"SK 66/99 Solingen 1",
+        "gast":"KSG 31 Essen 2"
+    }
+    ,{
+        "spielnr":"23",
+        "spieltag":"6",
+        "bahn":"5-8",
+        "datum":"11.11.12",
+        "uhrzeit":"13:00",
+        "heim":"BW 61 Mülheim 3",
+        "gast":"SK Kleve 1 "
+    }
+    ,{
+        "spielnr":"24",
+        "spieltag":"6",
+        "bahn":"1-4",
+        "datum":"11.11.12",
+        "uhrzeit":"10:00",
+        "heim":"SKC Kapellen 1 ",
+        "gast":"SKV Rees 3 "
+    }
  
-,{ "spielnr":"25","spieltag":"7","bahn":"1-4",
-"datum":"18.11.12","uhrzeit":"10:00",
-"heim":"SKV Rees 3 ",
-"gast":"SK Dinslaken 3 "}
-,{ "spielnr":"26","spieltag":"7","bahn":"2-5",
-"datum":"18.11.12","uhrzeit":"10:00",
-"heim":"KSF 32 Duisburg 1",
-"gast":"BW 61 Mülheim 3"}
-,{ "spielnr":"27","spieltag":"7","bahn":"2-5",
-"datum":"18.11.12","uhrzeit":"13:00",
-"heim":"KSG 31 Essen 2",
-"gast":"SKC Kapellen 1 "}
-,{ "spielnr":"28","spieltag":"7","bahn":"5-8",
-"datum":"18.11.12","uhrzeit":"10:00",
-"heim":"SK Kleve 1 ",
-"gast":"SK 66/99 Solingen 1"}
+    ,{
+        "spielnr":"25",
+        "spieltag":"7",
+        "bahn":"1-4",
+        "datum":"18.11.12",
+        "uhrzeit":"10:00",
+        "heim":"SKV Rees 3 ",
+        "gast":"SK Dinslaken 3 "
+    }
+    ,{
+        "spielnr":"26",
+        "spieltag":"7",
+        "bahn":"2-5",
+        "datum":"18.11.12",
+        "uhrzeit":"10:00",
+        "heim":"KSF 32 Duisburg 1",
+        "gast":"BW 61 Mülheim 3"
+    }
+    ,{
+        "spielnr":"27",
+        "spieltag":"7",
+        "bahn":"2-5",
+        "datum":"18.11.12",
+        "uhrzeit":"13:00",
+        "heim":"KSG 31 Essen 2",
+        "gast":"SKC Kapellen 1 "
+    }
+    ,{
+        "spielnr":"28",
+        "spieltag":"7",
+        "bahn":"5-8",
+        "datum":"18.11.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Kleve 1 ",
+        "gast":"SK 66/99 Solingen 1"
+    }
  
-,{ "spielnr":"29","spieltag":"8","bahn":"5-8",
-"datum":"02.12.12","uhrzeit":"10:00",
-"heim":"SK Kleve 1 ",
-"gast":"KSG 31 Essen 2"}
-,{ "spielnr":"30","spieltag":"8","bahn":"2-5",
-"datum":"02.12.12","uhrzeit":"10:00",
-"heim":"KSF 32 Duisburg 1",
-"gast":"SK 66/99 Solingen 1"}
-,{ "spielnr":"31","spieltag":"8","bahn":"1-4",
-"datum":"02.12.12","uhrzeit":"10:00",
-"heim":"SKV Rees 3 ",
-"gast":"BW 61 Mülheim 3"}
-,{ "spielnr":"32","spieltag":"8","bahn":"1-4",
-"datum":"02.12.12","uhrzeit":"10:00",
-"heim":"SK Dinslaken 3 ",
-"gast":"SKC Kapellen 1 "}
+    ,{
+        "spielnr":"29",
+        "spieltag":"8",
+        "bahn":"5-8",
+        "datum":"02.12.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Kleve 1 ",
+        "gast":"KSG 31 Essen 2"
+    }
+    ,{
+        "spielnr":"30",
+        "spieltag":"8",
+        "bahn":"2-5",
+        "datum":"02.12.12",
+        "uhrzeit":"10:00",
+        "heim":"KSF 32 Duisburg 1",
+        "gast":"SK 66/99 Solingen 1"
+    }
+    ,{
+        "spielnr":"31",
+        "spieltag":"8",
+        "bahn":"1-4",
+        "datum":"02.12.12",
+        "uhrzeit":"10:00",
+        "heim":"SKV Rees 3 ",
+        "gast":"BW 61 Mülheim 3"
+    }
+    ,{
+        "spielnr":"32",
+        "spieltag":"8",
+        "bahn":"1-4",
+        "datum":"02.12.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Dinslaken 3 ",
+        "gast":"SKC Kapellen 1 "
+    }
  
-,{ "spielnr":"33","spieltag":"9","bahn":"1-4",
-"datum":"16.12.12","uhrzeit":"10:00",
-"heim":"SK Dinslaken 3 ",
-"gast":"BW 61 Mülheim 3"}
-,{ "spielnr":"34","spieltag":"9","bahn":"1-4",
-"datum":"16.12.12","uhrzeit":"10:00",
-"heim":"SKC Kapellen 1 ",
-"gast":"SK Kleve 1 "}
-,{ "spielnr":"35","spieltag":"9","bahn":"2-5",
-"datum":"16.12.12","uhrzeit":"13:00",
-"heim":"KSG 31 Essen 2",
-"gast":"KSF 32 Duisburg 1"}
-,{ "spielnr":"36","spieltag":"9","bahn":"1-4",
-"datum":"16.12.12","uhrzeit":"10:00",
-"heim":"SK 66/99 Solingen 1",
-"gast":"SKV Rees 3 "}
+    ,{
+        "spielnr":"33",
+        "spieltag":"9",
+        "bahn":"1-4",
+        "datum":"16.12.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Dinslaken 3 ",
+        "gast":"BW 61 Mülheim 3"
+    }
+    ,{
+        "spielnr":"34",
+        "spieltag":"9",
+        "bahn":"1-4",
+        "datum":"16.12.12",
+        "uhrzeit":"10:00",
+        "heim":"SKC Kapellen 1 ",
+        "gast":"SK Kleve 1 "
+    }
+    ,{
+        "spielnr":"35",
+        "spieltag":"9",
+        "bahn":"2-5",
+        "datum":"16.12.12",
+        "uhrzeit":"13:00",
+        "heim":"KSG 31 Essen 2",
+        "gast":"KSF 32 Duisburg 1"
+    }
+    ,{
+        "spielnr":"36",
+        "spieltag":"9",
+        "bahn":"1-4",
+        "datum":"16.12.12",
+        "uhrzeit":"10:00",
+        "heim":"SK 66/99 Solingen 1",
+        "gast":"SKV Rees 3 "
+    }
  
-,{ "spielnr":"37","spieltag":"10","bahn":"1-4",
-"datum":"03.02.13","uhrzeit":"10:00",
-"heim":"SKC Kapellen 1 ",
-"gast":"BW 61 Mülheim 3"}
-,{ "spielnr":"38","spieltag":"10","bahn":"1-4",
-"datum":"03.02.13","uhrzeit":"13:00",
-"heim":"SKV Rees 3 ",
-"gast":"KSG 31 Essen 2"}
-,{ "spielnr":"39","spieltag":"10","bahn":"1-4",
-"datum":"03.02.13","uhrzeit":"10:00",
-"heim":"SK Dinslaken 3 ",
-"gast":"SK 66/99 Solingen 1"}
-,{ "spielnr":"40","spieltag":"10","bahn":"2-5",
-"datum":"03.02.13","uhrzeit":"13:00",
-"heim":"KSF 32 Duisburg 1",
-"gast":"SK Kleve 1 "}
+    ,{
+        "spielnr":"37",
+        "spieltag":"10",
+        "bahn":"1-4",
+        "datum":"03.02.13",
+        "uhrzeit":"10:00",
+        "heim":"SKC Kapellen 1 ",
+        "gast":"BW 61 Mülheim 3"
+    }
+    ,{
+        "spielnr":"38",
+        "spieltag":"10",
+        "bahn":"1-4",
+        "datum":"03.02.13",
+        "uhrzeit":"13:00",
+        "heim":"SKV Rees 3 ",
+        "gast":"KSG 31 Essen 2"
+    }
+    ,{
+        "spielnr":"39",
+        "spieltag":"10",
+        "bahn":"1-4",
+        "datum":"03.02.13",
+        "uhrzeit":"10:00",
+        "heim":"SK Dinslaken 3 ",
+        "gast":"SK 66/99 Solingen 1"
+    }
+    ,{
+        "spielnr":"40",
+        "spieltag":"10",
+        "bahn":"2-5",
+        "datum":"03.02.13",
+        "uhrzeit":"13:00",
+        "heim":"KSF 32 Duisburg 1",
+        "gast":"SK Kleve 1 "
+    }
  
-,{ "spielnr":"41","spieltag":"11","bahn":"5-8",
-"datum":"17.02.13","uhrzeit":"13:00",
-"heim":"SK Kleve 1 ",
-"gast":"SKV Rees 3 "}
-,{ "spielnr":"42","spieltag":"11","bahn":"2-5",
-"datum":"17.02.13","uhrzeit":"10:00",
-"heim":"KSF 32 Duisburg 1",
-"gast":"SKC Kapellen 1 "}
-,{ "spielnr":"43","spieltag":"11","bahn":"1-4",
-"datum":"17.02.13","uhrzeit":"10:00",
-"heim":"SK 66/99 Solingen 1",
-"gast":"BW 61 Mülheim 3"}
-,{ "spielnr":"44","spieltag":"11","bahn":"2-5",
-"datum":"17.02.13","uhrzeit":"12:00",
-"heim":"KSG 31 Essen 2",
-"gast":"SK Dinslaken 3 "}
+    ,{
+        "spielnr":"41",
+        "spieltag":"11",
+        "bahn":"5-8",
+        "datum":"17.02.13",
+        "uhrzeit":"13:00",
+        "heim":"SK Kleve 1 ",
+        "gast":"SKV Rees 3 "
+    }
+    ,{
+        "spielnr":"42",
+        "spieltag":"11",
+        "bahn":"2-5",
+        "datum":"17.02.13",
+        "uhrzeit":"10:00",
+        "heim":"KSF 32 Duisburg 1",
+        "gast":"SKC Kapellen 1 "
+    }
+    ,{
+        "spielnr":"43",
+        "spieltag":"11",
+        "bahn":"1-4",
+        "datum":"17.02.13",
+        "uhrzeit":"10:00",
+        "heim":"SK 66/99 Solingen 1",
+        "gast":"BW 61 Mülheim 3"
+    }
+    ,{
+        "spielnr":"44",
+        "spieltag":"11",
+        "bahn":"2-5",
+        "datum":"17.02.13",
+        "uhrzeit":"12:00",
+        "heim":"KSG 31 Essen 2",
+        "gast":"SK Dinslaken 3 "
+    }
  
-,{ "spielnr":"45","spieltag":"12","bahn":"1-4",
-"datum":"24.02.13","uhrzeit":"10:00",
-"heim":"SKC Kapellen 1 ",
-"gast":"SK 66/99 Solingen 1"}
-,{ "spielnr":"46","spieltag":"12","bahn":"1-4",
-"datum":"24.02.13","uhrzeit":"10:00",
-"heim":"SK Dinslaken 3 ",
-"gast":"SK Kleve 1 "}
-,{ "spielnr":"47","spieltag":"12","bahn":"1-4",
-"datum":"24.02.13","uhrzeit":"13:00",
-"heim":"SKV Rees 3 ",
-"gast":"KSF 32 Duisburg 1"}
-,{ "spielnr":"48","spieltag":"12","bahn":"5-8",
-"datum":"24.02.13","uhrzeit":"13:00",
-"heim":"BW 61 Mülheim 3",
-"gast":"KSG 31 Essen 2"}
+    ,{
+        "spielnr":"45",
+        "spieltag":"12",
+        "bahn":"1-4",
+        "datum":"24.02.13",
+        "uhrzeit":"10:00",
+        "heim":"SKC Kapellen 1 ",
+        "gast":"SK 66/99 Solingen 1"
+    }
+    ,{
+        "spielnr":"46",
+        "spieltag":"12",
+        "bahn":"1-4",
+        "datum":"24.02.13",
+        "uhrzeit":"10:00",
+        "heim":"SK Dinslaken 3 ",
+        "gast":"SK Kleve 1 "
+    }
+    ,{
+        "spielnr":"47",
+        "spieltag":"12",
+        "bahn":"1-4",
+        "datum":"24.02.13",
+        "uhrzeit":"13:00",
+        "heim":"SKV Rees 3 ",
+        "gast":"KSF 32 Duisburg 1"
+    }
+    ,{
+        "spielnr":"48",
+        "spieltag":"12",
+        "bahn":"5-8",
+        "datum":"24.02.13",
+        "uhrzeit":"13:00",
+        "heim":"BW 61 Mülheim 3",
+        "gast":"KSG 31 Essen 2"
+    }
  
-,{ "spielnr":"49","spieltag":"13","bahn":"2-5",
-"datum":"07.04.13","uhrzeit":"13:00",
-"heim":"KSF 32 Duisburg 1",
-"gast":"SK Dinslaken 3 "}
-,{ "spielnr":"50","spieltag":"13","bahn":"2-5",
-"datum":"07.04.13","uhrzeit":"13:00",
-"heim":"KSG 31 Essen 2",
-"gast":"SK 66/99 Solingen 1"}
-,{ "spielnr":"51","spieltag":"13","bahn":"5-8",
-"datum":"07.04.13","uhrzeit":"10:00",
-"heim":"SK Kleve 1 ",
-"gast":"BW 61 Mülheim 3"}
-,{ "spielnr":"52","spieltag":"13","bahn":"1-4",
-"datum":"07.04.13","uhrzeit":"10:00",
-"heim":"SKV Rees 3 ",
-"gast":"SKC Kapellen 1 "}
+    ,{
+        "spielnr":"49",
+        "spieltag":"13",
+        "bahn":"2-5",
+        "datum":"07.04.13",
+        "uhrzeit":"13:00",
+        "heim":"KSF 32 Duisburg 1",
+        "gast":"SK Dinslaken 3 "
+    }
+    ,{
+        "spielnr":"50",
+        "spieltag":"13",
+        "bahn":"2-5",
+        "datum":"07.04.13",
+        "uhrzeit":"13:00",
+        "heim":"KSG 31 Essen 2",
+        "gast":"SK 66/99 Solingen 1"
+    }
+    ,{
+        "spielnr":"51",
+        "spieltag":"13",
+        "bahn":"5-8",
+        "datum":"07.04.13",
+        "uhrzeit":"10:00",
+        "heim":"SK Kleve 1 ",
+        "gast":"BW 61 Mülheim 3"
+    }
+    ,{
+        "spielnr":"52",
+        "spieltag":"13",
+        "bahn":"1-4",
+        "datum":"07.04.13",
+        "uhrzeit":"10:00",
+        "heim":"SKV Rees 3 ",
+        "gast":"SKC Kapellen 1 "
+    }
  
-,{ "spielnr":"53","spieltag":"14","bahn":"1-4",
-"datum":"14.04.13","uhrzeit":"10:00",
-"heim":"SK Dinslaken 3 ",
-"gast":"SKV Rees 3 "}
-,{ "spielnr":"54","spieltag":"14","bahn":"5-8",
-"datum":"14.04.13","uhrzeit":"13:00",
-"heim":"BW 61 Mülheim 3",
-"gast":"KSF 32 Duisburg 1"}
-,{ "spielnr":"55","spieltag":"14","bahn":"1-4",
-"datum":"14.04.13","uhrzeit":"10:00",
-"heim":"SKC Kapellen 1 ",
-"gast":"KSG 31 Essen 2"}
-,{ "spielnr":"56","spieltag":"14","bahn":"1-4",
-"datum":"14.04.13","uhrzeit":"10:00",
-"heim":"SK 66/99 Solingen 1",
-"gast":"SK Kleve 1 "}
- 
-
-
-
-
-
-
-
-]
+    ,{
+        "spielnr":"53",
+        "spieltag":"14",
+        "bahn":"1-4",
+        "datum":"14.04.13",
+        "uhrzeit":"10:00",
+        "heim":"SK Dinslaken 3 ",
+        "gast":"SKV Rees 3 "
+    }
+    ,{
+        "spielnr":"54",
+        "spieltag":"14",
+        "bahn":"5-8",
+        "datum":"14.04.13",
+        "uhrzeit":"13:00",
+        "heim":"BW 61 Mülheim 3",
+        "gast":"KSF 32 Duisburg 1"
+    }
+    ,{
+        "spielnr":"55",
+        "spieltag":"14",
+        "bahn":"1-4",
+        "datum":"14.04.13",
+        "uhrzeit":"10:00",
+        "heim":"SKC Kapellen 1 ",
+        "gast":"KSG 31 Essen 2"
+    }
+    ,{
+        "spielnr":"56",
+        "spieltag":"14",
+        "bahn":"1-4",
+        "datum":"14.04.13",
+        "uhrzeit":"10:00",
+        "heim":"SK 66/99 Solingen 1",
+        "gast":"SK Kleve 1 "
+    }
+    ]
 }
