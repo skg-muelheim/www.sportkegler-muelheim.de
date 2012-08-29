@@ -24,7 +24,7 @@
                         </ul>
                     </li>
 
-                    <li><a href="#Jugend">Jugend</a></li>
+                    <li><a href="skgjugend.php?was=main&wann=aktuell">Jugend</a></li>
                     <li class="dropdown" id="main-nav.rw59muelheim">
                         <a class="dropdown-toggle"
                            data-toggle="dropdown"
@@ -33,9 +33,9 @@
                             <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                            <li><a href="#RWM1">1. Mannschaft</a></li>
-                            <li><a href="#RWM2">2. Mannschaft</a></li>
-                            <li><a href="#RWPokale">Pokalespiele</a></li>
+                            <li><a href="rw59muelheim.php?was=main&wann=aktuell#RWM1">1. Mannschaft</a></li>
+                            <li><a href="rw59muelheim.php?was=main&wann=aktuell#RWM2">2. Mannschaft</a></li>
+                            <li><a href="rw59muelheim.php?was=main&wann=aktuell#RWPokale">Pokalespiele</a></li>
                         </ul>
                     </li>
                     <li class="dropdown" id="main-nav.bw61muelheim">
@@ -49,7 +49,6 @@
                             <li><a href="bw61muelheim.php?was=main&wann=aktuell#BWM1">1. Mannschaft</a></li>
                             <li><a href="bw61muelheim.php?was=main&wann=aktuell#BWM2">2. Mannschaft</a></li>
                             <li><a href="bw61muelheim.php?was=main&wann=aktuell#BWM3">3. Mannschaft</a></li>
-                            <li><a href="bw61muelheim.php?was=main&wann=aktuell#BWM4">4. Mannschaft</a></li>
                             <li><a href="bw61muelheim.php?was=pokale&wann=aktuell">Pokalespiele</a></li>
                         </ul>
                     </li>
