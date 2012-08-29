@@ -4,7 +4,7 @@ include 'default.php';
 
 $smarty->assign('mainnav', 'kontakt');
 
-$content = 'kontakt_impressum.tpl'
+$content = 'kontakt_impressum.tpl';
 if (isset ($_GET['was'])) {
     if ($_GET['was'] == 'main' or $_GET['was'] == 'impressum') {
         $content = 'kontakt_impressum.tpl';

@@ -9,3 +9,6 @@
     {include file="content/kontakt-subnav.tpl" gbuch_aktiv="active" }
 </header>
 
+<section id="gaesteBuch">
+    <h1>G&auml;stebuch</h1>
+</section>
