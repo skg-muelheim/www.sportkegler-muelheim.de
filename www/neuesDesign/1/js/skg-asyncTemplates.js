@@ -1,6 +1,72 @@
 var skgmh = skgmh || {};
+
+var keyValueReplacement = function(dataNode,domNode) {
+    for (var key in dataNode) {
+        var tempList = $("."+key,domNode);
+        for (var key2 = tempList.length-1; key2 >= 0; key2--) {
+            tempList[key2].innerHTML = dataNode[key];
+        }
+    }
+}
+
 skgmh.async = {};
 skgmh.async.templates = {};
+skgmh.processes = {};
+skgmh.processes.alert = function(dest,loaded_template,msg) {
+    alert("Not Yet Implemented");
+}
+
+
+skgmh.processes.tabelle = function(dSpec,loaded_template,loaded_data) {
+    dSpec.dest.innerHTML = loaded_template;
+    var nodesToRepeat = null;
+    var parent = null;
+    var repeat = $(".repeat",dSpec.dest);
+    if (repeat.length == 1) {
+        nodesToRepeat = repeat[0].childNodes;
+        parent = repeat[0].parentNode;
+        parent.removeChild(repeat[0]);
+        var platz = 1;
+        for (var key in loaded_data['tabelle']) {
+            var repeatData = loaded_data['tabelle'][key];
+            var destDomNode = repeat[0].cloneNode(true);
+            parent.appendChild(destDomNode);
+            // Spezial Behandlung für Platzierungen 
+            if ("platzierung" in repeatData) {
+                platz = repeatData['platzierung'];
+            }else {
+                platz++;
+                var tempList = $(".platzierung",destDomNode);
+                for (var key3 = tempList.length-1; key3 >= 0; key3--) {
+                    tempList[key3].innerHTML = platz;
+                }
+            }
+            keyValueReplacement(repeatData,destDomNode);
+        }
+    }
+
+    var domPointer = $(".mannschaften",dSpec.dest);
+    if (domPointer.length == 1) {
+        var mannschaft =  Encoder.htmlEncode(loaded_data['mannschaften'],true);
+        mannschaft = str_replace(" ","&nbsp",mannschaft);
+        domPointer[0].innerHTML = mannschaft;
+    }
+
+    domPointer = $(".termin",dSpec.dest);
+    if (domPointer.length == 1) {
+        var termin =  Encoder.htmlEncode(loaded_data['termin'],true);
+        termin = str_replace(" ","&nbsp",mannschaft);
+        domPointer[0].innerHTML = termin;
+    }
+
+    domPointer = $(".liga",dSpec.dest);
+    if (domPointer.length == 1) {
+        var liga =  Encoder.htmlEncode(loaded_data['liga'],true);
+        liga = str_replace(" ","&nbsp",liga);
+        domPointer[0].innerHTML = liga;
+    }
+};
+
 
 (function(){
     var loadData = function(dest,loaded_template) {
@@ -10,90 +76,43 @@ skgmh.async.templates = {};
             type: "GET",
             url: "data.php/p/"+dest.data,
             success: function(msg) {
-                var loaded_data = msg;
-                dest.dest.innerHTML = loaded_template;
-                var repeat = $(".repeat",dest.dest);
-                var nodesToRepeat = repeat[0].childNodes;
-                var parent = repeat[0].parentNode;
-                parent.removeChild(repeat[0]);
-                var platz = 1;
-                for (var key in loaded_data['tabelle']) {
-                    var eintrag = loaded_data['tabelle'][key];
-                    if ("platzierung" in eintrag) {
-                        platz = eintrag['platzierung'];
-                    }else {
-                        platz++;
-                    }
-                    var node = repeat[0].cloneNode(true);
-                    parent.appendChild(node);
-                    var tempList = $(".platzierung",node);
-                    for (var key3 = tempList.length-1; key3 >= 0; key3--) {
-                        tempList[key3].innerHTML = platz;
-                    }
-                    for (var key2 in eintrag) {
-                        var tempList = $("."+key2,node);
-                        for (var key3 = tempList.length-1; key3 >= 0; key3--) {
-                            tempList[key3].innerHTML = eintrag[key2];
-                        }
-                    }
-                    
+                var procname = dest.dest.getAttribute("process");
+                var proc = null;
+                if (procname != null) {
+                    proc = skgmh.processes[procname];
                 }
-                
-                var domPointer = $(".mannschaften",dest.dest);
-                var mannschaft =  Encoder.htmlEncode(loaded_data['mannschaften'],true);
-                mannschaft = str_replace(" ","&nbsp",mannschaft);
-                domPointer[0].innerHTML = mannschaft;
-
-                domPointer = $(".termin",dest.dest);
-                var termin =  Encoder.htmlEncode(loaded_data['termin'],true);
-                termin = str_replace(" ","&nbsp",mannschaft);
-                domPointer[0].innerHTML = termin;
-
-                domPointer = $(".liga",dest.dest);
-                var liga =  Encoder.htmlEncode(loaded_data['liga'],true);
-                liga = str_replace(" ","&nbsp",liga);
-                domPointer[0].innerHTML = liga;
+                if (proc != null) {
+                    proc(dest,loaded_template,msg);
+                }else {
+                    skgmh.processes.alert(dest, loaded_template, msg);
+                }
             }
-            ,error: function(request,errortype,ex) {
-                dest.innerHTML = 'Konnte Daten nicht laden';
+            ,
+            error: function(request,errortype,ex) {
+                dest.dest.innerHTML = 'Konnte Daten nicht laden';
             }
         });        
     }
     
-    var loadAsyncOld = function(dest,template,data) {
-        if (template in skgmh.async.templates) {
-            
-        }else {
-            $.ajax({ 
-                    type: "GET"
-                    ,url: "templates/"+template+".client.html"
-                    ,success: function(msg){
-                        skgmh.async.templates[template] = msg;
-                        loadData(dest,msg,data);
-                    }
-                    ,error: function(request,errortype,ex) {
-                        dest.innerHTML = 'Konnte Vorlage nicht laden';
-                    }
-            });    
-        }
-    }
-
     var loadAsync = function(templatename,destinations) {
         $.ajax({ 
-                type: "GET"
-                ,url: "templates/"+templatename+".client.html"
-                ,success: function(msg){
-                    for (var i= destinations.length-1; i >= 0; i--) {
-                        var dest = destinations[i];
-                        loadData(dest,msg);
-                    }
+            type: "GET"
+            ,
+            url: "templates/"+templatename+".client.html"
+            ,
+            success: function(msg){
+                for (var i= destinations.length-1; i >= 0; i--) {
+                    var dest = destinations[i];
+                    loadData(dest,msg);
                 }
-                ,error: function(request,errortype,ex) {
-                    for (var i= destinations.length-1; i >= 0; i--) {
-                        var dest = destinations[i];
-                        dest.dest.innerHTML = 'Konnte Vorlage nicht laden';
-                    }
+            }
+            ,
+            error: function(request,errortype,ex) {
+                for (var i= destinations.length-1; i >= 0; i--) {
+                    var dest = destinations[i];
+                    dest.dest.innerHTML = 'Konnte Vorlage nicht laden';
                 }
+            }
         });    
     }
 
@@ -119,7 +138,7 @@ skgmh.async.templates = {};
         loadAsync(key,destinations);
     }
     
-    //    loadAsync(toLoad[i],template,data);
+//    loadAsync(toLoad[i],template,data);
 /*
        $.ajax(
         { 
