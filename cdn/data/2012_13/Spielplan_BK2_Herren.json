@@ -10,7 +10,7 @@
         "datum":"09.09.12",
         "uhrzeit":"13:00",
         "heim":"KSG 31 Essen 2",
-        "gast":"SK Kleve 1 "
+        "gast":"SK Kleve 1 ",
     }
     ,{
         "spielnr":"2",
@@ -39,7 +39,6 @@
         "heim":"SKC Kapellen 1 ",
         "gast":"SK Dinslaken 3 "
     }
- 
     ,{
         "spielnr":"5",
         "spieltag":"2",
