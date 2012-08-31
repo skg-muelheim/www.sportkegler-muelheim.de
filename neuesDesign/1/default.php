@@ -19,8 +19,10 @@ $smarty->debugging_ctrl = $smarty_debugger_ctrl;
 $host = $_SERVER['HTTP_HOST'];
 if (preg_match('/loc$/', $host)) {
     $smarty->assign('cdnHost','cdn.skg.loc');
+    $smarty->assign('analytics','off');
 } else {
     $smarty->assign('cdnHost','cdn.sportkegler-muelheim.loc');
+    $smarty->assign('analytics','on');
 }
 
 

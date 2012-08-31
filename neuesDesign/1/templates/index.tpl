@@ -2,7 +2,9 @@
 <html>
     <head>
         {include file='headElements.tpl'}
-        {include file='analytics.tpl'}
+        {if $analytics eq "on"}
+            {include file='analytics.tpl'}
+        {/if}
     </head>
     {*include file='bodyElements.tpl'*}
     <body data-spy="scroll" data-target=".subnav" data-offset="50">
