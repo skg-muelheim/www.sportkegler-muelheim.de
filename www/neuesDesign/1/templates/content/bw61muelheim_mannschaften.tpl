@@ -12,8 +12,8 @@
 <h1>BW 61 M&uuml;lheim 1</h1>
 <br/>
 
-<div class="load-async" template="nurTabelle" data="BW1.tabelle"></div>
-<div class="load-async" template="spieltage" data="2012_13/Spielplan_BK2_Herren"></div>
+<div class="load-async" template="nurTabelle" data="BW1.tabelle" process="tabelle"></div>
+<div class="load-async" template="spieltage" data="2012_13/Spielplan_BK2_Herren" process="spieltage"></div>
 <br/>
 <br/>
 <br/>
