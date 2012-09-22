@@ -1,0 +1,397 @@
+{
+    "liga":"Bezirksklasse 1",
+    "Staffelleiter":"Stefan Schröter,",
+    "spiele": [
+
+    {
+        "spielnr":"1",
+        "spieltag":"1",
+        "bahn":"5-8",
+        "datum":"09.09.12",
+        "uhrzeit":"13:00",
+        "heim":"SK Kamp-Lintfort 4 ",
+        "gast":"ESV Oberhausen 1 ",
+        "punkte":"2:1",
+        "ewp":"40:38",
+        "heim_holz":"4540",
+        "gast_holz":"4531",
+        "heim_schnitt":"756,6",
+        "gast_schnitt":"755,1"
+    }
+    ,{
+        "spielnr":"2",
+        "spieltag":"1",
+        "bahn":"1-4",
+        "datum":"09.09.12",
+        "uhrzeit":"13:00",
+        "heim":"SKV Rees 2 ",
+        "gast":"KSC 71 Saarn 1",
+        "punkte":"2:1",
+        "ewp":"37:40",
+        "heim_holz":"4436",
+        "gast_holz":"3786",
+        "heim_schnitt":"739,3",
+        "gast_schnitt":"757,2"
+    }
+    ,{
+        "spielnr":"3",
+        "spieltag":"1",
+        "bahn":"2-5",
+        "datum":"09.09.12",
+        "uhrzeit":"12:00",
+        "heim":"KSC Harmonie Duisburg 2",
+        "gast":"BW 61 Mülheim 2"
+    }
+    ,{
+        "spielnr":"4",
+        "spieltag":"2",
+        "bahn":"2-5",
+        "datum":"23.09.12",
+        "uhrzeit":"10:00",
+        "heim":"SK 54/59 Essen-Borbeck 1",
+        "gast":"KSC Harmonie Duisburg 2"
+    }
+    ,{
+        "spielnr":"5",
+        "spieltag":"2",
+        "bahn":"5-8",
+        "datum":"23.09.12",
+        "uhrzeit":"10:00",
+        "heim":"KSC 71 Saarn 1",
+        "gast":"SK Kamp-Lintfort 4 "
+    }
+    ,{
+        "spielnr":"6",
+        "spieltag":"2",
+        "bahn":"1-4",
+        "datum":"23.09.12",
+        "uhrzeit":"10:00",
+        "heim":"BW 61 Mülheim 2",
+        "gast":"SKV Rees 2 "
+    }
+    ,{
+        "spielnr":"7",
+        "spieltag":"3",
+        "bahn":"5-8",
+        "datum":"07.10.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Kamp-Lintfort 4 ",
+        "gast":"BW 61 Mülheim 2"
+    }
+    ,{
+        "spielnr":"8",
+        "spieltag":"3",
+        "bahn":"1-4",
+        "datum":"07.10.12",
+        "uhrzeit":"15:00",
+        "heim":"SKV Rees 2 ",
+        "gast":"SK 54/59 Essen-Borbeck 1"
+    }
+    ,{
+        "spielnr":"9",
+        "spieltag":"3",
+        "bahn":"1-2",
+        "datum":"07.10.12",
+        "uhrzeit":"10:00",
+        "heim":"ESV Oberhausen 1 ",
+        "gast":"KSC 71 Saarn 1"
+    }
+    ,{
+        "spielnr":"10",
+        "spieltag":"4",
+        "bahn":"1-4",
+        "datum":"21.10.12",
+        "uhrzeit":"10:00",
+        "heim":"BW 61 Mülheim 2",
+        "gast":"ESV Oberhausen 1 "
+    }
+    ,{
+        "spielnr":"11",
+        "spieltag":"4",
+        "bahn":"2-5",
+        "datum":"21.10.12",
+        "uhrzeit":"12:00",
+        "heim":"KSC Harmonie Duisburg 2",
+        "gast":"SKV Rees 2 "
+    }
+    ,{
+        "spielnr":"12",
+        "spieltag":"4",
+        "bahn":"2-5",
+        "datum":"21.10.12",
+        "uhrzeit":"10:00",
+        "heim":"SK 54/59 Essen-Borbeck 1",
+        "gast":"SK Kamp-Lintfort 4 "
+    }
+    ,{
+        "spielnr":"13",
+        "spieltag":"5",
+        "bahn":"1-2",
+        "datum":"04.11.12",
+        "uhrzeit":"10:00",
+        "heim":"ESV Oberhausen 1 ",
+        "gast":"SK 54/59 Essen-Borbeck 1"
+    }
+    ,{
+        "spielnr":"14",
+        "spieltag":"5",
+        "bahn":"5-8",
+        "datum":"04.11.12",
+        "uhrzeit":"10:00",
+        "heim":"KSC 71 Saarn 1",
+        "gast":"BW 61 Mülheim 2"
+    }
+    ,{
+        "spielnr":"15",
+        "spieltag":"5",
+        "bahn":"5-8",
+        "datum":"04.11.12",
+        "uhrzeit":"17:00",
+        "heim":"SK Kamp-Lintfort 4 ",
+        "gast":"KSC Harmonie Duisburg 2"
+    }
+    ,{
+        "spielnr":"16",
+        "spieltag":"6",
+        "bahn":"2-5",
+        "datum":"11.11.12",
+        "uhrzeit":"10:00",
+        "heim":"SK 54/59 Essen-Borbeck 1",
+        "gast":"KSC 71 Saarn 1"
+    }
+    ,{
+        "spielnr":"17",
+        "spieltag":"6",
+        "bahn":"1-4",
+        "datum":"11.11.12",
+        "uhrzeit":"13:00",
+        "heim":"SKV Rees 2 ",
+        "gast":"SK Kamp-Lintfort 4 "
+    }
+    ,{
+        "spielnr":"18",
+        "spieltag":"6",
+        "bahn":"2-5",
+        "datum":"11.11.12",
+        "uhrzeit":"15:00",
+        "heim":"KSC Harmonie Duisburg 2",
+        "gast":"ESV Oberhausen 1 "
+    }
+    ,{
+        "spielnr":"19",
+        "spieltag":"7",
+        "bahn":"1-4",
+        "datum":"18.11.12",
+        "uhrzeit":"10:00",
+        "heim":"BW 61 Mülheim 2",
+        "gast":"SK 54/59 Essen-Borbeck 1"
+    }
+    ,{
+        "spielnr":"20",
+        "spieltag":"7",
+        "bahn":"5-8",
+        "datum":"18.11.12",
+        "uhrzeit":"10:00",
+        "heim":"KSC 71 Saarn 1",
+        "gast":"KSC Harmonie Duisburg 2"
+    }
+    ,{
+        "spielnr":"21",
+        "spieltag":"7",
+        "bahn":"1-2",
+        "datum":"18.11.12",
+        "uhrzeit":"10:00",
+        "heim":"ESV Oberhausen 1 ",
+        "gast":"SKV Rees 2 "
+    }
+    ,{
+        "spielnr":"22",
+        "spieltag":"8",
+        "bahn":"1-2",
+        "datum":"02.12.12",
+        "uhrzeit":"10:00",
+        "heim":"ESV Oberhausen 1 ",
+        "gast":"SK Kamp-Lintfort 4 "
+    }
+    ,{
+        "spielnr":"23",
+        "spieltag":"8",
+        "bahn":"5-8",
+        "datum":"02.12.12",
+        "uhrzeit":"10:00",
+        "heim":"KSC 71 Saarn 1",
+        "gast":"SKV Rees 2 "
+    }
+    ,{
+        "spielnr":"24",
+        "spieltag":"8",
+        "bahn":"1-4",
+        "datum":"02.12.12",
+        "uhrzeit":"10:00",
+        "heim":"BW 61 Mülheim 2",
+        "gast":"KSC Harmonie Duisburg 2"
+    }
+    ,{
+        "spielnr":"25",
+        "spieltag":"9",
+        "bahn":"2-5",
+        "datum":"16.12.12",
+        "uhrzeit":"12:00",
+        "heim":"KSC Harmonie Duisburg 2",
+        "gast":"SK 54/59 Essen-Borbeck 1"
+    }
+    ,{
+        "spielnr":"26",
+        "spieltag":"9",
+        "bahn":"5-8",
+        "datum":"16.12.12",
+        "uhrzeit":"10:00",
+        "heim":"SK Kamp-Lintfort 4 ",
+        "gast":"KSC 71 Saarn 1"
+    }
+    ,{
+        "spielnr":"27",
+        "spieltag":"9",
+        "bahn":"1-4",
+        "datum":"16.12.12",
+        "uhrzeit":"15:00",
+        "heim":"SKV Rees 2 ",
+        "gast":"BW 61 Mülheim 2"
+    }
+    ,{
+        "spielnr":"28",
+        "spieltag":"10",
+        "bahn":"1-4",
+        "datum":"03.02.13",
+        "uhrzeit":"10:00",
+        "heim":"BW 61 Mülheim 2",
+        "gast":"SK Kamp-Lintfort 4 "
+    }
+    ,{
+        "spielnr":"29",
+        "spieltag":"10",
+        "bahn":"2-5",
+        "datum":"03.02.13",
+        "uhrzeit":"10:00",
+        "heim":"SK 54/59 Essen-Borbeck 1",
+        "gast":"SKV Rees 2 "
+    }
+    ,{
+        "spielnr":"30",
+        "spieltag":"10",
+        "bahn":"5-8",
+        "datum":"03.02.13",
+        "uhrzeit":"10:00",
+        "heim":"KSC 71 Saarn 1",
+        "gast":"ESV Oberhausen 1 "
+    }
+    ,{
+        "spielnr":"31",
+        "spieltag":"11",
+        "bahn":"1-2",
+        "datum":"17.02.13",
+        "uhrzeit":"10:00",
+        "heim":"ESV Oberhausen 1 ",
+        "gast":"BW 61 Mülheim 2"
+    }
+    ,{
+        "spielnr":"32",
+        "spieltag":"11",
+        "bahn":"1-4",
+        "datum":"17.02.13",
+        "uhrzeit":"13:00",
+        "heim":"SKV Rees 2 ",
+        "gast":"KSC Harmonie Duisburg 2"
+    }
+    ,{
+        "spielnr":"33",
+        "spieltag":"11",
+        "bahn":"5-8",
+        "datum":"17.02.13",
+        "uhrzeit":"13:00",
+        "heim":"SK Kamp-Lintfort 4 ",
+        "gast":"SK 54/59 Essen-Borbeck 1"
+    }
+    ,{
+        "spielnr":"34",
+        "spieltag":"12",
+        "bahn":"2-5",
+        "datum":"24.02.13",
+        "uhrzeit":"10:00",
+        "heim":"SK 54/59 Essen-Borbeck 1",
+        "gast":"ESV Oberhausen 1 "
+    }
+    ,{
+        "spielnr":"35",
+        "spieltag":"12",
+        "bahn":"1-4",
+        "datum":"24.02.13",
+        "uhrzeit":"10:00",
+        "heim":"BW 61 Mülheim 2",
+        "gast":"KSC 71 Saarn 1"
+    }
+    ,{
+        "spielnr":"36",
+        "spieltag":"12",
+        "bahn":"2-5",
+        "datum":"24.02.13",
+        "uhrzeit":"12:00",
+        "heim":"KSC Harmonie Duisburg 2",
+        "gast":"SK Kamp-Lintfort 4 "
+    }
+    ,{
+        "spielnr":"37",
+        "spieltag":"13",
+        "bahn":"5-8",
+        "datum":"07.04.13",
+        "uhrzeit":"10:00",
+        "heim":"KSC 71 Saarn 1",
+        "gast":"SK 54/59 Essen-Borbeck 1"
+    }
+    ,{
+        "spielnr":"38",
+        "spieltag":"13",
+        "bahn":"5-8",
+        "datum":"07.04.13",
+        "uhrzeit":"10:00",
+        "heim":"SK Kamp-Lintfort 4 ",
+        "gast":"SKV Rees 2 "
+    }
+    ,{
+        "spielnr":"39",
+        "spieltag":"13",
+        "bahn":"1-2",
+        "datum":"07.04.13",
+        "uhrzeit":"10:00",
+        "heim":"ESV Oberhausen 1 ",
+        "gast":"KSC Harmonie Duisburg 2"
+    }
+    ,{
+        "spielnr":"40",
+        "spieltag":"14",
+        "bahn":"2-5",
+        "datum":"14.04.13",
+        "uhrzeit":"10:00",
+        "heim":"SK 54/59 Essen-Borbeck 1",
+        "gast":"BW 61 Mülheim 2"
+    }
+    ,{
+        "spielnr":"41",
+        "spieltag":"14",
+        "bahn":"2-5",
+        "datum":"14.04.13",
+        "uhrzeit":"12:00",
+        "heim":"KSC Harmonie Duisburg 2",
+        "gast":"KSC 71 Saarn 1"
+    }
+    ,{
+        "spielnr":"42",
+        "spieltag":"14",
+        "bahn":"1-4",
+        "datum":"14.04.13",
+        "uhrzeit":"13:00",
+        "heim":"SKV Rees 2 ",
+        "gast":"ESV Oberhausen 1 "
+    }
+    ]
+}

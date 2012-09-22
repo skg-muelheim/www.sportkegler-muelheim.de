@@ -1,7 +1,7 @@
 <?php
 $pinfo = $_SERVER['PATH_INFO'];
 
-if (strpos($pinfo,'/p/') == 0) {
+if (strpos($pinfo,'/p/') === 0) {
     $perm = true;
     $pinfo = substr($pinfo,3);
 }else {
@@ -13,7 +13,6 @@ if (strpos($pinfo,"..") === true) {
 }
 
 $filename = "../../../cdn/data/".$pinfo.".json";
-
 $change = filemtime($filename);
 header("Last-Modified: " . date ("F d Y H:i:s.", filemtime($filename)));
 if ($perm) {

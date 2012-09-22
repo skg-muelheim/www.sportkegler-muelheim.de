@@ -12,10 +12,70 @@ var keyValueReplacement = function(dataNode,domNode) {
 skgmh.async = {};
 skgmh.async.templates = {};
 skgmh.processes = {};
+skgmh.closures = {};
+skgmh.actionHandlers = {};
 skgmh.processes.alert = function(dest,loaded_template,msg) {
     alert("Not Yet Implemented");
-}
+};
 
+skgmh.closures.bindShowSpieltag = function(template,domNode,loaded_data,spieltag) {
+    return function() {
+        skgmh.actionHandlers.showSpieltag(template,domNode,loaded_data,spieltag);
+    }
+};
+
+skgmh.actionHandlers.showSpieltag = function(template,domNode,loaded_data,spieltag) {
+    parent = domNode.parentNode;
+    after = domNode.nextSibling;
+    parent.removeChild(domNode);
+    for (var key in loaded_data['spiele']) {
+        var repeatData = loaded_data['spiele'][key];
+        if (repeatData.spieltag == spieltag) {
+            var destDomNode = template.cloneNode(true);
+            parent.insertBefore(destDomNode,after);
+            if ("spielnr" in repeatData) {
+                var tempList = $(".spielnr_in_klammern",destDomNode);
+                for (var key3 = tempList.length-1; key3 >= 0; key3--) {
+                    tempList[key3].innerHTML = "(" + repeatData.spielnr +")";
+                }
+            }
+            keyValueReplacement(repeatData,destDomNode);
+        }
+    }
+};
+
+skgmh.processes.spieltage = function(dSpec,loaded_template,loaded_data) {
+    dSpec.dest.innerHTML = loaded_template;
+    var nodesToRepeat = null;
+    var parent = null;
+    var repeat = $(".repeat",dSpec.dest);
+    if (repeat.length == 1) {
+        nodesToRepeat = repeat[0].childNodes;
+        parent = repeat[0].parentNode;
+        parent.removeChild(repeat[0]);
+        for (var key in loaded_data['spiele']) {
+            var repeatData = loaded_data['spiele'][key];
+            if (repeatData.heim == "KSC 71 Saarn 1" || repeatData.gast == "KSC 71 Saarn 1") {
+                var destDomNode = repeat[0].cloneNode(true);
+                $(destDomNode).bind('click',
+                    skgmh.closures.bindShowSpieltag(
+                        repeat[0],
+                        destDomNode,
+                        loaded_data,
+                        repeatData.spieltag));
+                
+                parent.appendChild(destDomNode);
+                if ("spielnr" in repeatData) {
+                    var tempList = $(".spielnr_in_klammern",destDomNode);
+                    for (var key3 = tempList.length-1; key3 >= 0; key3--) {
+                        tempList[key3].innerHTML = "(" + repeatData.spielnr +")";
+                    }
+                }
+                keyValueReplacement(repeatData,destDomNode);
+            }
+        }
+    }
+}
 
 skgmh.processes.tabelle = function(dSpec,loaded_template,loaded_data) {
     dSpec.dest.innerHTML = loaded_template;
@@ -44,21 +104,21 @@ skgmh.processes.tabelle = function(dSpec,loaded_template,loaded_data) {
             keyValueReplacement(repeatData,destDomNode);
         }
     }
-
+    
     var domPointer = $(".mannschaften",dSpec.dest);
     if (domPointer.length == 1) {
         var mannschaft =  Encoder.htmlEncode(loaded_data['mannschaften'],true);
         mannschaft = str_replace(" ","&nbsp",mannschaft);
         domPointer[0].innerHTML = mannschaft;
     }
-
+    
     domPointer = $(".termin",dSpec.dest);
     if (domPointer.length == 1) {
         var termin =  Encoder.htmlEncode(loaded_data['termin'],true);
         termin = str_replace(" ","&nbsp",mannschaft);
         domPointer[0].innerHTML = termin;
     }
-
+    
     domPointer = $(".liga",dSpec.dest);
     if (domPointer.length == 1) {
         var liga =  Encoder.htmlEncode(loaded_data['liga'],true);
@@ -68,13 +128,15 @@ skgmh.processes.tabelle = function(dSpec,loaded_template,loaded_data) {
 };
 
 
+
+
 (function(){
     var loadData = function(dest,loaded_template) {
         var domain = document.domain.split(".");
         var tld = domain[domain.length-1];
         $.ajax({
             type: "GET",
-            url: "data.php/p/"+dest.data,
+            url: "data.php/"+dest.data,
             success: function(msg) {
                 var procname = dest.dest.getAttribute("process");
                 var proc = null;
@@ -115,8 +177,8 @@ skgmh.processes.tabelle = function(dSpec,loaded_template,loaded_data) {
             }
         });    
     }
-
-
+    
+    
     var toLoad = $('.load-async');
     for (var i = toLoad.length-1 ; i >= 0; i--) {
         var templatename = toLoad[i].getAttribute('template');
@@ -137,7 +199,7 @@ skgmh.processes.tabelle = function(dSpec,loaded_template,loaded_data) {
         var destinations = skgmh.async.templates[key];
         loadAsync(key,destinations);
     }
-    
+
 //    loadAsync(toLoad[i],template,data);
 /*
        $.ajax(
@@ -157,8 +219,8 @@ skgmh.processes.tabelle = function(dSpec,loaded_template,loaded_data) {
                 alert(errObj['message']);
             }
         });
-*/
+     */
 
 //    }
-    
+
 }());

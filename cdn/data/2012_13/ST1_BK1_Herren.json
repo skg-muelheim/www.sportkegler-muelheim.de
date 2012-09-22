@@ -1,0 +1,185 @@
+{
+    "spiele":[{
+        "spielnr":"1",
+        "heim":{
+            "holz":"4540",
+            "ewp":"40",
+            "punkte":"2",
+            "spieler":[{
+                "name":"Buchholz, Rainer",
+                "holz":"788",
+                "ewp":"10"
+            },{
+                "name":"Sobczak, Wilfried",
+                "holz":"743",
+                "ewp":"6"
+            },{
+                "name":"Fusek, Manfred",
+                "holz":"774",
+                "ewp":"8"
+            },{
+                "name":"Bracun, Friedhelm",
+                "holz":"717",
+                "ewp":"2"
+            },{
+                "name":"Chemello, Mike",
+                "holz":"781",
+                "ewp":"9"
+            },{
+                "name":"Spath, Anton",
+                "holz":"737",
+                "ewp":"5"
+            }]
+            },
+        "gast":{
+            "holz":"4531",
+            "ewp":"38",
+            "punkte":"1",
+            "spieler":[{
+                "name":"Veelmann, Lothar",
+                "holz":"718",
+                "ewp":"3"
+            },{
+                "name":"Wendlik, Klaus-Jürgen",
+                "holz":"810",
+                "ewp":"12"
+            },{
+                "name":"Kottkamp, Heribert",
+                "holz":"710",
+                "ewp":"1"
+            },{
+                "name":"Dohrenbusch, Karl-Heinz",
+                "holz":"721",
+                "ewp":"4"
+            },{
+                "name":"Magerl, Kalle",
+                "holz":"762",
+                "ewp":"7"
+            },{
+                "name":"van Treek, Walter",
+                "holz":"810",
+                "ewp":"11"
+            }]
+            }
+        },{
+    "spielnr":"2",
+    "heim":{
+        "holz":"4436",
+        "ewp":"37",
+        "punkte":"2",
+        "spieler":[{
+            "name":"van de Locht, Rene",
+            "holz":"675",
+            "ewp":"2"
+        },{
+            "name":"Rippel, Lukas",
+            "holz":"698",
+            "ewp":"3"
+        },{
+            "name":"Pollmann, Klaus",
+            "holz":"842",
+            "ewp":"11"
+        },{
+            "name":"Rippel, Matthias",
+            "holz":"751",
+            "ewp":"8"
+        },{
+            "name":"van Lier, Michael",
+            "holz":"704",
+            "ewp":"4"
+        },{
+            "name":"Reckmann, Thomas",
+            "holz":"766",
+            "ewp":"9"
+        }]
+        },
+    "gast":{
+        "holz":"3786",
+        "ewp":"40",
+        "punkte":"1",
+        "spieler":[{
+            "name":"Hentschel, Henry",
+            "holz":"768",
+            "ewp":"10"
+        },{
+            "name":"Ulrich, Detlef",
+            "holz":"709",
+            "ewp":"5"
+        },{
+            "name":"Cyriax, Achim",
+            "holz":"740",
+            "ewp":"7"
+        },{
+            "name":"Sickelmann, Sebastian",
+            "holz":"851",
+            "ewp":"12"
+        },{
+            "name":"Eichler, Manfred",
+            "holz":"718",
+            "ewp":"6"
+        }]
+        }
+    },{
+    "spielnr":"3",
+    "heim":{
+        "holz":"4188",
+        "ewp":"42",
+        "punkte":"2",
+        "spieler":[{
+            "name":"Jakob, Mario",
+            "holz":"736",
+            "ewp":"12"
+        },{
+            "name":"Würg, Rolf",
+            "holz":"712",
+            "ewp":"7"
+        },{
+            "name":"Dießner, Peter",
+            "holz":"641",
+            "ewp":"2"
+        },{
+            "name":"Neumann, Frank",
+            "holz":"719",
+            "ewp":"10"
+        },{
+            "name":"Martini, Dirk",
+            "holz":"712",
+            "ewp":"8"
+        },{
+            "name":"Ambrosius, Peter",
+            "holz":"668",
+            "ewp":"3"
+        }]
+        },
+    "gast":{
+        "holz":"4135",
+        "ewp":"36",
+        "punkte":"1",
+        "spieler":[{
+            "name":"Zimmermann, Kim",
+            "holz":"720",
+            "ewp":"11"
+        },{
+            "name":"Dziura, Torben",
+            "holz":"682",
+            "ewp":"4"
+        },{
+            "name":"Sicking, Ewald",
+            "holz":"703",
+            "ewp":"6"
+        },{
+            "name":"Dentgen, Andre",
+            "holz":"686",
+            "ewp":"5"
+        },{
+            "name":"Wojtanowski, Wolfgang",
+            "holz":"714",
+            "ewp":"9"
+        },{
+            "name":"Dentgen, Ralf",
+            "holz":"630",
+            "ewp":"1"
+        }]
+        }
+    }]
+}

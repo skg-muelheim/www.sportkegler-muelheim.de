@@ -9,3 +9,7 @@
 <section id="bk">
     <h1>KSC 71 Saarn 1</h1>
 </section>
+<!--
+<div class="load-async" template="nurTabelle" data="KSC1.tabelle" process="tabelle"></div>
+-->
+<div class="load-async" template="spieltage" data="2012_13/SP_BK1_Herren" process="spieltage" filter="KSC 71 Saarn 1"></div>
