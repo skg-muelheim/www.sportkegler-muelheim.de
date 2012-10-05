@@ -14,4 +14,5 @@ MitDiesenDelimeterFaengtHierNixAn{include file='../css/docs.css'}MitDiesenDelime
 </style>
 <style media="screen">
 MitDiesenDelimeterFaengtHierNixAn{include file='../css/jquery.lightbox-0.5.css'}MitDiesenDelimeterHoertHierNixAuf
+MitDiesenDelimeterFaengtHierNixAn{include file='../css/skg.css'}MitDiesenDelimeterHoertHierNixAuf
 </style>

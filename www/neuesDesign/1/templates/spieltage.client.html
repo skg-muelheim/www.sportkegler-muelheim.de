@@ -2,7 +2,7 @@
 <table class="table table-striped table-bordered table-condensed">
     <thead>
         <tr>
-            <th>Spieltag <span style="font-size:7pt">(Nr.)</span></th>
+            <th colspan="2">Spieltag <span style="font-size:7pt">(Nr.)</span></th>
             <th>Heim</th>
             <th>Gast</th>
             <th>Ergebnis</th>
@@ -13,11 +13,38 @@
         </tr>
     </thead>
     <tbody>
-        <tr class="repeat">
-            <td><strong class="spieltag"></strong>&nbsp;<span style="font-size:7pt" class="spielnr_in_klammern"></span></td>
+        <tr class="repeat spielfrei">
+            <td colspan="2"><strong class="spieltag"></strong></td>
+            <td colspan="2" class="mannschaft" style="text-align: center"></td>
+            <td colspan="5"><strong>Spielfrei</strong></td>
+        </tr>
+        <tr class="repeat spieltag">
+            <td rowspan="4" ><strong class="spieltag"></strong></td>
+            <td colspan="7" style="text-align: center"><a class="compact">Anzeige Reduzieren</a>&nbsp;</td>
+        </tr>
+        <tr class="repeat spiel_reduced">
+            <td colspan="2">
+                <strong class="spieltag"></strong>&nbsp;
+                <span style="font-size:7pt" class="spielnr_in_klammern"></span>
+            </td>
             <td class="heim"></td>
             <td class="gast"></td>
-            <td><strong class="punkte"></strong>&nbsp;(<span class="ewp"></span>)</td>
+            <td>
+                <strong class="punkte"></strong>&nbsp;(<span class="ewp"></span>)
+            </td>
+            <td class="heim_holz"></td>
+            <td class="gast_holz"></td>
+            <td class="heim_schnitt"></td>
+            <td class="gast_schnitt"></td>
+        </tr>
+        <tr class="repeat spiel_expanded">
+            <!--<td><strong class="spieltag"></strong></td>-->
+            <td><span style="font-size:7pt" class="spielnr_in_klammern"></span></td>
+            <td class="heim"></td>
+            <td class="gast"></td>
+            <td>
+                <strong class="punkte"></strong>&nbsp;(<span class="ewp"></span>)
+            </td>
             <td class="heim_holz"></td>
             <td class="gast_holz"></td>
             <td class="heim_schnitt"></td>
