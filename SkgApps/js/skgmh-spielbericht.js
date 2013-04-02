@@ -318,8 +318,8 @@ skgmh.berechneHochrechnung = function(spieler) {
         var rFaktor = gassen[3] / (gassen[2] + gassen[3]);
         if (vFaktor == 1 || rFaktor == 1) {
             vFaktor = 105 / 175;
-            if (tipp > 0) {
-                if (tipp < 700) {
+            if (spieler.tipp > 0) {
+                if (spieler.tipp < 700) {
                     var vFaktorMax = 0.8;
                     var posInSkala = spieler.tipp / 700;
                     vFaktor = (vFaktorMax * (1-posInSkala)) + (vFaktor * posInSkala);

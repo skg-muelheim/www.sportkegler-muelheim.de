@@ -18,20 +18,46 @@ skgmh.processes.alert = function(dest,loaded_template,msg) {
     alert("Not Yet Implemented");
 };
 
-skgmh.closures.bindShowSpieltag = function(template,domNode,loaded_data,spieltag) {
+skgmh.closures.bindShowSpieltag = function(template,templateExpanded,templateSpieltag,domNode,loaded_data,spieltag,spieltagNodeToRepeat) {
     return function() {
-        skgmh.actionHandlers.showSpieltag(template,domNode,loaded_data,spieltag);
+        skgmh.actionHandlers.showSpieltag(template,templateExpanded,templateSpieltag,domNode,loaded_data,spieltag);
     }
 };
 
-skgmh.actionHandlers.showSpieltag = function(template,domNode,loaded_data,spieltag) {
+skgmh.closures.bindCompactSpiel = function(nodesToRemove,nodeToInsert) {
+    return function() {
+        var after = null;
+        for (var key3 = nodesToRemove.length-1; key3 >= 0; key3--) {
+            var parent = nodesToRemove[key3].parentNode;
+            after = nodesToRemove[key3].nextSibling;
+            parent.removeChild(nodesToRemove[key3]);
+        }
+        after.parentNode.insertBefore(nodeToInsert,after);
+    }
+};
+
+
+skgmh.actionHandlers.showSpieltag = function(template,templateExpanded,templateSpieltag,domNode,loaded_data,spieltag) {
     parent = domNode.parentNode;
     after = domNode.nextSibling;
     parent.removeChild(domNode);
+    var destDomNode = templateSpieltag.cloneNode(true);
+    parent.insertBefore(destDomNode,after);
+    var tempList = $(".spieltag",destDomNode);
+    for (var key3 = tempList.length-1; key3 >= 0; key3--) {
+        tempList[key3].innerHTML = spieltag;
+    }
+
+    var nodesInserted = new Array();
+    nodesInserted.push(destDomNode);
+    
+    $(".compact",destDomNode).bind('click', skgmh.closures.bindCompactSpiel(nodesInserted,domNode));
+
     for (var key in loaded_data['spiele']) {
         var repeatData = loaded_data['spiele'][key];
         if (repeatData.spieltag == spieltag) {
-            var destDomNode = template.cloneNode(true);
+            destDomNode = templateExpanded.cloneNode(true);
+            nodesInserted.push(destDomNode);
             parent.insertBefore(destDomNode,after);
             if ("spielnr" in repeatData) {
                 var tempList = $(".spielnr_in_klammern",destDomNode);
@@ -42,24 +68,54 @@ skgmh.actionHandlers.showSpieltag = function(template,domNode,loaded_data,spielt
             keyValueReplacement(repeatData,destDomNode);
         }
     }
+    
+    
 };
 
 skgmh.processes.spieltage = function(dSpec,loaded_template,loaded_data) {
     dSpec.dest.innerHTML = loaded_template;
-    var nodesToRepeat = null;
+    var spielNodeToRepeat = null;
+    var spielExpandedNodeToRepeat = null;
+    var spielfreiNodeToRepeat = null;
+    var spieltagNodeToRepeat = null;
+    var destDomNode = null;
+    
     var parent = null;
-    var repeat = $(".repeat",dSpec.dest);
+    var repeat = $(".spielfrei.repeat",dSpec.dest);
     if (repeat.length == 1) {
-        nodesToRepeat = repeat[0].childNodes;
+        spielfreiNodeToRepeat = repeat[0];
         parent = repeat[0].parentNode;
         parent.removeChild(repeat[0]);
+    }
+    repeat = $(".spieltag.repeat",dSpec.dest);
+    if (repeat.length == 1) {
+        spieltagNodeToRepeat = repeat[0];
+        parent = repeat[0].parentNode;
+        parent.removeChild(repeat[0]);
+    }
+    repeat = $(".spiel_expanded.repeat",dSpec.dest);
+    if (repeat.length == 1) {
+        spielExpandedNodeToRepeat = repeat[0];
+        parent = repeat[0].parentNode;
+        parent.removeChild(repeat[0]);
+    }
+    
+    repeat = $(".spiel_reduced.repeat",dSpec.dest);
+    if (repeat.length == 1) {
+        spielNodeToRepeat = repeat[0];
+        parent = spielNodeToRepeat.parentNode;
+        parent.removeChild(spielNodeToRepeat);
+        var spieltag = 0;
         for (var key in loaded_data['spiele']) {
             var repeatData = loaded_data['spiele'][key];
             if (repeatData.heim == "KSC 71 Saarn 1" || repeatData.gast == "KSC 71 Saarn 1") {
-                var destDomNode = repeat[0].cloneNode(true);
+                spieltag = parseInt(repeatData.spieltag);
+                destDomNode = spielNodeToRepeat.cloneNode(true);
                 $(destDomNode).bind('click',
                     skgmh.closures.bindShowSpieltag(
-                        repeat[0],
+                        spielNodeToRepeat,
+                        spielExpandedNodeToRepeat,
+                        spieltagNodeToRepeat,
                         destDomNode,
                         loaded_data,
                         repeatData.spieltag));
@@ -72,6 +128,27 @@ skgmh.processes.spieltage = function(dSpec,loaded_template,loaded_data) {
                     }
                 }
                 keyValueReplacement(repeatData,destDomNode);
+            }else if (parseInt(repeatData.spieltag) > spieltag +1) {
+                destDomNode = spielfreiNodeToRepeat.cloneNode(true);
+                $(destDomNode).bind('click',
+                    skgmh.closures.bindShowSpieltag(
+                        spielNodeToRepeat,
+                        spielExpandedNodeToRepeat,
+                        spieltagNodeToRepeat,
+                        destDomNode,
+                        loaded_data,
+                        spieltag+1));
+
+                parent.appendChild(destDomNode);
+                var tempList = $(".spieltag",destDomNode);
+                for (var key3 = tempList.length-1; key3 >= 0; key3--) {
+                    tempList[key3].innerHTML = spieltag +1;
+                }
+                var tempList = $(".mannschaft",destDomNode);
+                for (var key3 = tempList.length-1; key3 >= 0; key3--) {
+                    tempList[key3].innerHTML = "KSC 71 Saarn 1";
+                }
+                spieltag++;
             }
         }
     }
